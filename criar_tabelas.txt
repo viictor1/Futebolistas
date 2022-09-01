@@ -1,0 +1,6 @@
+CREATE TABLE Usuarios(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    email varchar(45) NOT NULL,
+    senha varchar(45) NOT NULL,
+    isAdministrador boolean
+);
