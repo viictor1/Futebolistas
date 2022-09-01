@@ -86,7 +86,7 @@ public class GerenciarCookies extends HttpServlet {
             }
         }
         if (achouCookie != true) {
-            request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
+            response.sendRedirect("home");
         }
 
     }

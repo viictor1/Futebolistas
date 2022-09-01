@@ -50,6 +50,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
           var element = document.getElementById("modal-esquece");
           element.classList.remove("show-esquece");
         }
+        
         </script>
     </head>
     <body>
@@ -79,6 +80,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
           <div id="modal-line"></div>
           <div id="option"><center><a onclick="validarRemover()">Apagar conta</a></center></div>
           <div id="modal-line"></div>
+          <c:if test="${autenticado.isAdministrador == true}">
+              Cadastrar novo Usuario
+          </c:if>
+            <div id="modal-line"></div>
           <div id="option"><center><a onclick="validarSair()"">Sair</a></center></div> <!--Aq é pra logout-->
         </div>
       </div>

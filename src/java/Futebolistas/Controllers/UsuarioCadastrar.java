@@ -70,7 +70,7 @@ public class UsuarioCadastrar extends HttpServlet {
                 model.add(u);
                 response.sendRedirect("UsuarioCadastrar");
             } catch (Exception e) {
-                request.getRequestDispatcher("index.html").forward(request, response);
+                response.sendRedirect("home");
             }
           
     }

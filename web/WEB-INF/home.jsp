@@ -58,6 +58,10 @@
             }
             </style>
     </head>
+    <script>if(${msg} != null){
+        alert(msg);
+    }
+    }</script>
     <body onload="showLogin()">
      <div id="decoration">
     <div id="barra"></div>
