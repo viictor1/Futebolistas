@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -56,19 +57,34 @@ public class UsuarioCadastrar extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
             
-            String nome, email, senha;
+            String nome, email, senha, checkbox;
+            Boolean adm;
 
             
             nome = request.getParameter("nome");
             email = request.getParameter("email");
             senha = request.getParameter("senha");
+            checkbox = request.getParameter("adm");
+            
+            if("s".equals(checkbox)){
+                adm = true;
+            }
+            else{adm = false;}
+            System.out.println(adm);
 
-            Usuario u = new Usuario(nome, email, senha);
+            Usuario u = new Usuario(nome, email, senha, adm);
 
             UsuarioModel model = new UsuarioModel();
             try {
                 model.add(u);
-                response.sendRedirect("UsuarioCadastrar");
+                HttpSession sessao = request.getSession();
+                if(sessao.getAttribute("autenticado") != null){
+                    response.sendRedirect("GerenciarCookies");
+                }
+                else{
+                    response.sendRedirect("UsuarioCadastrar");
+                }
+                
             } catch (Exception e) {
                 response.sendRedirect("home");
             }

@@ -50,7 +50,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
           var element = document.getElementById("modal-esquece");
           element.classList.remove("show-esquece");
         }
-        
+        function showCadastro() {
+          var element = document.getElementById("modal-cadastro");
+          element.classList.add("show-cadastro");
+        }
+        function hideCadastro() {
+          var element = document.getElementById("modal-cadastro");
+          element.classList.remove("show-cadastro");
+        }
         </script>
     </head>
     <body>
@@ -80,13 +87,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
           <div id="modal-line"></div>
           <div id="option"><center><a onclick="validarRemover()">Apagar conta</a></center></div>
           <div id="modal-line"></div>
-          <c:if test="${autenticado.isAdministrador == true}">
-              Cadastrar novo Usuario
-          </c:if>
-            <div id="modal-line"></div>
           <div id="option"><center><a onclick="validarSair()"">Sair</a></center></div> <!--Aq é pra logout-->
         </div>
       </div>
+          <c:if test="${autenticado.isAdministrador == true}">
+              <div id="option" onclick="showCadastro();hideLogado()"><center>Cadastrar novo Usuário</center></div>
+          </c:if>
     </div>
     <div class="esqueceu">
       <div class="modal-esquece" id="modal-esquece">
@@ -130,3 +136,82 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     </center>
   </body>
 </html>
+
+<div class="cadastro">
+      <div class="modal-cadastro" id="modal-cadastro">
+        <div class="content-login">
+          <span onclick="hideCadastro()">&times;</span>
+          CADASTRO
+          <form class="form-cadastro" action="UsuarioCadastrar" method="post">
+            Nome: <input type="text" name="nome" placeholder="Digite seu nome de usuário" id="form-cadastro" required>
+            E-Mail: <input type="email" name="email" placeholder="Digite seu endereço de E-Mail" id="form-cadastro" required>
+            Senha: <input type="password" name="senha" placeholder="Digite sua senha" id="form-cadastro" required>
+            Administrador: <input type="checkbox" name="adm" id="adm" value="s">
+            Escolha seu time: <br>
+           <button type="submit" class="cadastro-button">CRIAR CONTA</button>
+            <div class="select-box">
+            <div class="options-container">
+              <div class="option" id="option1">
+                <input type="radio" class="radio"/>
+                <label for="film">Atlético-MG</label>
+              </div>
+              <div class="option">
+                <input type="radio" class="radio" />
+                <label for="film">Corinthians</label>
+              </div>
+              <div class="option">
+                <input type="radio" class="radio"  />
+                <label for="film">CRESSPOM</label>
+              </div>
+              <div class="option">
+                <input type="radio" class="radio"  />
+                <label for="film">Cruzeiro</label>
+              </div>
+              <div class="option">
+                <input type="radio" class="radio"  />
+                <label for="film">ESMAC</label>
+              </div>
+              <div class="option">
+                <input type="radio" class="radio"  />
+                <label for="film">Ferroviária</label>
+              </div>
+              <div class="option">
+                <input type="radio" class="radio"  />
+                <label for="film">Flamengo</label>
+              </div>
+              <div class="option">
+                <input type="radio" class="radio"  />
+                <label for="film">Grêmio</label>
+              </div>
+              <div class="option">
+                <input type="radio" class="radio"  />
+                <label for="film">Internacional</label>
+              </div>
+              <div class="option">
+                <input type="radio" class="radio"  />
+                <label for="film">Avaí/Kinderman</label>
+              </div>
+              <div class="option">
+                <input type="radio" class="radio"  />
+                <label for="film">Palmeiras</label>
+              </div>
+              <div class="option">
+                <input type="radio" class="radio"  />
+                <label for="film">Real Brasília</label>
+              </div>
+              <div class="option">
+                <input type="radio" class="radio"  />
+                <label for="film">Red Bull Bragantino</label>
+              </div>
+            </div>
+            <div class="selected">
+              SELECIONE
+            </div>
+            <div class="search-box">
+              <input type="text" placeholder="Procurar..." />
+            </div>
+          </div>
+          <script src="main.js"></script>
+          </form>
+        </div>
+      </div>

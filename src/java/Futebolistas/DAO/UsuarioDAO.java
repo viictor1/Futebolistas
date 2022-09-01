@@ -11,13 +11,14 @@ public class UsuarioDAO {
     
 
     public void add(Usuario u) throws SQLException{
-        String sql = "INSERT INTO USUARIOS (NOME, EMAIL, SENHA) VALUES (?,?,?)";
+        String sql = "INSERT INTO USUARIOS (NOME, EMAIL, SENHA, ISADMINISTRADOR) VALUES (?,?,?,?)";
         Connection connection = new ConnectionFactory().getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql);
             
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getEmail());
             stmt.setString(3, u.getSenha());
+            stmt.setBoolean(4, u.getIsAdministrador());
             
             stmt.execute();
             stmt.close();

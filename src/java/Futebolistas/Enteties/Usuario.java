@@ -5,6 +5,13 @@ public class Usuario {
     Boolean isAdministrador;
     int id;
 
+    public Usuario(String nome, String email, String senha, Boolean adm) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.isAdministrador = adm;
+    }
+
     public int getId() {
         return id;
     }
