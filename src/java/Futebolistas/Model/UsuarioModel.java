@@ -27,6 +27,14 @@ public class UsuarioModel {
         dao.add(u);
     }
     
+    public void alterarSenha(int id, String senha) throws SQLException{
+        UsuarioDAO dao = new UsuarioDAO();
+        if(senha == null || senha.equals("")){
+            return;
+        }
+        dao.alterarSenha(id, senha);
+    }
+    
     public Usuario autenticar(String email, String senha) throws SQLException{
         UsuarioDAO dao = new UsuarioDAO();
         Usuario u = dao.autenticar(email, senha);

@@ -42,11 +42,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
           var element = document.getElementById("modal-logado");
           element.classList.remove("show-modal-logado");
         }
-        function showEsquece() {
+        function showAtualizarS() {
           var element = document.getElementById("modal-esquece");
           element.classList.add("show-esquece");
         }
-        function hideEsquece() {
+        function hideAtualizarS() {
           var element = document.getElementById("modal-esquece");
           element.classList.remove("show-esquece");
         }
@@ -83,7 +83,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
           <div id="modal-line"></div>
           <div id="option"><center>Meu time</center></div>
           <div id="modal-line"></div>
-          <div id="option" onclick="showEsquece();hideLogado()"><center>Alterar senha</center></div>
+          <div id="option" onclick="showAtualizarS();hideLogado()"><center>Alterar senha</center></div>
           <div id="modal-line"></div>
           <div id="option"><center><a onclick="validarRemover()">Apagar conta</a></center></div>
           <div id="modal-line"></div>
@@ -97,8 +97,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <div class="esqueceu">
       <div class="modal-esquece" id="modal-esquece">
         <div class="content-login">
-          <span onclick="hideEsquece()">&times;</span>
+          <span onclick="hideAtualizarS()">&times;</span>
           ALTERAR SENHA
+          <form action="alterarSenha" method="post">
+              Senha Antiga: <input type="password" name="senhaAntiga" id="form-cadastro" required>
+              Senha Nova:  <input type="password" name="senhaNova" id="form-cadastro" required>
+              <button type="submit" class="cadastro-button">Alterar Senha</button>
+          </form>
         </div>
       </div>
     </div>
@@ -147,8 +152,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             E-Mail: <input type="email" name="email" placeholder="Digite seu endereço de E-Mail" id="form-cadastro" required>
             Senha: <input type="password" name="senha" placeholder="Digite sua senha" id="form-cadastro" required>
             Administrador: <input type="checkbox" name="adm" id="adm" value="s">
+            <button type="submit" class="cadastro-button">CRIAR CONTA</button>
             Escolha seu time: <br>
-           <button type="submit" class="cadastro-button">CRIAR CONTA</button>
             <div class="select-box">
             <div class="options-container">
               <div class="option" id="option1">

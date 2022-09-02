@@ -26,7 +26,7 @@ public class UsuarioDAO {
     }
     
     public Usuario autenticar(String email, String senha) throws SQLException{
-        String sql = "SELECT ID, NOME, EMAIL, ISADMINISTRADOR FROM USUARIOS WHERE EMAIL = ? AND SENHA = ?";
+        String sql = "SELECT ID, NOME, EMAIL, SENHA, ISADMINISTRADOR FROM USUARIOS WHERE EMAIL = ? AND SENHA = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         
@@ -36,7 +36,7 @@ public class UsuarioDAO {
         ResultSet rs = stmt.executeQuery();
         Usuario u = null;
         if(rs.next()){
-            u = new Usuario(rs.getInt("ID"), rs.getString("NOME"), rs.getString("EMAIL"), rs.getBoolean("ISADMINISTRADOR"));
+            u = new Usuario(rs.getInt("ID"), rs.getString("NOME"), rs.getString("EMAIL"), rs.getString("SENHA"), rs.getBoolean("ISADMINISTRADOR"));
         }
         stmt.close();
         connection.close();
@@ -57,7 +57,7 @@ public class UsuarioDAO {
     }
     
     public Usuario selectUserbyID(int id) throws SQLException{
-        String sql =  "SELECT ID, EMAIL, ISADMINISTRADOR, NOME FROM USUARIOS WHERE ID = ?";
+        String sql =  "SELECT ID, EMAIL, SENHA, ISADMINISTRADOR, NOME FROM USUARIOS WHERE ID = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, id);
@@ -65,7 +65,7 @@ public class UsuarioDAO {
         ResultSet rs = stmt.executeQuery();
         Usuario u = null;
         if(rs.next()){
-            u = new Usuario(rs.getInt("ID"), rs.getString("NOME"), rs.getString("EMAIL"), rs.getBoolean("ISADMINISTRADOR"));
+            u = new Usuario(rs.getInt("ID"), rs.getString("NOME"), rs.getString("EMAIL"), rs.getString("SENHA"), rs.getBoolean("ISADMINISTRADOR"));
         }
         stmt.close();
         connection.close();
@@ -88,6 +88,19 @@ public class UsuarioDAO {
         connection.close();
         
         return encontrado;
+    }
+    
+    public void alterarSenha(int id, String senha) throws SQLException{     
+        String sql = "UPDATE USUARIOS SET SENHA = ? WHERE ID = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+          
+        stmt.setString(1, senha);
+        stmt.setInt(2, id);
+        
+        stmt.execute();
+        stmt.close();
+        connection.close();
     }
     
 }

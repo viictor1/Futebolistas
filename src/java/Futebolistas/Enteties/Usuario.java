@@ -12,6 +12,14 @@ public class Usuario {
         this.isAdministrador = adm;
     }
 
+    public Usuario(int id, String nome, String email, String senha, Boolean isAdministrador) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.isAdministrador = isAdministrador;
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
