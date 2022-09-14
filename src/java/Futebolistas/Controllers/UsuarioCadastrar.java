@@ -66,11 +66,10 @@ public class UsuarioCadastrar extends HttpServlet {
             senha = request.getParameter("senha");
             checkbox = request.getParameter("adm");
             
-            if("s".equals(checkbox)){
+            if("s".equals(checkbox)){ // atribuindo o valor de adm dependendo se foi selecionado ou não no checkbox da tela de cadastrar usuários do adm
                 adm = true;
             }
             else{adm = false;}
-            System.out.println(adm);
 
             Usuario u = new Usuario(nome, email, senha, adm);
 

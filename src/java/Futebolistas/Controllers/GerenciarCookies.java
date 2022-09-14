@@ -60,10 +60,10 @@ public class GerenciarCookies extends HttpServlet {
         Usuario u = null;
         
         if (sessao != null && sessao.getAttribute("autenticado") != null) {
-            u = (Usuario) sessao.getAttribute("autenticado");
-
-            request.setAttribute("autenticado", u);
-            request.getRequestDispatcher("WEB-INF/indexlogin.jsp").forward(request, response);
+            u = (Usuario) sessao.getAttribute("autenticado"); // se tiver uma sessão aberta, é atribuida à sessão o usuario
+            sessao.setAttribute("autenticado", u);
+            request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
+            return;
         } else {
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
@@ -71,21 +71,21 @@ public class GerenciarCookies extends HttpServlet {
                     if ("ManterLogado".equals(cookie.getName())) {
                         UsuarioModel model = new UsuarioModel();
                         try {
-                            u = model.selectUsuariobyID(Integer.parseInt(cookie.getValue()));
+                            u = model.selectUsuariobyID(Integer.parseInt(cookie.getValue())); // pegando o usuário pelo id dele que está no valor do cookie
                         } catch (SQLException ex) {
                             Logger.getLogger(GerenciarCookies.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         sessao = request.getSession(true);
-                        sessao.setAttribute("autenticado", u);
-                        request.getRequestDispatcher("WEB-INF/indexlogin.jsp").forward(request, response);
-                        achouCookie = true;
+                        sessao.setAttribute("autenticado", u); //se tiver um cookie de manter logado, é atribuida à sessão esse usuário
+                        request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
+                        achouCookie = true; // declarando que o cookie foi achado
                         break;
                     }
 
                 }
             }
         }
-        if (achouCookie != true) {
+        if (achouCookie != true) { // se o cookie não for achado, ele é direcionado para a home sem o usuário
             response.sendRedirect("home");
         }
 

@@ -54,13 +54,13 @@ public class EncerrarSessao extends HttpServlet {
         
         HttpSession sessao = request.getSession();
 
-        sessao.invalidate();
+        sessao.invalidate(); // pegando a sessão e invalidando ela
         
         Cookie[] cookies = request.getCookies();
         
         if(cookies != null){
          for (Cookie cookie : cookies){
-            if("ManterLogado".equals(cookie.getName())){
+            if("ManterLogado".equals(cookie.getName())){ //procurando o cookie de manter logado e terminando ela
                 cookie.setMaxAge(0);
                 response.addCookie(cookie);
             }

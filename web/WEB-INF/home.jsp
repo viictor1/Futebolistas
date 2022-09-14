@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,6 +19,33 @@
         <link rel="stylesheet" href="everyone.css" type="text/css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script type="text/javascript">
+        function validarRemover(){
+        if(window.confirm("Deseja realmente apagar a conta?") == true){
+            window.location.href = "UsuarioRemover";
+        }
+        return;
+        }
+        function validarSair(){
+            if(window.confirm("Deseja realmente sair?") == true){
+                window.location.href = "EncerrarSessao";
+            }
+        }
+        function showLogado() {
+          var element = document.getElementById("modal-logado");
+          element.classList.add("show-modal-logado");
+        }
+        function hideLogado() {
+          var element = document.getElementById("modal-logado");
+          element.classList.remove("show-modal-logado");
+        }
+        function showAtualizarS() {
+          var element = document.getElementById("modal-esquece");
+          element.classList.add("show-esquece");
+        }
+        function hideAtualizarS() {
+          var element = document.getElementById("modal-esquece");
+          element.classList.remove("show-esquece");
+        }
         function showModal() {
           var element = document.getElementById("modal");
           element.classList.add("show-modal");
@@ -58,22 +86,20 @@
             }
             </style>
     </head>
-    <script>if(${msg} != null){
-        alert(msg);
-    }
-    }</script>
-    <body onload="showLogin()">
-     <div id="decoration">
+    <body <c:if test="${autenticado == null}">onload="showLogin()"</c:if>> <!-- Se usuário não estiver logado, aparecerá tela para realizar login -->
+        <c:if test="${autenticado != null}"><script>alert("Seja bem vindo, ${autenticado.nome}!") </script></c:if> <!-- Saudação para usuário logado -->   
+    <div id="decoration">
     <div id="barra"></div>
     <div id="textinho">SITE FOCADO NO <br> FUTEBOL FEMININO </div>
   </div>
-    <div id="menu-login" onclick="showModal()">
+        <div id="menu-login" onclick="<c:if test="${autenticado == nul}">showModal()</c:if> <c:if test="${autenticado != nul}">showLogado()</c:if>"> <!-- mudando o modal que aparecerá dependendo se o usuário está ou não logado -->
       <center>
       <div id="line-login"></div>
-      <div id="line-login"></div>
+      <div id="line-login"></div> <!-- Menu do lado fechado -->
       <div id="line-login"></div>
       </center>
     </div>
+        <c:if test="${autenticado == null}"> <!-- Se não tiver usuário logado, aparecerá esse menu -->
     <div class="side-menu">
       <div class="modal" id="modal">
         <div class="modal-content">
@@ -89,7 +115,31 @@
         </div>
       </div>
     </div>
-    <div class="login">
+    </c:if>
+        
+        <c:if test="${autenticado != null}"> <!-- Se tiver usuário logado, apareerá essa tela -->
+    <div class="side-menu" onclick="sh">
+    <div class="modal-logado" id="modal-logado">
+    <div class="content-logado">        
+    <span onclick="hideLogado()">&times;</span>
+    <div id=modal-titulo>${autenticado.nome}</div> <!--AQ É A VARIÁVEL DO NOME QUE O USUÁRIO ESCOLHEU -->
+    <div class="modal-line"></div>
+    <div id="option"><center>Meu time</center></div>
+    <div id="modal-line"></div>
+    <div id="option" onclick="showAtualizarS();hideLogado()"><center>Alterar senha</center></div>
+    <div id="modal-line"></div>
+    <div id="option"><center><a onclick="validarRemover()">Apagar conta</a></center></div>
+    <div id="modal-line"></div>
+    <div id="option"><center><a onclick="validarSair()"">Sair</a></center></div> <!--Aq é pra logout-->
+    </div>
+  </div>
+    <c:if test="${autenticado.isAdministrador == true}"> <!-- se o usuário logado for um adm, ele poderá cadastrar um novo usuário -->
+            <div id="option" onclick="showCadastro();hideLogado()"><center>Cadastrar novo Usuário</center></div>
+        </c:if>
+  </div>
+      </c:if>  
+    
+        <div class="login"> <!-- Modal para fazer login -->
       <div class="modal-login" id="modal-login">
         <div class="content-login">
           <span onclick="hideLogin()">&times;</span>
@@ -109,7 +159,8 @@
         </div>
       </div>
     </div>
-    <div class="cadastro">
+        
+        <div class="cadastro"> <!-- Modal para cadastrar um novo usuário -->
       <div class="modal-cadastro" id="modal-cadastro">
         <div class="content-login">
           <span onclick="hideCadastro()">&times;</span>
@@ -118,6 +169,9 @@
             Nome: <input type="text" name="nome" placeholder="Digite seu nome de usuário" id="form-cadastro" required>
             E-Mail: <input type="email" name="email" placeholder="Digite seu endereço de E-Mail" id="form-cadastro" required>
             Senha: <input type="password" name="senha" placeholder="Digite sua senha" id="form-cadastro" required>
+          <c:if test="${autenticado.isAdministrador == true}"> <!-- ADM pode cadastrar um novo usuároi adm -->
+            Administrador: <input type="checkbox" name="adm" id="adm" value="s">
+            </c:if>
             Escolha seu time: <br>
            <button type="submit" class="cadastro-button">CRIAR CONTA</button>
             <div class="select-box">
@@ -187,11 +241,17 @@
         </div>
       </div>
     </div>
-    <div class="esqueceu">
+        <div class="atualizarS"> <!<!-- Modal para alterar senha -->
       <div class="modal-esquece" id="modal-esquece">
         <div class="content-login">
-          <span onclick="hideEsquece()">&times;</span>
-          ESQUECEU A SENHA?
+          <span onclick="hideAtualizarS()">&times;</span>
+          ALTERAR SENHA
+          <form action="alterarSenha" method="post">
+              Senha Antiga: <input type="password" name="senhaAntiga" id="form-cadastro" required>
+              Senha Nova:  <input type="password" name="senhaNova" id="form-cadastro" required>
+              <button type="submit" class="cadastro-button">Alterar Senha</button>
+          </form>
+        </div>
         </div>
       </div>
     </div>
@@ -213,7 +273,7 @@
           </nav>
         </center>
     </div>
-    <center><div id="line"></div></center>
+<center><div id="line"></div></center> <!-- Feed de notícias -->
     <div class="feed"><center>FEED</center></div>
     <center>
     <div class="containers"><div class="decoration2"></div><div class="decoration3"></div>

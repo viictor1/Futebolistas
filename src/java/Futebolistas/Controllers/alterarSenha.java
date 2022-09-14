@@ -73,7 +73,7 @@ public class alterarSenha extends HttpServlet {
         
         String senhaAntiga = request.getParameter("senhaAntiga");
         String senhaNova = request.getParameter("senhaNova");
-        if(senhaAntiga.equals(u.getSenha())){
+        if(senhaAntiga.equals(u.getSenha())){ // verificando se a senha digitada pelo usuário é realmente a senha antiga, e alterando a senha
             UsuarioModel model = new UsuarioModel();
             try {
                 model.alterarSenha(u.getId(), senhaNova);

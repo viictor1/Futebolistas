@@ -79,18 +79,15 @@ public class UsuarioLogin extends HttpServlet {
                 HttpSession sessao = request.getSession(true);
                 sessao.setAttribute("autenticado", u);
 
-                if ("s".equals(request.getParameter("manter"))) {
+                if ("s".equals(request.getParameter("manter"))) { // criando cookie se o usuário escolheu a opção de manter-se logado
                     Cookie cookie = new Cookie("ManterLogado", String.valueOf(u.getId()));
                     int mes = 60 * 60 * 24 * 30;
                     cookie.setMaxAge(mes);
                     response.addCookie(cookie);
 
                 }
-
-                response.sendRedirect("GerenciarCookies");
-            } else {
-                response.sendRedirect("home");
-            }
+            response.sendRedirect("GerenciarCookies");
+        }   
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioLogin.class.getName()).log(Level.SEVERE, null, ex);
         }

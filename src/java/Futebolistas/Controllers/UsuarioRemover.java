@@ -42,7 +42,7 @@ public class UsuarioRemover extends HttpServlet {
         HttpSession sessao = request.getSession();
         Usuario u = (Usuario) sessao.getAttribute("autenticado");
         UsuarioModel model = new UsuarioModel();
-        model.remover(u.getId());
+        model.remover(u.getId()); // removendo o usuaário e mandando ele para o servlet de encerrar sessão
         response.sendRedirect("EncerrarSessao");
     }
     
