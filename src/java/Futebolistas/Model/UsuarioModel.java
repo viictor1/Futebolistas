@@ -23,7 +23,6 @@ public class UsuarioModel {
         if(dao.verificarEmail(u.getEmail()) == true){
             return;
         }
-        
         dao.add(u);
     }
     

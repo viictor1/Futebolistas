@@ -11,14 +11,15 @@ public class UsuarioDAO {
     
 
     public void add(Usuario u) throws SQLException{
-        String sql = "INSERT INTO USUARIOS (NOME, EMAIL, SENHA, ISADMINISTRADOR) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO USUARIOS (NOME, EMAIL, SENHA, ISADMINISTRADOR, IDTIME) VALUES (?,?,?,?,?)";
         Connection connection = new ConnectionFactory().getConnection();
             PreparedStatement stmt = connection.prepareStatement(sql);
-            
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getEmail());
             stmt.setString(3, u.getSenha());
             stmt.setBoolean(4, u.getIsAdministrador());
+            stmt.setString(5, u.getTime());
+            System.out.println(u.getTime());
             
             stmt.execute();
             stmt.close();
@@ -26,7 +27,7 @@ public class UsuarioDAO {
     }
     
     public Usuario autenticar(String email, String senha) throws SQLException{
-        String sql = "SELECT ID, NOME, EMAIL, SENHA, ISADMINISTRADOR FROM USUARIOS WHERE EMAIL = ? AND SENHA = ?";
+        String sql = "SELECT ID, NOME, EMAIL, SENHA, ISADMINISTRADOR, IDTIME FROM USUARIOS WHERE EMAIL = ? AND SENHA = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         
@@ -36,7 +37,7 @@ public class UsuarioDAO {
         ResultSet rs = stmt.executeQuery();
         Usuario u = null;
         if(rs.next()){
-            u = new Usuario(rs.getInt("ID"), rs.getString("NOME"), rs.getString("EMAIL"), rs.getString("SENHA"), rs.getBoolean("ISADMINISTRADOR"));
+            u = new Usuario(rs.getInt("ID"), rs.getString("NOME"), rs.getString("EMAIL"), rs.getString("SENHA"), rs.getBoolean("ISADMINISTRADOR"), rs.getString("IDTIME"));
         }
         stmt.close();
         connection.close();

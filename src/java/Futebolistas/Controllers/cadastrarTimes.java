@@ -4,27 +4,25 @@
  */
 package Futebolistas.Controllers;
 
-import Futebolistas.Enteties.Usuario;
-import Futebolistas.Model.UsuarioModel;
+import Futebolistas.Enteties.Time;
+import Futebolistas.Model.TimeModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  *
  * @author maluc
  */
-@WebServlet(name = "UsuarioLogin", urlPatterns = {"/UsuarioLogin"})
-public class UsuarioLogin extends HttpServlet {
+@WebServlet(name = "cadastrarTimes", urlPatterns = {"/cadastrarTimes"})
+public class cadastrarTimes extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,7 +34,9 @@ public class UsuarioLogin extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -51,8 +51,9 @@ public class UsuarioLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        response.sendRedirect("GerenciarCookies");
+        processRequest(request, response);
+        
+        request.getRequestDispatcher("WEB-INF/cadastrar-times.jsp").forward(request, response);
     }
 
     /**
@@ -66,32 +67,30 @@ public class UsuarioLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-        String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
-
-        UsuarioModel model = new UsuarioModel();
-        Usuario u;
+        processRequest(request, response);
+        
+        String nome, data_fundacao, tecnico, presidente, local_fundacao;
+        int titulos;
+        
+        nome = request.getParameter("nome");
+        data_fundacao = request.getParameter("data");
+        tecnico = request.getParameter("tecnico");
+        presidente = request.getParameter("presidente");
+        local_fundacao = request.getParameter("local");
+        titulos = Integer.parseInt(request.getParameter("titulos"));
+        
+        Time time = new Time(nome, data_fundacao, tecnico, presidente, local_fundacao, titulos, 0);
+        TimeModel model = new TimeModel();
         try {
-            u = model.autenticar(email, senha);
-            if (u != null) {
-                HttpSession sessao = request.getSession(true);
-                sessao.setAttribute("autenticado", u);
-
-                if ("s".equals(request.getParameter("manter"))) { // criando cookie se o usuário escolheu a opção de manter-se logado
-                    Cookie cookie = new Cookie("ManterLogado", String.valueOf(u.getId()));
-                    int mes = 60 * 60 * 24 * 30;
-                    cookie.setMaxAge(mes);
-                    response.addCookie(cookie);
-
-                }    
-        }   
+            model.add(time);
             response.sendRedirect("GerenciarCookies");
+            return;
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioLogin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(cadastrarTimes.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
+        response.sendRedirect("cadastrarTimes");
+        
     }
 
     /**

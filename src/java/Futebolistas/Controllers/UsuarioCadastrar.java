@@ -57,7 +57,7 @@ public class UsuarioCadastrar extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
             
-            String nome, email, senha, checkbox;
+            String nome, email, senha, checkbox, time;
             Boolean adm;
 
             
@@ -65,13 +65,14 @@ public class UsuarioCadastrar extends HttpServlet {
             email = request.getParameter("email");
             senha = request.getParameter("senha");
             checkbox = request.getParameter("adm");
+            time = request.getParameter("selectTime");
             
             if("s".equals(checkbox)){ // atribuindo o valor de adm dependendo se foi selecionado ou não no checkbox da tela de cadastrar usuários do adm
                 adm = true;
             }
             else{adm = false;}
 
-            Usuario u = new Usuario(nome, email, senha, adm);
+            Usuario u = new Usuario(nome, email, senha, adm, time);
 
             UsuarioModel model = new UsuarioModel();
             try {

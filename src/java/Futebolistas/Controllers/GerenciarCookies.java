@@ -4,7 +4,9 @@
  */
 package Futebolistas.Controllers;
 
+import Futebolistas.Enteties.Time;
 import Futebolistas.Enteties.Usuario;
+import Futebolistas.Model.TimeModel;
 import Futebolistas.Model.UsuarioModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,6 +18,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -58,6 +61,18 @@ public class GerenciarCookies extends HttpServlet {
         HttpSession sessao = request.getSession(false);
         Boolean achouCookie = false;
         Usuario u = null;
+        TimeModel modelt = new TimeModel();
+        ArrayList<Time> times = null;
+        try {
+            times = modelt.selecionarTodos();
+            sessao.setAttribute("times", times); //deixando os times na sessão
+        } catch (SQLException ex) {
+           Logger.getLogger(GerenciarCookies.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+
+
         
         if (sessao != null && sessao.getAttribute("autenticado") != null) {
             u = (Usuario) sessao.getAttribute("autenticado"); // se tiver uma sessão aberta, é atribuida à sessão o usuario
@@ -86,7 +101,7 @@ public class GerenciarCookies extends HttpServlet {
             }
         }
         if (achouCookie != true) { // se o cookie não for achado, ele é direcionado para a home sem o usuário
-            response.sendRedirect("home");
+            request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
         }
 
     }
