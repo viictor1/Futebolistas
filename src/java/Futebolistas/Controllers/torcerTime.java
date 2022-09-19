@@ -5,7 +5,6 @@
 package Futebolistas.Controllers;
 
 import Futebolistas.Enteties.Usuario;
-import Futebolistas.Model.TimeModel;
 import Futebolistas.Model.UsuarioModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,10 +21,10 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author maluc
+ * @author victo
  */
-@WebServlet(name = "UsuarioRemover", urlPatterns = {"/UsuarioRemover"})
-public class UsuarioRemover extends HttpServlet {
+@WebServlet(name = "torcerTime", urlPatterns = {"/torcerTime"})
+public class torcerTime extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,15 +39,13 @@ public class UsuarioRemover extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         
-        HttpSession sessao = request.getSession();
-        Usuario u = (Usuario) sessao.getAttribute("autenticado");
+        HttpSession sessao = request.getSession(false);     
+        Usuario logado = (Usuario) sessao.getAttribute("autenticado");
         UsuarioModel model = new UsuarioModel();
-        TimeModel modelT = new TimeModel();
-        modelT.alterarTorcedores(u.getTime());
-        model.remover(u.getId()); // removendo o usuaário e mandando ele para o servlet de encerrar sessão
-        response.sendRedirect("EncerrarSessao");
+        String idTime = request.getParameter("idTime");
+        model.alterarTime(logado.getId(), logado.getTime(), idTime);
+        response.sendRedirect("Times");
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -65,7 +62,7 @@ public class UsuarioRemover extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioRemover.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(torcerTime.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -83,7 +80,7 @@ public class UsuarioRemover extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioRemover.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(torcerTime.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

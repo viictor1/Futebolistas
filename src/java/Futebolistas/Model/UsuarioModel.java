@@ -4,6 +4,7 @@
  */
 package Futebolistas.Model;
 
+import Futebolistas.DAO.TimeDAO;
 import Futebolistas.DAO.UsuarioDAO;
 import Futebolistas.Enteties.Usuario;
 import java.sql.SQLException;
@@ -49,5 +50,15 @@ public class UsuarioModel {
         UsuarioDAO dao = new UsuarioDAO();
         Usuario u = dao.selectUserbyID(id);
         return u;
+    }
+    
+    public void alterarTime(int id, String id_antigo, String id_novo) throws SQLException{
+        UsuarioDAO daoU = new UsuarioDAO();
+        TimeDAO daoT = new TimeDAO();
+        daoU.alterarTime(id, id_novo);
+        if(id_antigo != null && daoT.getNumTorcedores(id_antigo) > 0){
+            daoT.alterarTorcedores(id_antigo, 0, 1);
+        }   
+        daoT.alterarTorcedores(id_novo, 1, 0);
     }
 }

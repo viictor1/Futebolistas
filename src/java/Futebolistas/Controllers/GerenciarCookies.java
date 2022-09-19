@@ -62,26 +62,23 @@ public class GerenciarCookies extends HttpServlet {
         Boolean achouCookie = false;
         Usuario u = null;
         TimeModel modelt = new TimeModel();
-        ArrayList<Time> times = null;
+        ArrayList<Time> times = new ArrayList();
         try {
             times = modelt.selecionarTodos();
-            sessao.setAttribute("times", times); //deixando os times na sessão
         } catch (SQLException ex) {
            Logger.getLogger(GerenciarCookies.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
-
-
-        
         if (sessao != null && sessao.getAttribute("autenticado") != null) {
             u = (Usuario) sessao.getAttribute("autenticado"); // se tiver uma sessão aberta, é atribuida à sessão o usuario
             sessao.setAttribute("autenticado", u);
+            sessao.setAttribute("times", times); //deixando os times na sessão
             request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
             return;
         } else {
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
+                sessao = request.getSession(true);
                 for (Cookie cookie : cookies) {
                     if ("ManterLogado".equals(cookie.getName())) {
                         UsuarioModel model = new UsuarioModel();
@@ -90,17 +87,19 @@ public class GerenciarCookies extends HttpServlet {
                         } catch (SQLException ex) {
                             Logger.getLogger(GerenciarCookies.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        sessao = request.getSession(true);
+                        
                         sessao.setAttribute("autenticado", u); //se tiver um cookie de manter logado, é atribuida à sessão esse usuário
+                        sessao.setAttribute("times", times); //deixando os times na sessão
                         request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
                         achouCookie = true; // declarando que o cookie foi achado
                         break;
                     }
 
                 }
-            }
+            }             
         }
-        if (achouCookie != true) { // se o cookie não for achado, ele é direcionado para a home sem o usuário
+        if (achouCookie != true) { // se o cookie não for achado, ele é direcionado para a home sem o usuário, mas com os times
+            sessao.setAttribute("times", times);
             request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
         }
 

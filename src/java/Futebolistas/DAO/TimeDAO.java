@@ -58,4 +58,31 @@ public class TimeDAO {
         connection.close();
         return retorno;      
     }
+    
+    public void alterarTorcedores(String id, int mais, int menos) throws SQLException{
+        String sql = "UPDATE TIMES SET NUM_TORCEDORES = ? WHERE IDTIME = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, getNumTorcedores(id) + mais - menos);
+        stmt.setString(2, id);
+        
+        stmt.execute();
+        stmt.close();
+        connection.close();
+    }
+    
+    public int getNumTorcedores(String id) throws SQLException{
+        String sql = "SELECT NUM_TORCEDORES FROM TIMES WHERE IDTIME = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, id);
+        ResultSet rs = stmt.executeQuery();
+        int num = 0;
+        
+        if(rs.next()){
+            num = rs.getInt("NUM_TORCEDORES");
+        }
+                
+        return num;
+    }
 }

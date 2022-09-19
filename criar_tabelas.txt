@@ -1,6 +1,23 @@
+CREATE TABLE Times(
+  idTime INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
+                            (START WITH 1, INCREMENT BY 1),
+  nome VARCHAR(45) NOT NULL,
+  logo VARCHAR(45),
+  data_fundacao VARCHAR(4) NOT NULL,
+  tecnico VARCHAR(45) NOT NULL,
+  presidente VARCHAR(45) NOT NULL,
+  local_fundacao VARCHAR(45) NOT NULL,
+  titulos INT NOT NULL,
+  num_torcedores INT NOT NULL
+);
+
 CREATE TABLE Usuarios(
-    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
+                            (START WITH 1, INCREMENT BY 1),
+    nome varchar(45) NOT NULL,
     email varchar(45) NOT NULL,
     senha varchar(45) NOT NULL,
-    isAdministrador boolean
+    isAdministrador boolean,
+    idTime int,
+    FOREIGN KEY (idTime) REFERENCES Times(idTime)
 );

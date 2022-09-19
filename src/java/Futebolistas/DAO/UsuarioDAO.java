@@ -104,5 +104,18 @@ public class UsuarioDAO {
         connection.close();
     }
     
+    public void alterarTime(int id, String id_time) throws SQLException{
+        String sql = "UPDATE USUARIOS SET IDTIME = ? WHERE ID = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        
+        stmt.setString(1, id_time);
+        stmt.setInt(2, id);
+        
+        stmt.execute();
+        stmt.close();
+        connection.close();
+    }
+    
 }
 

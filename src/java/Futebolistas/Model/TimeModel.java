@@ -22,4 +22,8 @@ public class TimeModel {
         TimeDAO dao = new TimeDAO();
         return dao.selecionarTodos();
     }
+    public void alterarTorcedores(String id) throws SQLException{ //método para diminuir um torcedor para quando o usuário apagar conta
+        TimeDAO dao = new TimeDAO();
+        dao.alterarTorcedores(id, 0, 1);
+    }
 }
