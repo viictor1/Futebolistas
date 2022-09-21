@@ -70,6 +70,7 @@ public class alterarSenha extends HttpServlet {
         
         HttpSession sessao = request.getSession();
         Usuario u = (Usuario) sessao.getAttribute("autenticado");
+        sessao.removeAttribute("autenticado");
         
         String senhaAntiga = request.getParameter("senhaAntiga");
         String senhaNova = request.getParameter("senhaNova");
@@ -77,6 +78,7 @@ public class alterarSenha extends HttpServlet {
             UsuarioModel model = new UsuarioModel();
             try {
                 model.alterarSenha(u.getId(), senhaNova);
+                sessao.setAttribute("autenticado", model.selectUsuariobyID(u.getId()));
             } catch (SQLException ex) {
                 Logger.getLogger(alterarSenha.class.getName()).log(Level.SEVERE, null, ex);
             }

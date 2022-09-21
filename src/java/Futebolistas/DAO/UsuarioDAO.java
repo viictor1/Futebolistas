@@ -58,7 +58,7 @@ public class UsuarioDAO {
     }
     
     public Usuario selectUserbyID(int id) throws SQLException{
-        String sql =  "SELECT ID, EMAIL, SENHA, ISADMINISTRADOR, NOME FROM USUARIOS WHERE ID = ?";
+        String sql =  "SELECT ID, NOME, EMAIL, SENHA, ISADMINISTRADOR, IDTIME FROM USUARIOS WHERE ID = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, id);
@@ -66,7 +66,7 @@ public class UsuarioDAO {
         ResultSet rs = stmt.executeQuery();
         Usuario u = null;
         if(rs.next()){
-            u = new Usuario(rs.getInt("ID"), rs.getString("NOME"), rs.getString("EMAIL"), rs.getString("SENHA"), rs.getBoolean("ISADMINISTRADOR"));
+            u = new Usuario(rs.getInt("ID"), rs.getString("NOME"), rs.getString("EMAIL"), rs.getString("SENHA"), rs.getBoolean("ISADMINISTRADOR"), rs.getString("IDTIME"));
         }
         stmt.close();
         connection.close();

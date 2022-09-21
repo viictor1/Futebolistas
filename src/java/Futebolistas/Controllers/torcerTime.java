@@ -69,7 +69,7 @@ public class torcerTime extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(torcerTime.class.getName()).log(Level.SEVERE, null, ex);
         }
-        response.sendRedirect("GerenciarCookies");
+        response.sendRedirect("Times");
     }
 
     /**
