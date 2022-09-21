@@ -67,7 +67,7 @@ public class EncerrarSessao extends HttpServlet {
         }
  
         }
-        response.sendRedirect("home");  
+        response.sendRedirect("GerenciarCookies");  
     }
 
     /**

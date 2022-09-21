@@ -37,14 +37,7 @@ public class torcerTime extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        response.setContentType("text/html;charset=UTF-8");
-        
-        HttpSession sessao = request.getSession(false);     
-        Usuario logado = (Usuario) sessao.getAttribute("autenticado");
-        UsuarioModel model = new UsuarioModel();
-        String idTime = request.getParameter("idTime");
-        model.alterarTime(logado.getId(), logado.getTime(), idTime);
-        response.sendRedirect("Times");
+        response.setContentType("text/html;charset=UTF-8");      
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -59,11 +52,24 @@ public class torcerTime extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        HttpSession sessao = request.getSession(true);     
+        Usuario autenticado = (Usuario) sessao.getAttribute("autenticado");
+        sessao.removeAttribute("autenticado");
+        
+        UsuarioModel model = new UsuarioModel();
+        String idTime = request.getParameter("idTime");
         try {
-            processRequest(request, response);
+            model.alterarTime(autenticado.getId(), autenticado.getTime(), idTime);
         } catch (SQLException ex) {
             Logger.getLogger(torcerTime.class.getName()).log(Level.SEVERE, null, ex);
         }
+        try {
+            sessao.setAttribute("autenticado", model.selectUsuariobyID(autenticado.getId()));
+        } catch (SQLException ex) {
+            Logger.getLogger(torcerTime.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        response.sendRedirect("GerenciarCookies");
     }
 
     /**
@@ -77,11 +83,7 @@ public class torcerTime extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(torcerTime.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }
 
     /**

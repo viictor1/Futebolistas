@@ -4,6 +4,7 @@
  */
 package Futebolistas.Controllers;
 import Futebolistas.Enteties.Usuario;
+import Futebolistas.Model.TimeModel;
 import Futebolistas.Model.UsuarioModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -76,17 +77,10 @@ public class UsuarioCadastrar extends HttpServlet {
 
             UsuarioModel model = new UsuarioModel();
             try {
-                model.add(u);
-                HttpSession sessao = request.getSession();
-                if(sessao.getAttribute("autenticado") != null){
-                    response.sendRedirect("GerenciarCookies");
-                }
-                else{
-                    response.sendRedirect("UsuarioCadastrar");
-                }
-                
+                model.add(u);     
+                response.sendRedirect("GerenciarCookies");
             } catch (Exception e) {
-                response.sendRedirect("home");
+                response.sendRedirect("GerenciarCookies");
             }
           
     }

@@ -59,11 +59,11 @@ public class TimeDAO {
         return retorno;      
     }
     
-    public void alterarTorcedores(String id, int mais, int menos) throws SQLException{
+    public void alterarTorcedores(String id, int num) throws SQLException{
         String sql = "UPDATE TIMES SET NUM_TORCEDORES = ? WHERE IDTIME = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setInt(1, getNumTorcedores(id) + mais - menos);
+        stmt.setInt(1, (getNumTorcedores(id) + num));
         stmt.setString(2, id);
         
         stmt.execute();

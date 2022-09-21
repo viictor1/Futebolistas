@@ -77,8 +77,8 @@ public class GerenciarCookies extends HttpServlet {
             return;
         } else {
             Cookie[] cookies = request.getCookies();
+            sessao = request.getSession(true);
             if (cookies != null) {
-                sessao = request.getSession(true);
                 for (Cookie cookie : cookies) {
                     if ("ManterLogado".equals(cookie.getName())) {
                         UsuarioModel model = new UsuarioModel();

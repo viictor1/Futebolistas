@@ -19,7 +19,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         
     <div class="feed"><center>TIMES</center></div>
     
-    <c:if test="${autenticado.isAdministrador == true}"> <!-- se o usuário logado for um adm, ele poderá cadastrar um novo usuário -->
+    <c:if test="${autenticado.isAdministrador == true}"> <!-- se o usuário logado for um adm, ele poderá cadastrar um novo time -->
         <div id="option"><center><a href="cadastrarTimes">Cadastrar novo Time</a></center></div>
         </c:if>
         <div class="body-card">
@@ -41,8 +41,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <div class="button-carrossel">
               <button class="saibaMais">Saiba Mais</button>
               <c:if test="${autenticado != null && autenticado.time != time.id}">
-                  <button class="torcer"> <a href="torcerTime?idTime=${time.id}">Torcer</a></button>      
-              </c:if>
+                  <button class="torcer"> <a href="torcerTime?idTime=${time.id}">Torcer</a></button> 
+              </c:if>              
             </div>
           </div>
         </div>

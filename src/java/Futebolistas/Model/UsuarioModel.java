@@ -12,6 +12,7 @@ import java.sql.SQLException;
 public class UsuarioModel {
     public void add(Usuario u) throws SQLException{
         UsuarioDAO dao = new UsuarioDAO();
+        TimeModel model = new TimeModel();
         if(u.getNome() == null || u.getNome().equals("")){
             return;
         }
@@ -25,6 +26,8 @@ public class UsuarioModel {
             return;
         }
         dao.add(u);
+        model.alterarTorcedores(u.getTime(), 1);
+        
     }
     
     public void alterarSenha(int id, String senha) throws SQLException{
@@ -57,8 +60,8 @@ public class UsuarioModel {
         TimeDAO daoT = new TimeDAO();
         daoU.alterarTime(id, id_novo);
         if(id_antigo != null && daoT.getNumTorcedores(id_antigo) > 0){
-            daoT.alterarTorcedores(id_antigo, 0, 1);
+            daoT.alterarTorcedores(id_antigo, -1);
         }   
-        daoT.alterarTorcedores(id_novo, 1, 0);
+        daoT.alterarTorcedores(id_novo, 1);
     }
 }
