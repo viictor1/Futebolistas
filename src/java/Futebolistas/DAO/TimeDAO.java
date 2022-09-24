@@ -85,4 +85,20 @@ public class TimeDAO {
                 
         return num;
     }
+    
+    public void atualizarTime(Time t, int id) throws SQLException{
+        String sql = "UPDATE TIMES SET NOME = ?, DATA_FUNDACAO = ?, TECNICO = ?, PRESIDENTE = ?, LOCAL_FUNDACAO = ?, TITULOS = ? WHERE IDTIME = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt= connection.prepareStatement(sql);
+        stmt.setString(1, t.getNome());
+        stmt.setString(2, t.getData_fundacao());
+        stmt.setString(3, t.getTecnico());
+        stmt.setString(4, t.getPresidente());
+        stmt.setString(5, t.getLocal_fundacao());
+        stmt.setInt(6, t.getTitulos());
+        stmt.setInt(7, id);
+        stmt.execute();
+        stmt.close();
+        connection.close();
+    }
 }
