@@ -9,8 +9,8 @@ package Futebolistas.Enteties;
  * @author maluc
  */
 public class Time {
-    String nome, data_fundacao, tecnico, presidente, local_fundacao;
-    int id, titulos, num_torcedores;
+    private String nome, data_fundacao, tecnico, presidente, local_fundacao;
+    private int id, titulos, num_torcedores;
 
     public Time(String nome, String data_fundacao, String tecnico, String presidente, String local_fundacao, int titulos, int num_torcedores) {
         this.nome = nome;

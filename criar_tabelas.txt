@@ -21,3 +21,18 @@ CREATE TABLE Usuarios(
     idTime int,
     FOREIGN KEY (idTime) REFERENCES Times(idTime)
 );
+
+CREATE TABLE Noticias(
+  id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
+                            (START WITH 1, INCREMENT BY 1),
+  titulo VARCHAR(45) NOT NULL,
+  autor VARCHAR(45) NOT NULL,
+  texto VARCHAR(1000) NOT NULL
+);
+
+CREATE TABLE Arquivos(
+ id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
+                            (START WITH 1, INCREMENT BY 1),
+  localizacao VARCHAR(45),
+  mimetype VARCHAR(45)
+);

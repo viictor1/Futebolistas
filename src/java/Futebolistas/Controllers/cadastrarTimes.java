@@ -83,7 +83,7 @@ public class cadastrarTimes extends HttpServlet {
         TimeModel model = new TimeModel();
         try {
             model.add(time);
-            response.sendRedirect("GerenciarCookies");
+            response.sendRedirect("Times");
             return;
         } catch (SQLException ex) {
             Logger.getLogger(cadastrarTimes.class.getName()).log(Level.SEVERE, null, ex);

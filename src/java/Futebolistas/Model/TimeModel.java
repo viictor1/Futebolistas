@@ -16,6 +16,24 @@ import java.util.ArrayList;
 public class TimeModel {
     public void add(Time time) throws SQLException{
         TimeDAO dao = new TimeDAO();
+        if(time.getNome() == null || time.getNome().equals("")){
+            return;
+        }
+        if(time.getData_fundacao() == null || time.getData_fundacao().equals("")){
+            return;
+        }
+        if(time.getTecnico() == null || time.getTecnico().equals("")){
+            return;
+        }
+        if(time.getPresidente() == null || time.getPresidente().equals("")){
+            return;
+        }
+        if(time.getLocal_fundacao() == null || time.getLocal_fundacao().equals("")){
+            return;
+        }
+        if(time.getTitulos() < 0){
+            return;
+        }
         dao.add(time);
     }
     public ArrayList<Time> selecionarTodos() throws SQLException{

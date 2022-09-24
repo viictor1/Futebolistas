@@ -1,9 +1,9 @@
 package Futebolistas.Enteties;
 
 public class Usuario {
-    String nome, email, senha, time;
-    Boolean isAdministrador;
-    int id;
+    private String nome, email, senha, time;
+    private Boolean isAdministrador;
+    private int id;
 
     public Usuario(String nome, String email, String senha, Boolean adm) {
         this.nome = nome;
