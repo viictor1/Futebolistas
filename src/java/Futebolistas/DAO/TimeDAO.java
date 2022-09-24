@@ -5,6 +5,7 @@
 package Futebolistas.DAO;
 
 import Futebolistas.Connections.ConnectionFactory;
+import Futebolistas.Controllers.Times;
 import Futebolistas.Enteties.Time;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -100,5 +101,28 @@ public class TimeDAO {
         stmt.execute();
         stmt.close();
         connection.close();
+    }
+    
+    public Time selectTimeByID(int id) throws SQLException{
+        String sql = "SELECT IDTIME, NOME, DATA_FUNDACAO, TECNICO, PRESIDENTE, LOCAL_FUNDACAO, TITULOS, NUM_TORCEDORES FROM TIMES WHERE ID = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+        Time t = new Time();
+        
+        if(rs.next()){
+            t.setId(rs.getInt("IDTIME"));
+            t.setNome(rs.getString("NOME"));
+            t.setData_fundacao(rs.getString("DATA_FUNDACAO"));
+            t.setTecnico(rs.getString("TECNICO"));
+            t.setPresidente(rs.getString("PRESIDENTE"));
+            t.setLocal_fundacao(rs.getString("LOCAL_FUNDACAO"));
+            t.setTitulos(rs.getInt("TITULOS"));
+            t.setNum_torcedores(rs.getInt("NUM_TORCEDORES"));
+        }
+        stmt.close();
+        connection.close();
+        return t;
     }
 }
