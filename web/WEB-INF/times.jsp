@@ -12,10 +12,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
     <!-- ===== Fontawesome CDN Link ===== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
- 
+    <script src="https://kit.fontawesome.com/46a2e52881.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <c:import url="header.jsp"></c:import>
+        <c:import url="menu.jsp"></c:import>
         
     <div class="feed"><center>TIMES</center></div>
     
@@ -32,8 +33,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <div class="image">
               <img src="">
             </div>
-            <div class="media-icons">
-              <i class="fab fa-twitter"></i>
+            <div class="media-icons">   
+                <c:if test="${autenticado.isAdministrador == true}">
+                    <a href="menuTimes?idAlterar=${time.id}"><i class="fa-solid fa-pencil"></i></a>
+                </c:if>
+              
             </div>
             <div class="name-time">
               <span class="name">${time.nome}</span>
@@ -49,12 +53,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         </c:forEach>
           </div>
         </div>
-      </div>
-
-    <div class="swiper-button-next"></div>
+       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
       <div class="swiper-pagination"></div>
     </section>
+      </div>
+
+    
     <!-- Swiper JS -->
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 

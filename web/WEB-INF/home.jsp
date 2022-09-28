@@ -14,6 +14,7 @@
     <body>
      
         <c:import url="header.jsp"></c:import> 
+        <c:import url="menu.jsp"></c:import>
 
         <!-- Feed de notícias -->
     <div class="feed"><center>FEED</center></div>

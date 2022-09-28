@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 *{
   margin: 0;
   padding: 0;
@@ -281,18 +281,6 @@ body{background-color: #F4F3F3;}
   height: 1px;
   background-color: rgba(220,220,220);
   margin-top: 10px;
-}
-.x{
-  float: right;
-  width: 24px;
-  cursor: pointer;
-  background-color: rgba(192,192,192);
-  text-align: center;
-  line-height: 24px;
-  color: #FFFAFA;
-}
-.x:hover{
-  background-color: darkgray;
 }
 .show-login{
   opacity: 1;
@@ -645,10 +633,9 @@ body{background-color: #F4F3F3;}
   transform: rotate(45deg);
 }
 /*TIMES CARD*/
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 .body-card{
-  height: 52vh;
+  height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -658,10 +645,11 @@ body{background-color: #F4F3F3;}
 }
 section{
   position: relative;
-  height: 400px;
+  height: 300px;
   width: 1075px;
   display: flex;
   align-items: center;
+  font-family: 'Poppins', sans-serif;
 }
 
 .swiper{
@@ -737,7 +725,6 @@ section .card .image img{
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
-  color: ;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -760,7 +747,7 @@ section .card .image img{
 .card .rating i{
   font-size: 18px;
   margin: 0 2px;
-  color: 	#1C1C1C;
+  color: #1C1C1C;
 }
 
 .card .button-carrossel{
@@ -807,4 +794,157 @@ section .card .image img{
 .swiper-button-next:hover, .swiper-button-prev:hover{
   opacity: 1;
   color: 	#1C1C1C;
+}
+
+.both{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background-color: #8D96B6;
+  width: 600px;
+  height: 360px;
+  margin-top: 20px;
+  border-radius: 70px;
+  font-family: 'Poppins', sans-serif;;
+}
+.left{
+  float: left;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 150px;
+  flex-direction: column;
+  font-size: 26px;
+  color: white;
+  text-shadow: 2px 3px darkgray;
+}
+.r{
+  padding: 5px;
+}
+.fa-xmark{
+  font-size: 1.6em;
+  position: absolute;
+  color: white;
+  float: right;
+  margin-bottom: 270px;
+  margin-right: -470px;
+  cursor: pointer;
+}
+.box{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  font-size: 20px;
+  float: right;
+  width: 350px;
+  margin-left: 20px;
+}
+.am{
+  color: white;
+  font-family: arial;
+  text-decoration: none;
+  border: 2px solid;
+  width: 220px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-top: 20px;
+  font-size: 15px;
+  margin-left: 40px;
+}
+.am:hover{
+  background-color: white;
+  color: #8D96B6;
+}
+.fa-solid {
+  margin-left: 8px;
+}
+.fa-pencil{
+  margin-left: -3px;
+}
+.middle{
+  background-color: white;
+  height: 270px;
+  width: 2px;
+  position: absolute;
+  margin-left: -100px;
+}
+.pra-centralizar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1365px;
+  height: 640px;
+}
+.box-cadastro{
+  width: 600px;
+  height: 500px;
+  background-color: #DDE3E8;
+  font-family: 'Poppins', sans-serif;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border-radius: 50px;
+  box-shadow: 4px 6px lightgray;
+}
+.left-times{
+    color: #252526;
+    font-size: 18px;
+    height: 450px;
+}
+.fa-arrow-left{
+    margin-left: 25px;
+    text-decoration: none;
+    color: #252526;
+    cursor: pointer;
+}
+.right-time{
+  float: right;
+  flex-direction: column;
+  height: 600px;
+  width: 300px;
+  margin-left: 260px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.cadastro-time{
+  width: 200px;
+  height: 40px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-color: black;
+  border-radius: 0px;
+  background-color: #DDE3E8;
+  margin-bottom: 18px;
+  font-size: 16px;
+}
+
+input[type=text]{outline: none}
+
+input[type=file]{display: none}
+form{
+  flex-direction: column;
+  display: flex;
+}
+.file{
+cursor: pointer;
+}
+.btn-time{
+  width: 180px;
+  height: 45px;
+  margin-top: -10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border-radius: 10px;
+  cursor: pointer;
 }

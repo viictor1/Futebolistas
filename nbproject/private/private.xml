@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/futebolistas_com_times/Futebolistas-master01/Futebolistas/src/java/Futebolistas/DAO/TimeDAO.java</file>
+            <file>file:/C:/Users/maluc/OneDrive/Área%20de%20Trabalho/Futebolistas-master/web/WEB-INF/cadastrar-times.jsp</file>
+            <file>file:/C:/Users/maluc/OneDrive/Área%20de%20Trabalho/Futebolistas-master/web/WEB-INF/menuTimes.jsp</file>
+            <file>file:/C:/Users/maluc/OneDrive/Área%20de%20Trabalho/Futebolistas-master/web/WEB-INF/times.jsp</file>
+            <file>file:/C:/Users/maluc/OneDrive/Área%20de%20Trabalho/Futebolistas-master/src/java/Futebolistas/Controllers/cadastrarTimes.java</file>
         </group>
     </open-files>
 </project-private>

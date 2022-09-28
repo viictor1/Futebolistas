@@ -87,7 +87,7 @@ public class TimeDAO {
         return num;
     }
     
-    public void atualizarTime(Time t, int id) throws SQLException{
+    public void atualizarTime(Time t, String id) throws SQLException{
         String sql = "UPDATE TIMES SET NOME = ?, DATA_FUNDACAO = ?, TECNICO = ?, PRESIDENTE = ?, LOCAL_FUNDACAO = ?, TITULOS = ? WHERE IDTIME = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt= connection.prepareStatement(sql);
@@ -97,17 +97,17 @@ public class TimeDAO {
         stmt.setString(4, t.getPresidente());
         stmt.setString(5, t.getLocal_fundacao());
         stmt.setInt(6, t.getTitulos());
-        stmt.setInt(7, id);
+        stmt.setString(7, id);
         stmt.execute();
         stmt.close();
         connection.close();
     }
     
-    public Time selectTimeByID(int id) throws SQLException{
-        String sql = "SELECT IDTIME, NOME, DATA_FUNDACAO, TECNICO, PRESIDENTE, LOCAL_FUNDACAO, TITULOS, NUM_TORCEDORES FROM TIMES WHERE ID = ?";
+    public Time selectTimeByID(String id) throws SQLException{
+        String sql = "SELECT IDTIME, NOME, DATA_FUNDACAO, TECNICO, PRESIDENTE, LOCAL_FUNDACAO, TITULOS, NUM_TORCEDORES FROM TIMES WHERE IDTIME = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setInt(1, id);
+        stmt.setString(1, id);
         ResultSet rs = stmt.executeQuery();
         Time t = new Time();
         

@@ -87,6 +87,7 @@
             </style>
     </head>
     <body>
+        
     <div id="decoration">
     <div id="barra"></div>
     <div id="textinho">SITE FOCADO NO <br> FUTEBOL FEMININO </div>
@@ -98,6 +99,11 @@
       <div id="line-login"></div>
       </center>
     </div>
+    <div id="pmenu">
+      ELAS NO CAMPO
+    </div>
+    <div id="smenu">FUTEBOLISTAS</div>
+    <hr color="black" size="3px">
         <c:if test="${autenticado == null}"> <!-- Se não tiver usuário logado, aparecerá esse menu -->
     <div class="side-menu">
       <div class="modal" id="modal">
@@ -202,24 +208,6 @@
         </div>
       </div>
     </div>
-    <div id="pmenu">
-      ELAS NO CAMPO
-    </div>
-    <div id="smenu">FUTEBOLISTAS</div>
-    <hr color="black" size="3px">
-    <div class="links">
-        <center>
-          <nav class="menu">
-            <ul>
-              <li><a href="home">HOME</a></li>
-              <li><a href="Times">TIMES</a></li>
-              <li><a href="">CAMPEONATO</a></li>
-              <li><a href="">JOGOS</a></li>
-              <li><a href="">TORCIDAS</a></li>
-              <li><a href="">HISTÓRIA</a></li>
-          </nav>
-        </center>
-    </div>
-    <center><div id="line"></div></center>
+
     </body>
 </html>

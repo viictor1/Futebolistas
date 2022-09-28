@@ -44,4 +44,13 @@ public class TimeModel {
         TimeDAO dao = new TimeDAO();
         dao.alterarTorcedores(idTime, num);
     }
+    public Time getTimeByID(String id) throws SQLException{
+        TimeDAO dao = new TimeDAO();
+        Time t = dao.selectTimeByID(id);
+        return t;
+    }
+    public void atualizarTime(Time t, String id) throws SQLException{
+        TimeDAO dao = new TimeDAO();
+        dao.atualizarTime(t, id);
+    }
 }

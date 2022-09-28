@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,8 +22,8 @@ import java.util.logging.Logger;
  *
  * @author maluc
  */
-@WebServlet(name = "cadastrarTimes", urlPatterns = {"/cadastrarTimes"})
-public class cadastrarTimes extends HttpServlet {
+@WebServlet(name = "menuTimes", urlPatterns = {"/menuTimes"})
+public class menuTimes extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,9 +35,12 @@ public class cadastrarTimes extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
 
+        String id = request.getParameter("idAlterar");
+        request.setAttribute("idAlterar", id);
+        request.getRequestDispatcher("WEB-INF/menuTimes.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -51,21 +55,11 @@ public class cadastrarTimes extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        
-        String id = request.getParameter("idAlterar");
-        if(id != null){
-            TimeModel model = new TimeModel();
-            Time t = null;
-            try {
-                t = model.getTimeByID(id);
-            } catch (SQLException ex) {
-                Logger.getLogger(cadastrarTimes.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            request.setAttribute("alterar", t);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(menuTimes.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        request.getRequestDispatcher("WEB-INF/cadastrar-times.jsp").forward(request, response);
     }
 
     /**
@@ -79,42 +73,11 @@ public class cadastrarTimes extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        
-        String nome, data_fundacao, tecnico, presidente, local_fundacao;
-        int titulos;
-        String id = "";
-        
-        id = request.getParameter("id");
-        System.out.println(request.getParameter("id"));
-        nome = request.getParameter("nome");
-        data_fundacao = request.getParameter("data");
-        tecnico = request.getParameter("tecnico");
-        presidente = request.getParameter("presidente");
-        local_fundacao = request.getParameter("local");
-        titulos = Integer.parseInt(request.getParameter("titulos"));
-        
-        Time time = new Time(nome, data_fundacao, tecnico, presidente, local_fundacao, titulos, 0);
-        TimeModel model = new TimeModel();       
-
-        if(id != ""){
-            try { 
-                model.atualizarTime(time, id);
-                response.sendRedirect("GerenciarCookies");
-            } catch (SQLException ex) {
-                response.sendRedirect("cadastrarTimes");
-            }
-        }     
-        else{
-            try { 
-                model.add(time);
-                response.sendRedirect("GerenciarCookies");
-            } catch (SQLException ex) {
-                response.sendRedirect("cadastrarTimes");
-            }
-        }     
-
-        
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(menuTimes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
