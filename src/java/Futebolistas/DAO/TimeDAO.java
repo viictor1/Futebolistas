@@ -125,4 +125,14 @@ public class TimeDAO {
         connection.close();
         return t;
     }
+    
+    public void remover(String id) throws SQLException{
+        String sql = "DELETE FROM TIMES WHERE IDTIME = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, id);
+        stmt.execute();
+        stmt.close();
+        connection.close();
+    }
 }

@@ -49,8 +49,33 @@ public class TimeModel {
         Time t = dao.selectTimeByID(id);
         return t;
     }
-    public void atualizarTime(Time t, String id) throws SQLException{
+    public void atualizarTime(Time time, String id) throws SQLException{
+        if(time.getNome() == null || time.getNome().equals("")){
+            return;
+        }
+        if(time.getData_fundacao() == null || time.getData_fundacao().equals("")){
+            return;
+        }
+        if(time.getTecnico() == null || time.getTecnico().equals("")){
+            return;
+        }
+        if(time.getPresidente() == null || time.getPresidente().equals("")){
+            return;
+        }
+        if(time.getLocal_fundacao() == null || time.getLocal_fundacao().equals("")){
+            return;
+        }
+        if(time.getTitulos() < 0){
+            return;
+        }
         TimeDAO dao = new TimeDAO();
-        dao.atualizarTime(t, id);
+        dao.atualizarTime(time, id);
+    }
+    
+    public void remover(String id) throws SQLException{
+        TimeDAO dao = new TimeDAO();
+        UsuarioModel model = new UsuarioModel();
+        model.removerTorcedores(Integer.parseInt(id));
+        dao.remover(id);
     }
 }

@@ -100,19 +100,19 @@ public class cadastrarTimes extends HttpServlet {
         if(id != ""){
             try { 
                 model.atualizarTime(time, id);
-                response.sendRedirect("GerenciarCookies");
             } catch (SQLException ex) {
-                response.sendRedirect("cadastrarTimes");
+                Logger.getLogger(cadastrarTimes.class.getName()).log(Level.SEVERE, null, ex);
             }
         }     
         else{
-            try { 
+            try {
                 model.add(time);
-                response.sendRedirect("GerenciarCookies");
             } catch (SQLException ex) {
-                response.sendRedirect("cadastrarTimes");
+                Logger.getLogger(cadastrarTimes.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }     
+
+        }   
+        response.sendRedirect("Times");
 
         
     }

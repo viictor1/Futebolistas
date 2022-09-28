@@ -53,8 +53,7 @@ public class UsuarioDAO {
         
         stmt.execute();
         stmt.close();
-        connection.close();
-        
+        connection.close();    
     }
     
     public Usuario selectUserbyID(int id) throws SQLException{
@@ -117,5 +116,14 @@ public class UsuarioDAO {
         connection.close();
     }
     
+    public void removerTorcedores(int id) throws SQLException{ //remover todos os torcedores quando apagar time
+        String sql = "UPDATE USUARIOS SET IDTIME = NULL WHERE IDTIME = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, id);
+        stmt.execute();
+        stmt.close();
+        connection.close();
+    }
 }
 

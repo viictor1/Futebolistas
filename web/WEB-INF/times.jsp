@@ -36,6 +36,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <div class="media-icons">   
                 <c:if test="${autenticado.isAdministrador == true}">
                     <a href="menuTimes?idAlterar=${time.id}"><i class="fa-solid fa-pencil"></i></a>
+                    <a href="removerTime?id=${time.id}"><i class="fa-solid fa-xmark"></i></a>
                 </c:if>
               
             </div>

@@ -64,4 +64,9 @@ public class UsuarioModel {
         }   
         daoT.alterarTorcedores(id_novo, 1);
     }
+    
+    public void removerTorcedores(int id) throws SQLException{ //remover todos os torcedores quando apagar time
+        UsuarioDAO dao = new UsuarioDAO();
+        dao.removerTorcedores(id);
+    }
 }
