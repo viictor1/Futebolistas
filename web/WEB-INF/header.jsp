@@ -110,13 +110,13 @@
         <div class="modal-content">
           <span class="x" onclick="hideModal()">&times;</span>
           <div id=modal-titulo>USUÁRIO</div>
-          <div id="modal-line"></div>
+          <div class="modal-line"></div>
           <div id="option" onclick="showLogin();hideModal()"><center>Login</center></div>
-          <div id="modal-line"></div>
+          <div class="modal-line"></div>
           <div id="option" onclick="showCadastro();hideModal()"><center>Registrar conta</center></div>
-          <div id="modal-line"></div>
+          <div class="modal-line"></div>
           <div id="option"><center>mais opções</center></div>
-          <div id="modal-line"></div>
+          <div class="modal-line"></div>
         </div>
       </div>
     </div>
@@ -128,16 +128,15 @@
     <div class="content-logado">        
     <span class="x" onclick="hideLogado()">&times;</span>
     <div id=modal-titulo>${autenticado.nome}</div> <!--AQ É A VARIÁVEL DO NOME QUE O USUÁRIO ESCOLHEU -->
-    <div class="modal-line"></div>
     <div id="option"><center>Meu time</center></div>
-    <div id="modal-line"></div>
+    <div class="modal-line"></div>
     <div id="option" onclick="showAtualizarS();hideLogado()"><center>Alterar senha</center></div>
-    <div id="modal-line"></div>
+    <div class="modal-line"></div>
     <div id="option"><center><a onclick="validarRemover()">Apagar conta</a></center></div>
-    <div id="modal-line"></div>
+    <div class="modal-line"></div>
     <c:if test="${autenticado.isAdministrador == true}"> <!-- se o usuário logado for um adm, ele poderá cadastrar um novo usuário -->
             <div id="option" onclick="showCadastro();hideLogado()"><center>Cadastrar novo Usuário</center></div>
-            <div id="modal-line"></div>
+            <div class="modal-line"></div>
         </c:if>
     <div id="option"><center><a onclick="validarSair()"">Sair</a></center></div> <!--Aq é pra logout-->
     </div>
@@ -186,7 +185,12 @@
               <input type="text" placeholder="Procurar..." />
             </div>
             <c:if test="${autenticado.isAdministrador == true}"> <!-- ADM pode cadastrar um novo usuároi adm -->
-                Administrador: <input type="checkbox" name="adm" id="adm" value="s">
+                <div class="kadm">
+              <label class="container-label">Administrador:
+                  <input type="checkbox" id="adm" value="s" name="adm">
+              <span class="checkmark"></span>
+            </label>
+          </div>
             </c:if>
           </div>
           <script src="main.js"></script>
