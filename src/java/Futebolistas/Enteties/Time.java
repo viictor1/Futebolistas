@@ -10,7 +10,7 @@ package Futebolistas.Enteties;
  */
 public class Time {
     private String nome, data_fundacao, tecnico, presidente, local_fundacao;
-    private int id, titulos, num_torcedores;
+    private int id, titulos, num_torcedores, idArquivo;
 
     public Time(String nome, String data_fundacao, String tecnico, String presidente, String local_fundacao, int titulos, int num_torcedores) {
         this.nome = nome;
@@ -19,6 +19,14 @@ public class Time {
         this.presidente = presidente;
         this.local_fundacao = local_fundacao;
         this.titulos = titulos;
+    }
+
+    public int getIdArquivo() {
+        return idArquivo;
+    }
+
+    public void setIdArquivo(int idArquivo) {
+        this.idArquivo = idArquivo;
     }
 
     public int getNum_torcedores() {

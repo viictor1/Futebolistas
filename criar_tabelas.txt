@@ -1,14 +1,22 @@
+CREATE TABLE Arquivos(
+ idArquivo INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
+                            (START WITH 1, INCREMENT BY 1),
+  conteudo blob(5M),
+  mimetype VARCHAR(45)
+);
+
 CREATE TABLE Times(
   idTime INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
                             (START WITH 1, INCREMENT BY 1),
   nome VARCHAR(45) NOT NULL,
-  logo VARCHAR(45),
   data_fundacao VARCHAR(4) NOT NULL,
   tecnico VARCHAR(45) NOT NULL,
   presidente VARCHAR(45) NOT NULL,
   local_fundacao VARCHAR(45) NOT NULL,
   titulos INT NOT NULL,
-  num_torcedores INT NOT NULL
+  num_torcedores INT NOT NULL,
+  idArquivo int,
+  FOREIGN KEY (idArquivo) REFERENCES Arquivos(idArquivo)
 );
 
 CREATE TABLE Usuarios(
@@ -27,12 +35,7 @@ CREATE TABLE Noticias(
                             (START WITH 1, INCREMENT BY 1),
   titulo VARCHAR(45) NOT NULL,
   autor VARCHAR(45) NOT NULL,
-  texto VARCHAR(1000) NOT NULL
-);
-
-CREATE TABLE Arquivos(
- id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
-                            (START WITH 1, INCREMENT BY 1),
-  localizacao VARCHAR(45),
-  mimetype VARCHAR(45)
+  texto VARCHAR(1000) NOT NULL,
+  idArquivo int,
+  FOREIGN KEY (idArquivo) REFERENCES Arquivos(idArquivo)
 );

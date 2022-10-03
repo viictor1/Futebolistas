@@ -5,6 +5,7 @@
 package Futebolistas.Model;
 
 import Futebolistas.DAO.TimeDAO;
+import Futebolistas.Enteties.Arquivo;
 import Futebolistas.Enteties.Time;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  * @author maluc
  */
 public class TimeModel {
-    public void add(Time time) throws SQLException{
+    public void add(Time time, Arquivo img) throws SQLException{
         TimeDAO dao = new TimeDAO();
         if(time.getNome() == null || time.getNome().equals("")){
             return;
@@ -34,7 +35,7 @@ public class TimeModel {
         if(time.getTitulos() < 0){
             return;
         }
-        dao.add(time);
+        dao.add(time, img);
     }
     public ArrayList<Time> selecionarTodos() throws SQLException{
         TimeDAO dao = new TimeDAO();

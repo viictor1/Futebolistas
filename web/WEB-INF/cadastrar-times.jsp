@@ -26,7 +26,7 @@
           
       </div>
       <div class="right-time">
-        <form class="" action="cadastrarTimes?id=${alterar.id}" method="post">
+          <form class="" action="cadastrarTimes?id=${alterar.id}" method="post" enctype="multipart/form-data">
           <input type="text" name="nome" value="${alterar.nome}" class="cadastro-time" placeholder="Nome do time">
           <input type="text" name="data" value="${alterar.data_fundacao}" class="cadastro-time" placeholder="Ano de Fundação">
           <input type="text" name="tecnico" value="${alterar.tecnico}" class="cadastro-time" placeholder="Técnico">
@@ -36,7 +36,7 @@
           <label for="file" class="file cadastro-time">Logo do time
             <i class="fa-solid fa-image"></i>
           </label>
-          <input type="file" name="" id="file" value="" class="cadastro-time">
+          <input type="file" name="imagem" id="file" value="" class="cadastro-time">
           <input type="submit" name="" value="Concluir" class="btn-time">   
         </form>
       </div>

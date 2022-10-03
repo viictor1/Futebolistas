@@ -31,7 +31,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <div class="swiper-slide card">
           <div class="card-content">
             <div class="image">
-              <img src="">
+              <img src="mostrarImagem?id=${time.id})">
             </div>
             <div class="media-icons">   
                 <c:if test="${autenticado.isAdministrador == true}">
