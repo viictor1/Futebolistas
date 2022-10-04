@@ -21,7 +21,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <div class="feed"><center>TIMES</center></div>
     
     <c:if test="${autenticado.isAdministrador == true}"> <!-- se o usuário logado for um adm, ele poderá cadastrar um novo time -->
-        <div id="option"><center><a href="cadastrarTimes">Cadastrar novo Time</a></center></div>
+        <div id="option"><center><a href="CadastrarTimes">Cadastrar novo Time</a></center></div>
         </c:if>
         <div class="body-card">
             <section>
@@ -31,12 +31,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <div class="swiper-slide card">
           <div class="card-content">
             <div class="image">
-              <img src="mostrarImagem?id=${time.id})">
+              <img src="MostrarImagem?id=${time.idArquivo}">
             </div>
             <div class="media-icons">   
                 <c:if test="${autenticado.isAdministrador == true}">
-                    <a href="menuTimes?idAlterar=${time.id}"><i class="fa-solid fa-pencil"></i></a>
-                    <a href="removerTime?id=${time.id}"><i class="fa-solid fa-trash-can"></i></a>
+                    <a href="MenuTimes?idAlterar=${time.id}"><i class="fa-solid fa-pencil"></i></a>
+                    <a href="RemoverTime?id=${time.id}"><i class="fa-solid fa-trash-can"></i></a>
                 </c:if>
               
             </div>
@@ -46,7 +46,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <div class="button-carrossel">
               <button class="saibaMais">Saiba Mais</button>
               <c:if test="${autenticado != null && autenticado.time != time.id}">
-                  <button class="torcer"> <a href="torcerTime?idTime=${time.id}">Torcer</a></button> 
+                  <button class="torcer"> <a href="TorcerTime?idTime=${time.id}">Torcer</a></button> 
               </c:if>              
             </div>
           </div>

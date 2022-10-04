@@ -47,9 +47,29 @@ public class TimeDAO {
             connection.rollback();
         } finally {
             connection.close();
-        }
-              
-        
+        }       
+    }
+    
+    public void remover(int id) throws SQLException{
+        ArquivoDAO dao = new ArquivoDAO(); 
+        Time t = selectTimeByID(id);
+        String sql = "DELETE FROM TIMES WHERE IDTIME = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        try {
+            connection.setAutoCommit(false);
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.execute();
+            dao.remover(connection, t.getIdArquivo());
+            stmt.close();           
+            connection.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            connection.rollback();
+        } finally {
+            connection.close();
+        }        
     }
     
     public ArrayList<Time> selecionarTodos() throws SQLException{
@@ -77,23 +97,23 @@ public class TimeDAO {
         return retorno;      
     }
     
-    public void alterarTorcedores(String id, int num) throws SQLException{
+    public void alterarTorcedores(int id, int num) throws SQLException{
         String sql = "UPDATE TIMES SET NUM_TORCEDORES = ? WHERE IDTIME = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, (getNumTorcedores(id) + num));
-        stmt.setString(2, id);
+        stmt.setInt(2, id);
         
         stmt.execute();
         stmt.close();
         connection.close();
     }
     
-    public int getNumTorcedores(String id) throws SQLException{
+    public int getNumTorcedores(int id) throws SQLException{
         String sql = "SELECT NUM_TORCEDORES FROM TIMES WHERE IDTIME = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setString(1, id);
+        stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
         int num = 0;
         
@@ -104,27 +124,38 @@ public class TimeDAO {
         return num;
     }
     
-    public void atualizarTime(Time t, String id) throws SQLException{
+    public void atualizarTime(Time t, int id, Arquivo arquivo) throws SQLException{
+        ArquivoDAO dao = new ArquivoDAO();
         String sql = "UPDATE TIMES SET NOME = ?, DATA_FUNDACAO = ?, TECNICO = ?, PRESIDENTE = ?, LOCAL_FUNDACAO = ?, TITULOS = ? WHERE IDTIME = ?";
         Connection connection = new ConnectionFactory().getConnection();
-        PreparedStatement stmt= connection.prepareStatement(sql);
-        stmt.setString(1, t.getNome());
-        stmt.setString(2, t.getData_fundacao());
-        stmt.setString(3, t.getTecnico());
-        stmt.setString(4, t.getPresidente());
-        stmt.setString(5, t.getLocal_fundacao());
-        stmt.setInt(6, t.getTitulos());
-        stmt.setString(7, id);
-        stmt.execute();
-        stmt.close();
-        connection.close();
+        try {
+            connection.setAutoCommit(false);
+            dao.alterar(connection, arquivo);
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            
+            stmt.setString(1, t.getNome());
+            stmt.setString(2, t.getData_fundacao());
+            stmt.setString(3, t.getTecnico());
+            stmt.setString(4, t.getPresidente());
+            stmt.setString(5, t.getLocal_fundacao());
+            stmt.setInt(6, t.getTitulos());
+            stmt.setInt(7, id);
+            
+            stmt.execute();
+            stmt.close();
+            connection.commit();
+        } catch (Exception e) {
+            connection.rollback();
+        } finally {
+            connection.close();
+        }             
     }
     
-    public Time selectTimeByID(String id) throws SQLException{
+    public Time selectTimeByID(int id) throws SQLException{
         String sql = "SELECT IDTIME, NOME, DATA_FUNDACAO, TECNICO, PRESIDENTE, LOCAL_FUNDACAO, TITULOS, NUM_TORCEDORES, IDARQUIVO FROM TIMES WHERE IDTIME = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setString(1, id);
+        stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
         Time t = new Time();
         
@@ -138,21 +169,10 @@ public class TimeDAO {
             t.setTitulos(rs.getInt("TITULOS"));
             t.setNum_torcedores(rs.getInt("NUM_TORCEDORES"));
             t.setIdArquivo(rs.getInt("IDARQUIVO"));
-            System.out.println(t.getNome());
-            System.out.println(t.getIdArquivo());
         }
         stmt.close();
         connection.close();
         return t;
     }
     
-    public void remover(String id) throws SQLException{
-        String sql = "DELETE FROM TIMES WHERE IDTIME = ?";
-        Connection connection = new ConnectionFactory().getConnection();
-        PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setString(1, id);
-        stmt.execute();
-        stmt.close();
-        connection.close();
-    }
 }

@@ -21,12 +21,15 @@
         <div class="pra-centralizar">
             
     <div class="box-cadastro">
-        <a href="menuTimes"> <i class="fa-solid fa-arrow-left"></i></a>
+        <a href="MenuTimes"> <i class="fa-solid fa-arrow-left"></i></a>
       <div class="left-times">
           
       </div>
       <div class="right-time">
-          <form class="" action="cadastrarTimes?id=${alterar.id}" method="post" enctype="multipart/form-data">
+          <form class="" action="CadastrarTimes?id=${alterar.id}" method="post" enctype="multipart/form-data">
+              <c:if test="${alterar.id != null}">
+              <input type="hidden" id="id" name="idArquivo" value="${alterar.idArquivo}">
+              </c:if>
           <input type="text" name="nome" value="${alterar.nome}" class="cadastro-time" placeholder="Nome do time">
           <input type="text" name="data" value="${alterar.data_fundacao}" class="cadastro-time" placeholder="Ano de Fundação">
           <input type="text" name="tecnico" value="${alterar.tecnico}" class="cadastro-time" placeholder="Técnico">

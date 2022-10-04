@@ -41,7 +41,7 @@ public class UsuarioCadastrar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
+        response.sendRedirect("GerenciarCookies");
     }
 
     /**
@@ -58,7 +58,8 @@ public class UsuarioCadastrar extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
             
-            String nome, email, senha, checkbox, time;
+            String nome, email, senha, checkbox;
+            int time;
             Boolean adm;
 
             
@@ -66,7 +67,7 @@ public class UsuarioCadastrar extends HttpServlet {
             email = request.getParameter("email");
             senha = request.getParameter("senha");
             checkbox = request.getParameter("adm");
-            time = request.getParameter("selectTime");
+            time = Integer.parseInt(request.getParameter("selectTime"));
             
             if("s".equals(checkbox)){ // atribuindo o valor de adm dependendo se foi selecionado ou não no checkbox da tela de cadastrar usuários do adm
                 adm = true;

@@ -53,14 +53,7 @@ public class Times extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-        HttpSession sessao = request.getSession(true);
-        TimeModel model = new TimeModel();
-        try {
-            sessao.setAttribute("times", model.selecionarTodos());
-        } catch (SQLException ex) {
-            Logger.getLogger(Times.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        request.getRequestDispatcher("WEB-INF/times.jsp").forward(request, response);
+        response.sendRedirect("GerenciarCookies?origem=Times"); // mandando para a gerenciar cookies para atualizar times
     }
 
     /**

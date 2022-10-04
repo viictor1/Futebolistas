@@ -23,8 +23,8 @@ import java.util.logging.Logger;
  *
  * @author victo
  */
-@WebServlet(name = "atualizarSenha", urlPatterns = {"/alterarSenha"})
-public class alterarSenha extends HttpServlet {
+@WebServlet(name = "AlterarSenha", urlPatterns = {"/AlterarSenha"})
+public class AlterarSenha extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -80,7 +80,7 @@ public class alterarSenha extends HttpServlet {
                 model.alterarSenha(u.getId(), senhaNova);
                 sessao.setAttribute("autenticado", model.selectUsuariobyID(u.getId()));
             } catch (SQLException ex) {
-                Logger.getLogger(alterarSenha.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AlterarSenha.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         response.sendRedirect("GerenciarCookies");

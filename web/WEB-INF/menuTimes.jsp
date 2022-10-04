@@ -19,7 +19,7 @@
     <body>
         <div class="pra-centralizar">
          <div class="both">
-       <i class="fa-solid fa-xmark"></i>
+             <a href="Times"><i class="fa-solid fa-xmark"></i></a>
       <div class="left">
       <c:if test="${idAlterar != null}">
           <span class="r">Alterar</span>
@@ -33,7 +33,7 @@
       </div>
       <div class="middle"></div>
       <div class="box">
-        <a href="cadastrarTimes?idAlterar=${idAlterar}" class="am">TIME
+        <a href="CadastrarTimes?idAlterar=${idAlterar}" class="am">TIME
           <i class="fa-solid fa-screwdriver-wrench"></i>
         </a>
         <a href="cadastrar-jogadoras.html" class="am">JOGADORAS

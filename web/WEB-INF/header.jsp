@@ -203,7 +203,7 @@
         <div class="content-login">
           <span class="x" onclick="hideAtualizarS()">&times;</span>
           ALTERAR SENHA
-          <form action="alterarSenha" method="post">
+          <form action="AlterarSenha" method="post">
               Senha Antiga: <input type="password" name="senhaAntiga" id="form-cadastro" required>
               Senha Nova:  <input type="password" name="senhaNova" id="form-cadastro" required>
               <button type="submit" class="cadastro-button">Alterar Senha</button>

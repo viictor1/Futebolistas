@@ -34,6 +34,27 @@ public class ArquivoDAO {
         }
     }
     
+    public void remover(Connection connection, int id) throws SQLException{
+        String sql = "DELETE FROM ARQUIVOS WHERE IDARQUIVO = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        
+        stmt.setInt(1, id);
+        
+        stmt.execute();
+        stmt.close();
+    }
+    
+    public void alterar(Connection connection, Arquivo arquivo) throws SQLException{
+        String sql = "UPDATE ARQUIVOS SET CONTEUDO = ?, MIMETYPE = ? WHERE IDARQUIVO = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setBytes(1, arquivo.getConteudo());
+        stmt.setString(2, arquivo.getMimetype());
+        stmt.setInt(3, arquivo.getId());
+        
+        stmt.execute();
+        stmt.close();
+    }
+    
     public Arquivo getArquivoByID(int id) throws SQLException{
         String sql = "SELECT IDARQUIVO, CONTEUDO, MIMETYPE FROM ARQUIVOS WHERE IDARQUIVO = ?";
         Connection connection = new ConnectionFactory().getConnection();

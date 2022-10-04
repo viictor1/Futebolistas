@@ -23,8 +23,8 @@ import java.util.logging.Logger;
  *
  * @author victo
  */
-@WebServlet(name = "torcerTime", urlPatterns = {"/torcerTime"})
-public class torcerTime extends HttpServlet {
+@WebServlet(name = "TorcerTime", urlPatterns = {"/TorcerTime"})
+public class TorcerTime extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,16 +58,16 @@ public class torcerTime extends HttpServlet {
         sessao.removeAttribute("autenticado");
         
         UsuarioModel model = new UsuarioModel();
-        String idTime = request.getParameter("idTime");
+        int idTime = Integer.parseInt(request.getParameter("idTime"));
         try {
             model.alterarTime(autenticado.getId(), autenticado.getTime(), idTime);
         } catch (SQLException ex) {
-            Logger.getLogger(torcerTime.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TorcerTime.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             sessao.setAttribute("autenticado", model.selectUsuariobyID(autenticado.getId()));
         } catch (SQLException ex) {
-            Logger.getLogger(torcerTime.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TorcerTime.class.getName()).log(Level.SEVERE, null, ex);
         }
         response.sendRedirect("Times");
     }

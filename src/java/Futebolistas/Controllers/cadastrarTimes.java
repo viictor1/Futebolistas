@@ -6,6 +6,7 @@ package Futebolistas.Controllers;
 
 import Futebolistas.Enteties.Arquivo;
 import Futebolistas.Enteties.Time;
+import Futebolistas.Model.ArquivoModel;
 import Futebolistas.Model.TimeModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -25,9 +26,9 @@ import java.util.logging.Logger;
  *
  * @author maluc
  */
-@WebServlet(name = "cadastrarTimes", urlPatterns = {"/cadastrarTimes"})
+@WebServlet(name = "CadastrarTimes", urlPatterns = {"/CadastrarTimes"})
 @MultipartConfig(maxFileSize = 8 * 1024 * 1024 * 5) // 5MB
-public class cadastrarTimes extends HttpServlet {
+public class CadastrarTimes extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -59,14 +60,21 @@ public class cadastrarTimes extends HttpServlet {
         processRequest(request, response);
         request.setCharacterEncoding("UTF-8");
         
-        String id = request.getParameter("idAlterar");
-        if(id != null){
+        int id;
+        if(request.getParameter("idAlterar") == null){
+            id = 0;
+        }
+        else{
+            id = Integer.parseInt(request.getParameter("idAlterar"));
+        }
+        
+        if(id > 0){
             TimeModel model = new TimeModel();
             Time t = null;
             try {
                 t = model.getTimeByID(id);
             } catch (SQLException ex) {
-                Logger.getLogger(cadastrarTimes.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CadastrarTimes.class.getName()).log(Level.SEVERE, null, ex);
             }
             request.setAttribute("alterar", t);
         }
@@ -90,10 +98,15 @@ public class cadastrarTimes extends HttpServlet {
         
         String nome, data_fundacao, tecnico, presidente, local_fundacao;
         int titulos;
-        String id = "";
+        int id;
         
-        id = request.getParameter("id");
-        System.out.println(request.getParameter("id"));
+        if(request.getParameter("id").equals("")){
+            id = 0;
+        }
+        else{
+            id = Integer.parseInt(request.getParameter("id"));
+        }
+        
         nome = request.getParameter("nome");
         data_fundacao = request.getParameter("data");
         tecnico = request.getParameter("tecnico");
@@ -101,19 +114,51 @@ public class cadastrarTimes extends HttpServlet {
         local_fundacao = request.getParameter("local");
         titulos = Integer.parseInt(request.getParameter("titulos"));
         
+        int idArquivo;
+        TimeModel model = new TimeModel();  
+        
+        if(request.getParameter("idArquivo") == null){
+            idArquivo = 0;
+        }
+        else{
+            idArquivo = Integer.parseInt(request.getParameter("idArquivo"));
+        }
+      
         Part part = request.getPart("imagem");
         String mimetype = part.getContentType();
         byte[] imagem = new byte[part.getInputStream().available()];
         part.getInputStream().read(imagem);
+        Arquivo img = new Arquivo();
         
-        Arquivo img = new Arquivo(imagem, mimetype);
-        
+        if(id == 0){ // se nao tiver id de time
+            img.setConteudo(imagem); // Time novo
+            img.setMimetype(mimetype);  
+        }
+        else{
+            ArquivoModel modelA = new ArquivoModel();
+            if(imagem.length != 0){  // passou imagem
+                    img.setId(idArquivo);
+                    img.setConteudo(imagem);
+                    img.setMimetype(mimetype);
+            }
+            else{
+                System.out.println("5");
+                try {
+                    img = modelA.getArquivoByID(idArquivo); // nao passou imagem
+                 } 
+                catch (SQLException ex) {
+                Logger.getLogger(CadastrarTimes.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+        }
+               
         Time time = new Time(nome, data_fundacao, tecnico, presidente, local_fundacao, titulos, 0);
-        TimeModel model = new TimeModel();       
+             
 
-        if(id != ""){
+        if(id > 0){
             try { 
-                model.atualizarTime(time, id);
+                model.atualizarTime(time, id, img);
             } catch (SQLException ex) {
                 response.sendRedirect("Times");
             }
@@ -122,11 +167,11 @@ public class cadastrarTimes extends HttpServlet {
             try {
                 model.add(time, img);
             } catch (SQLException ex) {
-                response.sendRedirect("cadastrarTimes");
+                response.sendRedirect("CadastrarTimes");
             }
 
         }   
-        response.sendRedirect("Times");
+        response.sendRedirect("GerenciarCookies?origin=Times");
 
         
     }

@@ -1,9 +1,9 @@
 package Futebolistas.Enteties;
 
 public class Usuario {
-    private String nome, email, senha, time;
+    private String nome, email, senha;
     private Boolean isAdministrador;
-    private int id;
+    private int id, time;
 
     public Usuario(String nome, String email, String senha, Boolean adm) {
         this.nome = nome;
@@ -13,11 +13,11 @@ public class Usuario {
         this.time = time;
     }
 
-    public String getTime() {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(int time) {
         this.time = time;
     }
 
@@ -33,7 +33,7 @@ public class Usuario {
         return id;
     }
 
-    public Usuario(String nome, String email, String senha, Boolean isAdministrador, String time) {
+    public Usuario(String nome, String email, String senha, Boolean isAdministrador, int time) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -76,7 +76,7 @@ public class Usuario {
         this.isAdministrador = isAdministrador;
     }
 
-    public Usuario(int id, String nome, String email, String senha, Boolean isAdministrador, String time){
+    public Usuario(int id, String nome, String email, String senha, Boolean isAdministrador, int time){
         this.nome = nome;
         this.email = email;
         this.senha = senha;

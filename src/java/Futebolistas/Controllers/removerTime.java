@@ -21,8 +21,8 @@ import java.util.logging.Logger;
  *
  * @author victo
  */
-@WebServlet(name = "removerTime", urlPatterns = {"/removerTime"})
-public class removerTime extends HttpServlet {
+@WebServlet(name = "RemoverTime", urlPatterns = {"/RemoverTime"})
+public class RemoverTime extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -54,11 +54,11 @@ public class removerTime extends HttpServlet {
         
         TimeModel model = new TimeModel();
         try {
-            model.remover(request.getParameter("id"));
+            model.remover(Integer.parseInt(request.getParameter("id")));
         } catch (SQLException ex) {
-            Logger.getLogger(removerTime.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RemoverTime.class.getName()).log(Level.SEVERE, null, ex);
         }
-        response.sendRedirect("Times");
+        response.sendRedirect("Times?origin=Times");
     }
 
     /**

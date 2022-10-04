@@ -22,8 +22,8 @@ import java.util.logging.Logger;
  *
  * @author maluc
  */
-@WebServlet(name = "menuTimes", urlPatterns = {"/menuTimes"})
-public class menuTimes extends HttpServlet {
+@WebServlet(name = "MenuTimes", urlPatterns = {"/MenuTimes"})
+public class MenuTimes extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,7 +58,7 @@ public class menuTimes extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(menuTimes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuTimes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -76,7 +76,7 @@ public class menuTimes extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(menuTimes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuTimes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

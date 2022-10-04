@@ -35,22 +35,25 @@ public class TimeModel {
         if(time.getTitulos() < 0){
             return;
         }
+        if(img.getConteudo().length == 0){
+            return;
+        }
         dao.add(time, img);
     }
     public ArrayList<Time> selecionarTodos() throws SQLException{
         TimeDAO dao = new TimeDAO();
         return dao.selecionarTodos();
     }
-    public void alterarTorcedores(String idTime, int num) throws SQLException{
+    public void alterarTorcedores(int idTime, int num) throws SQLException{
         TimeDAO dao = new TimeDAO();
         dao.alterarTorcedores(idTime, num);
     }
-    public Time getTimeByID(String id) throws SQLException{
+    public Time getTimeByID(int id) throws SQLException{
         TimeDAO dao = new TimeDAO();
         Time t = dao.selectTimeByID(id);
         return t;
     }
-    public void atualizarTime(Time time, String id) throws SQLException{
+    public void atualizarTime(Time time, int id, Arquivo arquivo) throws SQLException{
         if(time.getNome() == null || time.getNome().equals("")){
             return;
         }
@@ -70,13 +73,13 @@ public class TimeModel {
             return;
         }
         TimeDAO dao = new TimeDAO();
-        dao.atualizarTime(time, id);
+        dao.atualizarTime(time, id, arquivo);
     }
     
-    public void remover(String id) throws SQLException{
+    public void remover(int id) throws SQLException{
         TimeDAO dao = new TimeDAO();
         UsuarioModel model = new UsuarioModel();
-        model.removerTorcedores(Integer.parseInt(id));
+        model.removerTorcedores(id);
         dao.remover(id);
     }
 }

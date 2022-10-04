@@ -55,11 +55,11 @@ public class UsuarioModel {
         return u;
     }
     
-    public void alterarTime(int id, String id_antigo, String id_novo) throws SQLException{
+    public void alterarTime(int id, int id_antigo, int id_novo) throws SQLException{
         UsuarioDAO daoU = new UsuarioDAO();
         TimeDAO daoT = new TimeDAO();
         daoU.alterarTime(id, id_novo);
-        if(id_antigo != null && daoT.getNumTorcedores(id_antigo) > 0){
+        if(id_antigo != 0 && daoT.getNumTorcedores(id_antigo) > 0){
             daoT.alterarTorcedores(id_antigo, -1);
         }   
         daoT.alterarTorcedores(id_novo, 1);

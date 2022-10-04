@@ -21,14 +21,14 @@
     
     <center>
     <div class="containers"><div class="decoration2"></div><div class="decoration3"></div>
-    <img src="img/exemplo.jpg" id="img-feed"><div id="titulo">TÍTULO</div><div id="legenda">legenda legenda legenda legenda</div>
+    <img src="img/exemplo.jpg" class="img-feed"><div class="titulo">TÍTULO</div><div class="legenda">legenda legenda legenda legenda</div>
   </div>
     <div id="space"></div>
     <div class="containers"><div class="decoration2"></div><div class="decoration3"></div>
-    <img src="img/exemplo.jpg" id="img-feed"><div id="titulo">TÍTULO</div><div id="legenda">legenda legenda legenda legenda</div></div>
+    <img src="img/exemplo.jpg" class="img-feed"><div class="titulo">TÍTULO</div><div class="legenda">legenda legenda legenda legenda</div></div>
     <div id="space"></div>
     <div class="containers"><div class="decoration2"></div><div class="decoration3"></div>
-    <img src="img/exemplo.jpg" id="img-feed"><div id="titulo">TÍTULO</div><div id="legenda">legenda legenda legenda legenda</div></div>
+    <img src="img/exemplo.jpg" class="img-feed"><div class="titulo">TÍTULO</div><div class="legenda">legenda legenda legenda legenda</div></div>
     </center>
     <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>

@@ -24,8 +24,8 @@ import java.util.logging.Logger;
  *
  * @author victo
  */
-@WebServlet(name = "mostrarImagem", urlPatterns = {"/mostrarImagem"})
-public class mostrarImagem extends HttpServlet {
+@WebServlet(name = "MostrarImagem", urlPatterns = {"/MostrarImagem"})
+public class MostrarImagem extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -56,18 +56,14 @@ public class mostrarImagem extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-        String id = request.getParameter("id");
-        TimeModel model = new TimeModel();
+        int id = Integer.parseInt(request.getParameter("id"));
         ArquivoModel modelA = new ArquivoModel();
         try {
-            Time t = model.getTimeByID(id);
-            System.out.println(t.getNome());
-           /* Arquivo a = modelA.getArquivoByID(t.getIdArquivo());
-            System.out.println(a.getMimetype());
+            Arquivo a = modelA.getArquivoByID(id);
             response.setContentType(a.getMimetype());
-            response.getOutputStream().write(a.getConteudo()); */
+            response.getOutputStream().write(a.getConteudo()); 
         } catch (SQLException ex) {
-            Logger.getLogger(mostrarImagem.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MostrarImagem.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

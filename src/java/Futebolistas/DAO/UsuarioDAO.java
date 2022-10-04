@@ -18,8 +18,7 @@ public class UsuarioDAO {
         stmt.setString(2, u.getEmail());
         stmt.setString(3, u.getSenha());
         stmt.setBoolean(4, u.getIsAdministrador());
-        stmt.setString(5, u.getTime());
-        System.out.println(u.getTime());
+        stmt.setInt(5, u.getTime());
 
         stmt.execute();
         stmt.close();
@@ -37,7 +36,7 @@ public class UsuarioDAO {
         ResultSet rs = stmt.executeQuery();
         Usuario u = null;
         if(rs.next()){
-            u = new Usuario(rs.getInt("ID"), rs.getString("NOME"), rs.getString("EMAIL"), rs.getString("SENHA"), rs.getBoolean("ISADMINISTRADOR"), rs.getString("IDTIME"));
+            u = new Usuario(rs.getInt("ID"), rs.getString("NOME"), rs.getString("EMAIL"), rs.getString("SENHA"), rs.getBoolean("ISADMINISTRADOR"), rs.getInt("IDTIME"));
         }
         stmt.close();
         connection.close();
@@ -65,7 +64,7 @@ public class UsuarioDAO {
         ResultSet rs = stmt.executeQuery();
         Usuario u = null;
         if(rs.next()){
-            u = new Usuario(rs.getInt("ID"), rs.getString("NOME"), rs.getString("EMAIL"), rs.getString("SENHA"), rs.getBoolean("ISADMINISTRADOR"), rs.getString("IDTIME"));
+            u = new Usuario(rs.getInt("ID"), rs.getString("NOME"), rs.getString("EMAIL"), rs.getString("SENHA"), rs.getBoolean("ISADMINISTRADOR"), rs.getInt("IDTIME"));
         }
         stmt.close();
         connection.close();
@@ -103,12 +102,12 @@ public class UsuarioDAO {
         connection.close();
     }
     
-    public void alterarTime(int id, String id_time) throws SQLException{
+    public void alterarTime(int id, int id_time) throws SQLException{
         String sql = "UPDATE USUARIOS SET IDTIME = ? WHERE ID = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         
-        stmt.setString(1, id_time);
+        stmt.setInt(1, id_time);
         stmt.setInt(2, id);
         
         stmt.execute();
