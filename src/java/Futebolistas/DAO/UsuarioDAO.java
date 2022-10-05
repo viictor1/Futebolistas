@@ -19,6 +19,7 @@ public class UsuarioDAO {
         stmt.setString(3, u.getSenha());
         stmt.setBoolean(4, u.getIsAdministrador());
         stmt.setInt(5, u.getTime());
+        System.out.println(u.getTime());
 
         stmt.execute();
         stmt.close();

@@ -38,8 +38,6 @@ public class MenuTimes extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String id = request.getParameter("idAlterar");
-        request.setAttribute("idAlterar", id);
         request.getRequestDispatcher("WEB-INF/menuTimes.jsp").forward(request, response);
     }
 

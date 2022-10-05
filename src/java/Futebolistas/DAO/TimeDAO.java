@@ -22,13 +22,14 @@ import java.util.ArrayList;
 public class TimeDAO {
     public void add(Time time, Arquivo img) throws SQLException{
         ArquivoDAO dao = new ArquivoDAO();    
-        String sql = "INSERT INTO TIMES (NOME, DATA_FUNDACAO, TECNICO, PRESIDENTE, LOCAL_FUNDACAO, TITULOS, NUM_TORCEDORES, IDARQUIVO) VALUES (?,?,?,?,?,?,?,?)";
         Connection connection = new ConnectionFactory().getConnection();
         try {
-            connection.setAutoCommit(false);            
-            PreparedStatement stmt = connection.prepareStatement(sql);
+            connection.setAutoCommit(false);                      
             
             dao.add(connection, img);
+            
+            String sql = "INSERT INTO TIMES (NOME, DATA_FUNDACAO, TECNICO, PRESIDENTE, LOCAL_FUNDACAO, TITULOS, NUM_TORCEDORES, IDARQUIVO) VALUES (?,?,?,?,?,?,?,?)";
+            PreparedStatement stmt = connection.prepareStatement(sql);
             
             stmt.setString(1, time.getNome());
             stmt.setString(2, time.getData_fundacao());
@@ -52,16 +53,19 @@ public class TimeDAO {
     
     public void remover(int id) throws SQLException{
         ArquivoDAO dao = new ArquivoDAO(); 
-        Time t = selectTimeByID(id);
-        String sql = "DELETE FROM TIMES WHERE IDTIME = ?";
         Connection connection = new ConnectionFactory().getConnection();
         try {
             connection.setAutoCommit(false);
+            Time t = selectTimeByID(id);
+            String sql = "DELETE FROM TIMES WHERE IDTIME = ?";
+            
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, id);
             stmt.execute();
-            dao.remover(connection, t.getIdArquivo());
-            stmt.close();           
+            stmt.close();
+            
+            //dao.remover(connection, t.getIdArquivo());
+            
             connection.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,11 +130,11 @@ public class TimeDAO {
     
     public void atualizarTime(Time t, int id, Arquivo arquivo) throws SQLException{
         ArquivoDAO dao = new ArquivoDAO();
-        String sql = "UPDATE TIMES SET NOME = ?, DATA_FUNDACAO = ?, TECNICO = ?, PRESIDENTE = ?, LOCAL_FUNDACAO = ?, TITULOS = ? WHERE IDTIME = ?";
         Connection connection = new ConnectionFactory().getConnection();
         try {
             connection.setAutoCommit(false);
             dao.alterar(connection, arquivo);
+            String sql = "UPDATE TIMES SET NOME = ?, DATA_FUNDACAO = ?, TECNICO = ?, PRESIDENTE = ?, LOCAL_FUNDACAO = ?, TITULOS = ? WHERE IDTIME = ?";
             PreparedStatement stmt = connection.prepareStatement(sql);
             
             stmt.setString(1, t.getNome());

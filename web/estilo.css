@@ -420,14 +420,14 @@ body{background-color: #F4F3F3;}
   background-color: rgb(128,128,128, 0.4);
   float: center;
   width: 280px;
-  margin-top: 20px;
   display: inline-block;
   cursor: pointer;
+  margin: 20px 20px;
 }
 .containers:hover{
-  -webkit-transform: scale(1.07);
-  -ms-transform: scale(1.07);
-  transform: scale(1.07);
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
 }
 .containers-times{
   height: 190px;
@@ -442,12 +442,6 @@ body{background-color: #F4F3F3;}
 #space{
   width: 70px;
   display: inline-block;
-}
-.img-feed{
-  width: 200px;
-  height: 230px;
-  margin-top: 20px;
-  display: flex;
 }
 .times-img{
   margin-top: 30px;
@@ -464,35 +458,35 @@ body{background-color: #F4F3F3;}
 .titulo{
   font-size: 14px;
   color: #696868;
-  margin-top: 8px;
-  margin-left: 50px;
-  font-family: fantasy;
+  margin-top: 12px;
   height: 14px;
   display: flex;
+  font-family: 'Poppins', sans-serif;
 }
 .legenda{
   font-size: 12px;
-  color: 	#808080;
+  color: #808080;
   display: flex;
   margin-top: 10px;
-  margin-left: 50px;
-  font-family: arial;
+  margin-left: 40px;
+  font-family: 'Poppins', sans-serif;
+  padding-bottom: 5px;
 }
 .decoration2{
   position: absolute;
   background-color: #696868;
   height: 58px;
-  width: 3px;
-  margin-top: 260px;
-  margin-left: 40px;
+  width: 2px;
+  margin-top: 247px;
+  margin-left: 50px;
 }
 .decoration3{
   position: absolute;
   background-color: #696868;
-  height: 3px;
+  height: 2px;
   width: 108px;
-  margin-top: 315px;
-  margin-left: 40px;
+  margin-top: 305px;
+  margin-left: 50px;
 }
 .jogadoras{
     font-size: 24px;
@@ -652,9 +646,18 @@ body{background-color: #F4F3F3;}
   font-family: 'Poppins', sans-serif;
   box-sizing: border-box;
 }
+.body-feed{
+  height: 55vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2f2f2;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
 section{
   position: relative;
-  height: 300px;
+  height: 420px;
   width: 1075px;
   display: flex;
   align-items: center;
@@ -664,7 +667,6 @@ section{
 .swiper{
   width: 950px;
 }
-
 .card{
   position: relative;
   background: #fff;
@@ -672,13 +674,33 @@ section{
   margin: 20px 0;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
-
+.cardf{
+  position: relative;
+  background: #fff;
+  border-radius: 20px;
+  margin: 20px 0;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); 
+}
+.cardf:hover{
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+}
 .card::before{
   content: "";
   position: absolute;
   height: 40%;
   width: 100%;
   background: black;
+  border-radius: 20px 20px 0 0;
+}
+
+.cardf::before{
+  content: "";
+  position: absolute;
+  height: 40%;
+  width: 100%;
+  background: white;
   border-radius: 20px 20px 0 0;
 }
 
@@ -691,9 +713,27 @@ section{
   z-index: 100;
 }
 
+.cardf .card-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  position: relative;
+  z-index: 100;
+  height: 260px;
+}
+
 section .card .image{
   height: 140px;
   width: 140px;
+  border-radius: 50%;
+  padding: 3px;
+  background: white;
+}
+
+section .cardf .image{
+  height: 170px;
+  width: 170px;
   border-radius: 50%;
   padding: 3px;
   background: white;
@@ -708,7 +748,28 @@ section .card .image img{
   min-height: 100px;
 }
 
+section .cardf .image img{
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  border-radius: 45%;
+  max-height: 170px;
+  min-height: 170px;
+}
+.img-feed img{
+    max-height: 190px;
+    max-width: 150px;
+}
 .card .media-icons{
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardf .media-icons{
   position: absolute;
   top: 10px;
   right: 20px;
@@ -726,6 +787,10 @@ section .card .image img{
 }
 
 .card .media-icons i:hover{
+  opacity: 1;
+}
+
+.cardf .media-icons i:hover{
   opacity: 1;
 }
 
@@ -832,12 +897,12 @@ section .card .image img{
 }
 .fa-xmark{
   font-size: 1.6em;
-  position: absolute;
   color: white;
-  float: right;
-  margin-bottom: 270px;
-  margin-right: -470px;
   cursor: pointer;
+  position: absolute;
+  margin-top: -150px;
+  padding-right: 20px;
+  
 }
 .box{
   justify-content: center;
@@ -890,7 +955,6 @@ section .card .image img{
   align-items: center;
   justify-content: center;
   width: 1365px;
-  height: 640px;
 }
 .box-cadastro{
   width: 600px;

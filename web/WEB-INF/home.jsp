@@ -9,7 +9,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+        <!-- ===== Link Swiper's CSS ===== -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+
+    <!-- ===== Fontawesome CDN Link ===== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="estilo.css">
+    <script src="https://kit.fontawesome.com/46a2e52881.js" crossorigin="anonymous"></script>
     </head>
     <body>
      
@@ -18,21 +26,73 @@
 
         <!-- Feed de notícias -->
     <div class="feed"><center>FEED</center></div>
-    
-    <center>
-    <div class="containers"><div class="decoration2"></div><div class="decoration3"></div>
-    <img src="img/exemplo.jpg" class="img-feed"><div class="titulo">TÍTULO</div><div class="legenda">legenda legenda legenda legenda</div>
-  </div>
-    <div id="space"></div>
-    <div class="containers"><div class="decoration2"></div><div class="decoration3"></div>
-    <img src="img/exemplo.jpg" class="img-feed"><div class="titulo">TÍTULO</div><div class="legenda">legenda legenda legenda legenda</div></div>
-    <div id="space"></div>
-    <div class="containers"><div class="decoration2"></div><div class="decoration3"></div>
-    <img src="img/exemplo.jpg" class="img-feed"><div class="titulo">TÍTULO</div><div class="legenda">legenda legenda legenda legenda</div></div>
-    </center>
-    <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-pagination"></div>
+    <div class="body-feed">
+    <section> 
+      <div class="swiper mySwiper container">
+        <div class="swiper-wrapper content">
+          <div class="swiper-slide cardf">
+            <div class="decoration2"></div><div class="decoration3"></div>
+            <div class="card-content">
+              <div class="img-feed">
+                <img src="img/exemplo.jpg">
+              </div>
+              <div class="titulo">
+                <span class="name">BOTAFOGO</span>
+              </div>
+              <div class="legenda">
+                <span class="legenda-noticia">hgsg ahxbshdg sbdhgsd jasdghadsg gsdfagd hfsdtFDST HSF</span>
+              </div>
+            </div>
+          </div>
+            <div class="swiper-slide cardf">
+            <div class="decoration2"></div><div class="decoration3"></div>
+            <div class="card-content">
+              <div class="img-feed">
+                <img src="img/exemplo.jpg">
+              </div>
+              <div class="titulo">
+                <span class="name">BOTAFOGO</span>
+              </div>
+              <div class="legenda">
+                <span class="legenda-noticia">hgsg ahxbshdg sbdhgsd jasdghadsg gsdfagd hfsdtFDST HSF</span>
+              </div>
+            </div>
+          </div>
+            <div class="swiper-slide cardf">
+            <div class="decoration2"></div><div class="decoration3"></div>
+            <div class="card-content">
+              <div class="img-feed">
+                <img src="img/exemplo.jpg">
+              </div>
+              <div class="titulo">
+                <span class="name">BOTAFOGO</span>
+              </div>
+              <div class="legenda">
+                <span class="legenda-noticia">hgsg ahxbshdg sbdhgsd jasdghadsg gsdfagd hfsdtFDST HSF</span>
+              </div>
+            </div>
+          </div>
+            <div class="swiper-slide cardf">
+            <div class="decoration2"></div><div class="decoration3"></div>
+            <div class="card-content">
+              <div class="img-feed">
+                <img src="img/exemplo.jpg">
+              </div>
+              <div class="titulo">
+                <span class="name">BOTAFOGO</span>
+              </div>
+              <div class="legenda">
+                <span class="legenda-noticia">hgsg ahxbshdg sbdhgsd jasdghadsg gsdfagd hfsdtFDST HSF</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
       <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
       
       <script>

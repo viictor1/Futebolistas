@@ -135,7 +135,7 @@
     <div id="option"><center><a onclick="validarRemover()">Apagar conta</a></center></div>
     <div class="modal-line"></div>
     <c:if test="${autenticado.isAdministrador == true}"> <!-- se o usuário logado for um adm, ele poderá cadastrar um novo usuário -->
-            <div id="option" onclick="showCadastro();hideLogado()"><center>Cadastrar novo Usuário</center></div>
+        <a href="MenuTimes"><div id="option"><center>Cadastrar</center></div></a>
             <div class="modal-line"></div>
         </c:if>
     <div id="option"><center><a onclick="validarSair()"">Sair</a></center></div> <!--Aq é pra logout-->
@@ -197,7 +197,6 @@
           </form>
         </div>
       </div>
-    </div>
         <div class="atualizarS"> <!<!-- Modal para alterar senha -->
       <div class="modal-esquece" id="modal-esquece">
         <div class="content-login">

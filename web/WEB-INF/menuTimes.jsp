@@ -17,28 +17,32 @@
         <script src="https://kit.fontawesome.com/46a2e52881.js" crossorigin="anonymous"></script>
     </head>
     <body>
+        <c:import url="header.jsp"></c:import>
         <div class="pra-centralizar">
+            
          <div class="both">
-             <a href="Times"><i class="fa-solid fa-xmark"></i></a>
+             <a href="GerenciarCookies"><i class="fa-solid fa-xmark"></i></a>
       <div class="left">
-      <c:if test="${idAlterar != null}">
-          <span class="r">Alterar</span>
-      </c:if>
-      <c:if test="${idAlterar == null}">
-          <span class="r">CADASTRO</span>
-      </c:if>
+        <span class="r">CADASTRO</span>
         <span class="r">TIME</span>
         <span class="r">E</span>
         <span class="r">JOGADORAS</span>
       </div>
       <div class="middle"></div>
+      
       <div class="box">
+          
         <a href="CadastrarTimes?idAlterar=${idAlterar}" class="am">TIME
           <i class="fa-solid fa-screwdriver-wrench"></i>
         </a>
         <a href="cadastrar-jogadoras.html" class="am">JOGADORAS
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
+        <a href="" class="am">NOTÍCIAS
+        <i class="fa-solid fa-screwdriver-wrench"></i></a>
+        <a href="" class="am">USUÁRIOS
+        <i class="fa-solid fa-screwdriver-wrench"></i></a>
       </div>
+          
     </div>
         </div>
     </body>

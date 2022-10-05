@@ -20,9 +20,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         
     <div class="feed"><center>TIMES</center></div>
     
-    <c:if test="${autenticado.isAdministrador == true}"> <!-- se o usuário logado for um adm, ele poderá cadastrar um novo time -->
-        <div id="option"><center><a href="CadastrarTimes">Cadastrar novo Time</a></center></div>
-        </c:if>
         <div class="body-card">
             <section>
              <div class="swiper mySwiper container">
@@ -35,7 +32,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             </div>
             <div class="media-icons">   
                 <c:if test="${autenticado.isAdministrador == true}">
-                    <a href="MenuTimes?idAlterar=${time.id}"><i class="fa-solid fa-pencil"></i></a>
+                    <a href="CadastrarTimes?idAlterar=${time.id}"><i class="fa-solid fa-pencil"></i></a>
                     <a href="RemoverTime?id=${time.id}"><i class="fa-solid fa-trash-can"></i></a>
                 </c:if>
               

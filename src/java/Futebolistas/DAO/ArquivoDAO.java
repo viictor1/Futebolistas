@@ -37,9 +37,7 @@ public class ArquivoDAO {
     public void remover(Connection connection, int id) throws SQLException{
         String sql = "DELETE FROM ARQUIVOS WHERE IDARQUIVO = ?";
         PreparedStatement stmt = connection.prepareStatement(sql);
-        
         stmt.setInt(1, id);
-        
         stmt.execute();
         stmt.close();
     }

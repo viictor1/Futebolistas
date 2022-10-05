@@ -3,11 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/DAO/ArquivoDAO.java</file>
-            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/DAO/UsuarioDAO.java</file>
-            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/Model/TimeModel.java</file>
-            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/Controllers/RemoverTime.java</file>
-            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/DAO/TimeDAO.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/futebolistas/web/WEB-INF/times.jsp</file>
+            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/futebolistas/src/java/Futebolistas/Controllers/MenuTimes.java</file>
         </group>
     </open-files>
 </project-private>

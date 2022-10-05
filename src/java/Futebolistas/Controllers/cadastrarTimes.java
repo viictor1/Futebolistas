@@ -60,19 +60,11 @@ public class CadastrarTimes extends HttpServlet {
         processRequest(request, response);
         request.setCharacterEncoding("UTF-8");
         
-        int id;
-        if(request.getParameter("idAlterar") == null){
-            id = 0;
-        }
-        else{
-            id = Integer.parseInt(request.getParameter("idAlterar"));
-        }
-        
-        if(id > 0){
+        if(!"".equals(request.getParameter("idAlterar"))){
             TimeModel model = new TimeModel();
             Time t = null;
             try {
-                t = model.getTimeByID(id);
+                t = model.getTimeByID(Integer.parseInt(request.getParameter("idAlterar")));
             } catch (SQLException ex) {
                 Logger.getLogger(CadastrarTimes.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -100,13 +92,13 @@ public class CadastrarTimes extends HttpServlet {
         int titulos;
         int id;
         
-        if(request.getParameter("id").equals("")){
+        if("".equals(request.getParameter("id"))){
             id = 0;
         }
         else{
-            id = Integer.parseInt(request.getParameter("id"));
+            id = Integer.parseInt(request.getParameter("id")); //pegando id do time se ele tiver alterando
         }
-        
+     
         nome = request.getParameter("nome");
         data_fundacao = request.getParameter("data");
         tecnico = request.getParameter("tecnico");
@@ -114,37 +106,28 @@ public class CadastrarTimes extends HttpServlet {
         local_fundacao = request.getParameter("local");
         titulos = Integer.parseInt(request.getParameter("titulos"));
         
-        int idArquivo;
-        TimeModel model = new TimeModel();  
-        
-        if(request.getParameter("idArquivo") == null){
-            idArquivo = 0;
-        }
-        else{
-            idArquivo = Integer.parseInt(request.getParameter("idArquivo"));
-        }
-      
+        int idArquivo = 0;
+               
         Part part = request.getPart("imagem");
         String mimetype = part.getContentType();
         byte[] imagem = new byte[part.getInputStream().available()];
         part.getInputStream().read(imagem);
         Arquivo img = new Arquivo();
         
-        if(id == 0){ // se nao tiver id de time
+        if(id == 0){
             img.setConteudo(imagem); // Time novo
             img.setMimetype(mimetype);  
         }
         else{
             ArquivoModel modelA = new ArquivoModel();
             if(imagem.length != 0){  // passou imagem
-                    img.setId(idArquivo);
+                    img.setId(Integer.parseInt(request.getParameter("idArquivo")));
                     img.setConteudo(imagem);
                     img.setMimetype(mimetype);
-            }
+                }
             else{
-                System.out.println("5");
                 try {
-                    img = modelA.getArquivoByID(idArquivo); // nao passou imagem
+                img = modelA.getArquivoByID(idArquivo); // nao passou imagem
                  } 
                 catch (SQLException ex) {
                 Logger.getLogger(CadastrarTimes.class.getName()).log(Level.SEVERE, null, ex);
@@ -154,26 +137,24 @@ public class CadastrarTimes extends HttpServlet {
         }
                
         Time time = new Time(nome, data_fundacao, tecnico, presidente, local_fundacao, titulos, 0);
-             
+        TimeModel model = new TimeModel();
 
-        if(id > 0){
-            try { 
-                model.atualizarTime(time, id, img);
-            } catch (SQLException ex) {
-                response.sendRedirect("Times");
-            }
-        }     
-        else{
+        if(id == 0){
             try {
                 model.add(time, img);
             } catch (SQLException ex) {
                 response.sendRedirect("CadastrarTimes");
             }
-
+            
+        }     
+        else{
+            try {
+                model.atualizarTime(time, id, img);
+            } catch (SQLException ex) {
+                response.sendRedirect("Times?origin=Times");
+            }
         }   
-        response.sendRedirect("GerenciarCookies?origin=Times");
-
-        
+        response.sendRedirect("Times?origin=Times");       
     }
 
     /**

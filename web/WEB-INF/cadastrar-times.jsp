@@ -18,6 +18,7 @@
     <script src="https://kit.fontawesome.com/46a2e52881.js" crossorigin="anonymous"></script>
     </head>
     <body>
+        <c:import url="header.jsp"></c:import>
         <div class="pra-centralizar">
             
     <div class="box-cadastro">

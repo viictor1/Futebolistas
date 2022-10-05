@@ -18,7 +18,7 @@
         <center>
           <nav class="menu">
             <ul>
-              <li><a href="home">HOME</a></li>
+              <li><a href="GerenciarCookies">HOME</a></li>
               <li><a href="Times">TIMES</a></li>
               <li><a href="">CAMPEONATO</a></li>
               <li><a href="">JOGOS</a></li>

@@ -73,12 +73,15 @@ public class GerenciarCookies extends HttpServlet {
             u = (Usuario) sessao.getAttribute("autenticado"); // se tiver uma sessão aberta, é atribuida à sessão o usuario
             sessao.setAttribute("autenticado", u);
             sessao.setAttribute("times", times); //deixando os times na sessão
-            if(request.getParameter("origem").equals("Times")){
-                request.getRequestDispatcher("WEB-INF/times.jsp").forward(request, response);
+            if("".equals(request.getParameter("origin"))){
+                request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
                 return;
-            }
-            request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
-            return;
+            } else if("Times".equals(request.getParameter("origin"))){
+                    request.getRequestDispatcher("WEB-INF/times").forward(request, response);
+                    return;
+                }
+            
+            
         } else {
             Cookie[] cookies = request.getCookies();
             sessao = request.getSession(true);
