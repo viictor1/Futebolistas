@@ -80,6 +80,10 @@ public class GerenciarCookies extends HttpServlet {
                     request.getRequestDispatcher("WEB-INF/times").forward(request, response);
                     return;
                 }
+            else if("Cadastro".equals(request.getParameter("origin"))){
+                    request.setAttribute("cadastro", true);
+                    request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
+            }
             
             
         } else {

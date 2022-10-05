@@ -134,8 +134,8 @@
     <div class="modal-line"></div>
     <div id="option"><center><a onclick="validarRemover()">Apagar conta</a></center></div>
     <div class="modal-line"></div>
-    <c:if test="${autenticado.isAdministrador == true}"> <!-- se o usuário logado for um adm, ele poderá cadastrar um novo usuário -->
-        <a href="MenuTimes"><div id="option"><center>Cadastrar</center></div></a>
+    <c:if test="${autenticado.isAdministrador == true}"> <!-- se o usuário logado for um adm, ele poderá cadastrar novos times, noticias, usuarios, jogadoras, campeonatos antigos -->
+        <a href="MenuCadastro"><div id="option"><center>Cadastrar</center></div></a>
             <div class="modal-line"></div>
         </c:if>
     <div id="option"><center><a onclick="validarSair()"">Sair</a></center></div> <!--Aq é pra logout-->
@@ -174,16 +174,6 @@
             Nome: <input type="text" name="nome" placeholder="Digite seu nome de usuário" id="form-cadastro" required>
             E-Mail: <input type="email" name="email" placeholder="Digite seu endereço de E-Mail" id="form-cadastro" required>
             Senha: <input type="password" name="senha" placeholder="Digite sua senha" id="form-cadastro" required>
-            Escolha seu time: <br>
-           <button type="submit" class="cadastro-button">CRIAR CONTA</button>
-            <select name="selectTime">
-            <c:forEach var="time" items="${times}">
-                  <option value="${time.id}">${time.nome}</option>
-             </c:forEach>
-            </select>
-            <div class="search-box">
-              <input type="text" placeholder="Procurar..." />
-            </div>
             <c:if test="${autenticado.isAdministrador == true}"> <!-- ADM pode cadastrar um novo usuároi adm -->
                 <div class="kadm">
               <label class="container-label">Administrador:
@@ -192,6 +182,17 @@
             </label>
           </div>
             </c:if>
+            Escolha seu time: <br>
+          
+            <select name="selectTime">
+            <c:forEach var="time" items="${times}">
+                  <option value="${time.id}">${time.nome}</option>
+             </c:forEach>
+            </select>
+            <div class="search-box">
+              <input type="text" placeholder="Procurar..." />
+            </div> 
+             <button type="submit" class="cadastro-button">CRIAR CONTA</button>
           </div>
           <script src="main.js"></script>
           </form>

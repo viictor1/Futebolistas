@@ -19,7 +19,12 @@
     <link rel="stylesheet" href="estilo.css">
     <script src="https://kit.fontawesome.com/46a2e52881.js" crossorigin="anonymous"></script>
     </head>
-    <body>
+    <c:if test="${cadastro == true}">
+        <body onload="showCadastro()">
+    </c:if>
+    <c:if test="${cadastro == false}">
+         <body>
+    </c:if>
      
         <c:import url="header.jsp"></c:import> 
         <c:import url="menu.jsp"></c:import>

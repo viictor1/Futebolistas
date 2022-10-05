@@ -22,7 +22,7 @@
         <div class="pra-centralizar">
             
     <div class="box-cadastro">
-        <a href="MenuTimes"> <i class="fa-solid fa-arrow-left"></i></a>
+        <a href="MenuCadastro"> <i class="fa-solid fa-arrow-left"></i></a>
       <div class="left-times">
           
       </div>

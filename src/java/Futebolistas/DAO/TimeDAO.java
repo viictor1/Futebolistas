@@ -64,8 +64,7 @@ public class TimeDAO {
             stmt.execute();
             stmt.close();
             
-            //dao.remover(connection, t.getIdArquivo());
-            
+            dao.remover(connection, t.getIdArquivo());    
             connection.commit();
         } catch (Exception e) {
             e.printStackTrace();

@@ -14,8 +14,8 @@ import java.sql.Statement;
  */
 public class ArquivoDAO {
     public void add(Connection connection, Arquivo arquivo) throws SQLException{
-        String sql = "INSERT INTO ARQUIVOS (CONTEUDO, MIMETYPE) VALUES (?,?)";
-        PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        String arquivoSQL = "INSERT INTO ARQUIVOS (CONTEUDO, MIMETYPE) VALUES (?,?)";
+        PreparedStatement stmt = connection.prepareStatement(arquivoSQL, Statement.RETURN_GENERATED_KEYS);
         stmt.setBytes(1, arquivo.getConteudo());
         stmt.setString(2, arquivo.getMimetype());      
         int rows = stmt.executeUpdate();
@@ -35,11 +35,11 @@ public class ArquivoDAO {
     }
     
     public void remover(Connection connection, int id) throws SQLException{
-        String sql = "DELETE FROM ARQUIVOS WHERE IDARQUIVO = ?";
-        PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setInt(1, id);
-        stmt.execute();
-        stmt.close();
+        String arquivoSQL = "DELETE FROM ARQUIVOS WHERE IDARQUIVO = ?";
+        PreparedStatement stmt2 = connection.prepareStatement(arquivoSQL);
+        stmt2.setInt(1, id);
+        stmt2.execute();
+        stmt2.close();
     }
     
     public void alterar(Connection connection, Arquivo arquivo) throws SQLException{

@@ -72,6 +72,9 @@ public class TimeModel {
         if(time.getTitulos() < 0){
             return;
         }
+        if(arquivo.getConteudo().length == 0){
+            return;
+        }
         TimeDAO dao = new TimeDAO();
         dao.atualizarTime(time, id, arquivo);
     }

@@ -39,7 +39,7 @@
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
         <a href="" class="am">NOTÍCIAS
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
-        <a href="" class="am">USUÁRIOS
+        <a href="GerenciarCookies?origin=Cadastro" class="am">USUÁRIOS
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
       </div>
           

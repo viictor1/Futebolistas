@@ -22,8 +22,8 @@ import java.util.logging.Logger;
  *
  * @author maluc
  */
-@WebServlet(name = "MenuTimes", urlPatterns = {"/MenuTimes"})
-public class MenuTimes extends HttpServlet {
+@WebServlet(name = "MenuCadastro", urlPatterns = {"/MenuCadastro"})
+public class MenuCadastro extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,7 +38,8 @@ public class MenuTimes extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
 
-        request.getRequestDispatcher("WEB-INF/menuTimes.jsp").forward(request, response);
+        System.out.println("chegou aqui");
+        request.getRequestDispatcher("WEB-INF/menuCadastro.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,7 +57,7 @@ public class MenuTimes extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(MenuTimes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuCadastro.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -74,7 +75,7 @@ public class MenuTimes extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(MenuTimes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuCadastro.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
