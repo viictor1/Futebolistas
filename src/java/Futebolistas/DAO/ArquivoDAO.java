@@ -32,6 +32,7 @@ public class ArquivoDAO {
                 throw new SQLException("ERRO AO OBTER ID DO ARQUIVO!");
             }
         }
+        stmt.close();
     }
     
     public void remover(Connection connection, int id) throws SQLException{
@@ -66,7 +67,8 @@ public class ArquivoDAO {
             arquivo.setConteudo(rs.getBytes("CONTEUDO"));
             arquivo.setMimetype(rs.getString("MIMETYPE"));
         }
-        
+        stmt.close();
+        connection.close();
         return arquivo;
     }
 }
