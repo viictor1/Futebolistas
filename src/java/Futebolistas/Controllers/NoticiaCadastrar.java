@@ -31,6 +31,8 @@ public class NoticiaCadastrar extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        request.getRequestDispatcher("WEB-INF/cadastro-noticias.jsp").forward(request, response);
     }
 
     @Override
@@ -44,12 +46,14 @@ public class NoticiaCadastrar extends HttpServlet {
         texto = request.getParameter("texto");
         
         Noticia n = new Noticia(titulo, autor, texto);
+        System.out.println(titulo + autor + texto);
         NoticiaModel model = new NoticiaModel();
         try {
-            model.add(n); // colocar página de times depois
+            model.add(n);
+            response.sendRedirect("GerenciarCookies");
         } catch (SQLException ex) {
             Logger.getLogger(NoticiaCadastrar.class.getName()).log(Level.SEVERE, null, ex);
-            // colocar página de cadastrar times depois
+            response.sendRedirect("NoticiaCadastrar");
         }
     }
 

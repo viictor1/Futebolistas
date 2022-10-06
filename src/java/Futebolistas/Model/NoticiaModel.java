@@ -10,6 +10,7 @@ import java.sql.SQLException;
  */
 public class NoticiaModel {
     public void add(Noticia n) throws SQLException{
+        System.out.println("ta na model noticias" + n.getTitulo() + n.getAutor() + n.getTexto());
         NoticiaDAO dao = new NoticiaDAO();
         if(n.getTitulo() == null || n.getTitulo().equals("")){
             return;

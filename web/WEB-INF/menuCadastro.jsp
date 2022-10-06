@@ -37,7 +37,7 @@
         </a>
         <a href="cadastrar-jogadoras.html" class="am">JOGADORAS
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
-        <a href="" class="am">NOTÍCIAS
+        <a href="NoticiaCadastrar" class="am">NOTÍCIAS
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
         <a href="GerenciarCookies?origin=Cadastro" class="am">USUÁRIOS
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
