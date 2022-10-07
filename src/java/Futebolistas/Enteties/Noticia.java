@@ -5,7 +5,15 @@ package Futebolistas.Enteties;
  * @author victo
  */
 public class Noticia {
-    private int id;
+    private int id, idArquivo;
+
+    public int getIdArquivo() {
+        return idArquivo;
+    }
+
+    public void setIdArquivo(int idArquivo) {
+        this.idArquivo = idArquivo;
+    }
     private String titulo, autor, texto;
 
     public Noticia(String titulo, String autor, String texto) {

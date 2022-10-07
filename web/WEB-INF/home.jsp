@@ -35,63 +35,29 @@
     <section> 
       <div class="swiper mySwiper container">
         <div class="swiper-wrapper content">
+            
+        <c:forEach var="noticia" items="${noticias}">
           <div class="swiper-slide cardf">
+            <div class="media-icons">        
+            </div>
             <div class="decoration2"></div><div class="decoration3"></div>
             <div class="card-content">
+                <c:if test="${autenticado.isAdministrador == true}">
+                    <a href=""><i class="fa-solid fa-pencil"></i></a>
+                    <a href="RemoverNoticia?id=${noticia.id}"><i class="fa-solid fa-trash-can"></i></a>
+                </c:if>
               <div class="img-feed">
-                <img src="img/exemplo.jpg">
+                <img src="MostrarImagem?id=${noticia.idArquivo}">
               </div>
               <div class="titulo">
-                <span class="name">BOTAFOGO</span>
+                <span class="name">${noticia.titulo}</span>
               </div>
               <div class="legenda">
-                <span class="legenda-noticia">hgsg ahxbshdg sbdhgsd jasdghadsg gsdfagd hfsdtFDST HSF</span>
+                <span class="legenda-noticia">${noticia.texto}</span>
               </div>
             </div>
-          </div>
-            <div class="swiper-slide cardf">
-            <div class="decoration2"></div><div class="decoration3"></div>
-            <div class="card-content">
-              <div class="img-feed">
-                <img src="img/exemplo.jpg">
-              </div>
-              <div class="titulo">
-                <span class="name">BOTAFOGO</span>
-              </div>
-              <div class="legenda">
-                <span class="legenda-noticia">hgsg ahxbshdg sbdhgsd jasdghadsg gsdfagd hfsdtFDST HSF</span>
-              </div>
-            </div>
-          </div>
-            <div class="swiper-slide cardf">
-            <div class="decoration2"></div><div class="decoration3"></div>
-            <div class="card-content">
-              <div class="img-feed">
-                <img src="img/exemplo.jpg">
-              </div>
-              <div class="titulo">
-                <span class="name">BOTAFOGO</span>
-              </div>
-              <div class="legenda">
-                <span class="legenda-noticia">hgsg ahxbshdg sbdhgsd jasdghadsg gsdfagd hfsdtFDST HSF</span>
-              </div>
-            </div>
-          </div>
-            <div class="swiper-slide cardf">
-            <div class="decoration2"></div><div class="decoration3"></div>
-            <div class="card-content">
-              <div class="img-feed">
-                <img src="img/exemplo.jpg">
-              </div>
-              <div class="titulo">
-                <span class="name">BOTAFOGO</span>
-              </div>
-              <div class="legenda">
-                <span class="legenda-noticia">hgsg ahxbshdg sbdhgsd jasdghadsg gsdfagd hfsdtFDST HSF</span>
-              </div>
-            </div>
-          </div>
-        </div>
+          </div>          
+        </c:forEach>
       </div>
       <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>

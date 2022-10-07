@@ -123,7 +123,7 @@ public class TimeDAO {
         if(rs.next()){
             num = rs.getInt("NUM_TORCEDORES");
         }
-                
+        connection.close();
         return num;
     }
     

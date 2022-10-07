@@ -151,10 +151,10 @@ public class CadastrarTimes extends HttpServlet {
             try {
                 model.atualizarTime(time, id, img);
             } catch (SQLException ex) {
-                response.sendRedirect("Times?origin=Times");
+                response.sendRedirect("GerenciarCookies?origin=Times");
             }
         }   
-        response.sendRedirect("Times?origin=Times");       
+        response.sendRedirect("GerenciarCookies?origin=Times");       
     }
 
     /**

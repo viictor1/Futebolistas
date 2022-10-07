@@ -27,9 +27,9 @@
       </div>
       <div class="right-time">
           <form class="" action="NoticiaCadastrar" method="post" enctype="multipart/form-data">
-          <input type="text" name="titulo" value="" class="cadastro-time" placeholder="TÍTULO">
-          <input type="text" name="autor" value="" class="cadastro-time" placeholder="AUTOR">
-          <textarea class="cadastro-time" name="texto" rows="15" cols="30"></textarea>
+          <input type="text" name="titulo" value="" class="cadastro-time" placeholder="Título">
+          <input type="text" name="autor" value="" class="cadastro-time" placeholder="Autor">
+          <textarea class="cadastro-time" name="texto" rows="10" cols="20" style="resize: none" placeholder="Texto"></textarea>
           <label for="file" class="file cadastro-time">Capa da Notícia
             <i class="fa-solid fa-image"></i>
           </label>

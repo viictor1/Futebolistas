@@ -16,7 +16,7 @@ import java.io.IOException;
  *
  * @author maluc
  */
-@WebFilter(filterName = "FiltroAdm", servletNames = {"CadastrarTimes", "MenuCadastro"})
+@WebFilter(filterName = "FiltroAdm", servletNames = {"CadastrarTimes", "MenuCadastro", "NoticiaCadastrar"})
 public class FiltroAdm implements Filter{
 
     @Override

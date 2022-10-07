@@ -26,6 +26,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
       <div class="swiper-wrapper content">
       <c:forEach var="time" items="${times}">
         <div class="swiper-slide card">
+            
           <div class="card-content">
             <div class="image">
               <img src="MostrarImagem?id=${time.idArquivo}">

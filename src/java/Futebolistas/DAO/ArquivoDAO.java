@@ -13,7 +13,7 @@ import java.sql.Statement;
  * @author victo
  */
 public class ArquivoDAO {
-    public void add(Connection connection, Arquivo arquivo) throws SQLException{
+    public int add(Connection connection, Arquivo arquivo) throws SQLException{
         String arquivoSQL = "INSERT INTO ARQUIVOS (CONTEUDO, MIMETYPE) VALUES (?,?)";
         PreparedStatement stmt = connection.prepareStatement(arquivoSQL, Statement.RETURN_GENERATED_KEYS);
         stmt.setBytes(1, arquivo.getConteudo());
@@ -33,6 +33,7 @@ public class ArquivoDAO {
             }
         }
         stmt.close();
+        return arquivo.getId();
     }
     
     public void remover(Connection connection, int id) throws SQLException{

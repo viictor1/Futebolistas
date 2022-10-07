@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Menu de Cadastros</title>
         <link rel="stylesheet" href="estilo.css" type="text/css"/>
         <link rel="stylesheet" href="everyone.css" type="text/css"/>
         <link rel="stylesheet" href="style.css" type="text/css"/>
@@ -35,7 +35,7 @@
         <a href="CadastrarTimes?idAlterar=${idAlterar}" class="am">TIME
           <i class="fa-solid fa-screwdriver-wrench"></i>
         </a>
-        <a href="cadastrar-jogadoras.html" class="am">JOGADORAS
+        <a href="" class="am">JOGADORAS
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
         <a href="NoticiaCadastrar" class="am">NOTÍCIAS
         <i class="fa-solid fa-screwdriver-wrench"></i></a>

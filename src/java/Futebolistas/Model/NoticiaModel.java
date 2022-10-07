@@ -2,15 +2,16 @@ package Futebolistas.Model;
 
 import Futebolistas.DAO.NoticiaDAO;
 import Futebolistas.Enteties.Noticia;
+import Futebolistas.Enteties.Arquivo;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
  * @author victo
  */
 public class NoticiaModel {
-    public void add(Noticia n) throws SQLException{
-        System.out.println("ta na model noticias" + n.getTitulo() + n.getAutor() + n.getTexto());
+    public void add(Noticia n, Arquivo arquivo) throws SQLException{
         NoticiaDAO dao = new NoticiaDAO();
         if(n.getTitulo() == null || n.getTitulo().equals("")){
             return;
@@ -21,6 +22,19 @@ public class NoticiaModel {
         if(n.getTexto()== null || n.getTexto().equals("")){
             return;
         }
-        dao.add(n);
+        if(arquivo.getConteudo().length == 0){
+            return;
+        }
+        dao.add(n, arquivo);
+    }
+    
+    public void remover(int id) throws SQLException{
+        NoticiaDAO dao = new NoticiaDAO();
+        dao.remover(id);
+    }
+    
+    public ArrayList<Noticia> selecionarTodos() throws SQLException{
+        NoticiaDAO dao = new NoticiaDAO();
+        return dao.selecionarTodos();
     }
 }
