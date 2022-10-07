@@ -43,7 +43,6 @@
             <div class="decoration2"></div><div class="decoration3"></div>
             <div class="card-content">
                 <c:if test="${autenticado.isAdministrador == true}">
-                    <a href=""><i class="fa-solid fa-pencil"></i></a>
                     <a href="RemoverNoticia?id=${noticia.id}"><i class="fa-solid fa-trash-can"></i></a>
                 </c:if>
               <div class="img-feed">
