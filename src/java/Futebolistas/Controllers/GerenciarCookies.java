@@ -129,6 +129,20 @@ public class GerenciarCookies extends HttpServlet {
             sessao.setAttribute("times", times);
             request.setAttribute("noticias", noticias); //deixando as coisas na sessao mesmo se nao tiver logado
             sessao.setAttribute("campeonatos", cas);
+            if("".equals(request.getParameter("origin"))){
+                request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
+                return;
+            } else if("Times".equals(request.getParameter("origin"))){
+                    request.getRequestDispatcher("WEB-INF/times.jsp").forward(request, response);
+                    return;
+                }
+            else if("Cadastro".equals(request.getParameter("origin"))){
+                    request.setAttribute("cadastro", true);
+                    request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
+            } else if("Ca".equals(request.getParameter("origin"))){
+                response.sendRedirect("CampeonatosAntigos");
+                return;
+            }
             request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
         }
 

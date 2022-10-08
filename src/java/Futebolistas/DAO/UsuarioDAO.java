@@ -2,6 +2,7 @@ package Futebolistas.DAO;
 
 import Futebolistas.Connections.ConnectionFactory;
 import Futebolistas.Enteties.Usuario;
+import Futebolistas.Model.TimeModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,17 +14,25 @@ public class UsuarioDAO {
     public void add(Usuario u) throws SQLException{
         String sql = "INSERT INTO USUARIOS (NOME, EMAIL, SENHA, ISADMINISTRADOR, IDTIME) VALUES (?,?,?,?,?)";
         Connection connection = new ConnectionFactory().getConnection();
-        PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setString(1, u.getNome());
-        stmt.setString(2, u.getEmail());
-        stmt.setString(3, u.getSenha());
-        stmt.setBoolean(4, u.getIsAdministrador());
-        stmt.setInt(5, u.getTime());
-        System.out.println(u.getTime());
-
-        stmt.execute();
-        stmt.close();
-        connection.close();   
+        try {
+            connection.setAutoCommit(false);
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, u.getNome());
+            stmt.setString(2, u.getEmail());
+            stmt.setString(3, u.getSenha());
+            stmt.setBoolean(4, u.getIsAdministrador());
+            stmt.setInt(5, u.getTime());
+            stmt.execute();
+            stmt.close(); 
+            TimeModel model = new TimeModel();
+            model.alterarTorcedores(u.getTime(), 1);
+            connection.commit();
+        } catch (Exception e) {
+            connection.rollback();
+        } finally {
+            connection.close();
+        }
+        
     }
     
     public Usuario autenticar(String email, String senha) throws SQLException{
@@ -44,16 +53,27 @@ public class UsuarioDAO {
         return u;
     } 
     
-    public void remover(int id) throws SQLException{
+    public void remover(Usuario u) throws SQLException{
         String sql = "DELETE FROM USUARIOS WHERE ID = ?";
         Connection connection = new ConnectionFactory().getConnection();
-        PreparedStatement stmt = connection.prepareStatement(sql);
+        try {
+            connection.setAutoCommit(false);
+            PreparedStatement stmt = connection.prepareStatement(sql);
         
-        stmt.setInt(1, id);
-        
-        stmt.execute();
-        stmt.close();
-        connection.close();    
+            stmt.setInt(1, u.getId());
+
+            stmt.execute();
+            stmt.close();
+            TimeModel model = new TimeModel();
+            model.alterarTorcedores(u.getTime(), -1);
+            connection.commit();
+        } catch (Exception e) {
+            connection.rollback();
+        } finally {
+            connection.close(); 
+        }
+    
+           
     }
     
     public Usuario selectUserbyID(int id) throws SQLException{

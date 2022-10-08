@@ -24,7 +24,7 @@
     <body>
         <c:import url="header.jsp"></c:import> 
         <c:import url="menu.jsp"></c:import>
-
+    <div class="feed"><center>Campeonatos Antigos</center></div>
     <div class="body-feed">
     <section> 
       <div class="swiper mySwiper container">

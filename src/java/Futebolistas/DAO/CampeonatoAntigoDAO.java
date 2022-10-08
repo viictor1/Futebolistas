@@ -56,9 +56,17 @@ public class CampeonatoAntigoDAO{
             connection.rollback();
         } finally {
             connection.close(); 
-        }
-        
-           
+        }           
+    }
+    
+    public void removerTodosDoVencedor(int id) throws SQLException{
+        String sql = "DELETE FROM CAMPEONATOANTIGO WHERE VENCEDOR = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, id);
+        stmt.execute();
+        stmt.close();
+        connection.close();
     }
     
     public CampeonatoAntigo selectCabyID(int id) throws SQLException{
@@ -96,5 +104,20 @@ public class CampeonatoAntigoDAO{
         stmt.close();
         connection.close();
         return retorno;
+    }
+    
+    public Boolean verificarAno(int ano) throws SQLException{ // pra nao poder cadastrar 2 titulos no mesmo ano
+        Boolean encontrado = false;
+        String sql = "SELECT ID FROM CAMPEONATOANTIGO WHERE ANO = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, ano);
+        ResultSet rs = stmt.executeQuery();
+        if(rs.next()){
+            encontrado = true;
+        }
+        stmt.close();
+        connection.close();
+        return encontrado;
     }
 }

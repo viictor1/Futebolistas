@@ -53,9 +53,11 @@ public class TimeDAO {
     
     public void remover(int id) throws SQLException{
         ArquivoDAO dao = new ArquivoDAO(); 
+        CampeonatoAntigoDAO daoC = new CampeonatoAntigoDAO();
         Connection connection = new ConnectionFactory().getConnection();
         try {
             connection.setAutoCommit(false);
+            daoC.removerTodosDoVencedor(id);
             Time t = selectTimeByID(id);
             String sql = "DELETE FROM TIMES WHERE IDTIME = ?";
             
@@ -64,7 +66,7 @@ public class TimeDAO {
             stmt.execute();
             stmt.close();
             
-            dao.remover(connection, t.getIdArquivo());    
+            dao.remover(connection, t.getIdArquivo());        
             connection.commit();
         } catch (Exception e) {
             e.printStackTrace();

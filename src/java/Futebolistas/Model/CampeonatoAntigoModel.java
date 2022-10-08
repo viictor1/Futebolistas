@@ -12,6 +12,9 @@ import java.util.ArrayList;
 public class CampeonatoAntigoModel {
     public void add(CampeonatoAntigo ca) throws SQLException{
         CampeonatoAntigoDAO dao = new CampeonatoAntigoDAO();
+        if(dao.verificarAno(ca.getAno()) == true){
+            return;
+        }
         dao.add(ca);
     }
     
