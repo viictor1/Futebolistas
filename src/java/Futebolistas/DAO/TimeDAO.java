@@ -28,7 +28,7 @@ public class TimeDAO {
             
             dao.add(connection, img);
             
-            String sql = "INSERT INTO TIMES (NOME, DATA_FUNDACAO, TECNICO, PRESIDENTE, LOCAL_FUNDACAO, TITULOS, NUM_TORCEDORES, IDARQUIVO) VALUES (?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO TIMES (NOME, DATA_FUNDACAO, TECNICO, PRESIDENTE, LOCAL_FUNDACAO, NUM_TORCEDORES, TITULOS, IDARQUIVO) VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement stmt = connection.prepareStatement(sql);
             
             stmt.setString(1, time.getNome());
@@ -36,7 +36,7 @@ public class TimeDAO {
             stmt.setString(3, time.getTecnico());
             stmt.setString(4, time.getPresidente());
             stmt.setString(5, time.getLocal_fundacao());
-            stmt.setInt(6, time.getTitulos());
+            stmt.setInt(6, 0);
             stmt.setInt(7, 0);
             stmt.setInt(8, img.getId());
             
@@ -112,6 +112,18 @@ public class TimeDAO {
         connection.close();
     }
     
+    public void alterarTitulos(int id, int num) throws SQLException{
+        String sql = "UPDATE TIMES SET TITULOS = ? WHERE IDTIME = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, (getNumTitulos(id) + num));
+        stmt.setInt(2, id);
+        
+        stmt.execute();
+        stmt.close();
+        connection.close();
+    }
+    
     public int getNumTorcedores(int id) throws SQLException{
         String sql = "SELECT NUM_TORCEDORES FROM TIMES WHERE IDTIME = ?";
         Connection connection = new ConnectionFactory().getConnection();
@@ -127,13 +139,28 @@ public class TimeDAO {
         return num;
     }
     
+    public int getNumTitulos(int id) throws SQLException{
+        String sql = "SELECT TITULOS FROM TIMES WHERE IDTIME = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+        int num = 0;
+        
+        if(rs.next()){
+            num = rs.getInt("TITULOS");
+        }
+        connection.close();
+        return num;
+    }
+    
     public void atualizarTime(Time t, int id, Arquivo arquivo) throws SQLException{
         ArquivoDAO dao = new ArquivoDAO();
         Connection connection = new ConnectionFactory().getConnection();
         try {
             connection.setAutoCommit(false);
             dao.alterar(connection, arquivo);
-            String sql = "UPDATE TIMES SET NOME = ?, DATA_FUNDACAO = ?, TECNICO = ?, PRESIDENTE = ?, LOCAL_FUNDACAO = ?, TITULOS = ? WHERE IDTIME = ?";
+            String sql = "UPDATE TIMES SET NOME = ?, DATA_FUNDACAO = ?, TECNICO = ?, PRESIDENTE = ?, LOCAL_FUNDACAO = ? WHERE IDTIME = ?";
             PreparedStatement stmt = connection.prepareStatement(sql);
             
             stmt.setString(1, t.getNome());
@@ -141,8 +168,7 @@ public class TimeDAO {
             stmt.setString(3, t.getTecnico());
             stmt.setString(4, t.getPresidente());
             stmt.setString(5, t.getLocal_fundacao());
-            stmt.setInt(6, t.getTitulos());
-            stmt.setInt(7, id);
+            stmt.setInt(6, id);
             
             stmt.execute();
             stmt.close();

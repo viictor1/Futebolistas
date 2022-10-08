@@ -32,9 +32,6 @@ public class TimeModel {
         if(time.getLocal_fundacao() == null || time.getLocal_fundacao().equals("")){
             return;
         }
-        if(time.getTitulos() < 0){
-            return;
-        }
         if(img.getConteudo().length == 0){
             return;
         }
@@ -67,9 +64,6 @@ public class TimeModel {
             return;
         }
         if(time.getLocal_fundacao() == null || time.getLocal_fundacao().equals("")){
-            return;
-        }
-        if(time.getTitulos() < 0){
             return;
         }
         TimeDAO dao = new TimeDAO();

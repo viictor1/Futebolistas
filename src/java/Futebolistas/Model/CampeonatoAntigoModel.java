@@ -19,4 +19,10 @@ public class CampeonatoAntigoModel {
         CampeonatoAntigoDAO dao = new CampeonatoAntigoDAO();
         return dao.selecionarTodos();
     }
+    
+    public void remover(int id) throws SQLException{
+        CampeonatoAntigoDAO dao = new CampeonatoAntigoDAO();
+        CampeonatoAntigo ca = dao.selectCabyID(id);
+        dao.remover(ca);
+    }
 }

@@ -36,7 +36,6 @@
           <input type="text" name="tecnico" value="${alterar.tecnico}" class="cadastro-time" placeholder="Técnico">
           <input type="text" name="presidente" value="${alterar.presidente}" class="cadastro-time" placeholder="Presidente">
           <input type="text" name="local" value="${alterar.local_fundacao}" class="cadastro-time" placeholder="Local de Fundação">
-          <input type="text" name="titulos" value="${alterar.titulos}" class="cadastro-time" placeholder="Campeonatos Vencidos">
           <label for="file" class="file cadastro-time">Logo do time
             <i class="fa-solid fa-image"></i>
           </label>

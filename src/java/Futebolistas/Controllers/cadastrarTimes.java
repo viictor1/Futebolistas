@@ -89,7 +89,6 @@ public class CadastrarTimes extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         
         String nome, data_fundacao, tecnico, presidente, local_fundacao;
-        int titulos;
         int id;
         
         if("".equals(request.getParameter("id"))){
@@ -104,7 +103,6 @@ public class CadastrarTimes extends HttpServlet {
         tecnico = request.getParameter("tecnico");
         presidente = request.getParameter("presidente");
         local_fundacao = request.getParameter("local");
-        titulos = Integer.parseInt(request.getParameter("titulos"));
         
         int idArquivo = 0;
                
@@ -136,7 +134,7 @@ public class CadastrarTimes extends HttpServlet {
             
         }
                
-        Time time = new Time(nome, data_fundacao, tecnico, presidente, local_fundacao, titulos, 0);
+        Time time = new Time(nome, data_fundacao, tecnico, presidente, local_fundacao);
         TimeModel model = new TimeModel();
 
         if(id == 0){

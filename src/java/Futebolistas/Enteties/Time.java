@@ -12,13 +12,12 @@ public class Time {
     private String nome, data_fundacao, tecnico, presidente, local_fundacao;
     private int id, titulos, num_torcedores, idArquivo;
 
-    public Time(String nome, String data_fundacao, String tecnico, String presidente, String local_fundacao, int titulos, int num_torcedores) {
+    public Time(String nome, String data_fundacao, String tecnico, String presidente, String local_fundacao) {
         this.nome = nome;
         this.data_fundacao = data_fundacao;
         this.tecnico = tecnico;
         this.presidente = presidente;
         this.local_fundacao = local_fundacao;
-        this.titulos = titulos;
     }
 
     public int getIdArquivo() {
