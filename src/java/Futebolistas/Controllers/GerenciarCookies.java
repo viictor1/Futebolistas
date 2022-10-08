@@ -4,9 +4,11 @@
  */
 package Futebolistas.Controllers;
 
+import Futebolistas.Enteties.CampeonatoAntigo;
 import Futebolistas.Enteties.Noticia;
 import Futebolistas.Enteties.Time;
 import Futebolistas.Enteties.Usuario;
+import Futebolistas.Model.CampeonatoAntigoModel;
 import Futebolistas.Model.NoticiaModel;
 import Futebolistas.Model.TimeModel;
 import Futebolistas.Model.UsuarioModel;
@@ -65,11 +67,14 @@ public class GerenciarCookies extends HttpServlet {
         Usuario u = null;
         TimeModel modelt = new TimeModel();
         NoticiaModel modeln = new NoticiaModel();
+        CampeonatoAntigoModel modelca = new CampeonatoAntigoModel();
         ArrayList<Time> times = new ArrayList();
         ArrayList<Noticia> noticias = new ArrayList();
+        ArrayList<CampeonatoAntigo> cas = new ArrayList();
         try {
             times = modelt.selecionarTodos();
             noticias = modeln.selecionarTodos();
+            cas = modelca.selecionarTodos();
         } catch (SQLException ex) {
            Logger.getLogger(GerenciarCookies.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -78,6 +83,7 @@ public class GerenciarCookies extends HttpServlet {
             sessao.setAttribute("autenticado", u);
             sessao.setAttribute("times", times); //deixando os times na sessão
             sessao.setAttribute("noticias", noticias);
+            sessao.setAttribute("campeonatos", cas);
             if("".equals(request.getParameter("origin"))){
                 request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
                 return;
@@ -88,6 +94,9 @@ public class GerenciarCookies extends HttpServlet {
             else if("Cadastro".equals(request.getParameter("origin"))){
                     request.setAttribute("cadastro", true);
                     request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
+            } else if("Ca".equals(request.getParameter("origin"))){
+                response.sendRedirect("CampeonatosAntigos");
+                return;
             }
             
             
@@ -107,6 +116,7 @@ public class GerenciarCookies extends HttpServlet {
                         sessao.setAttribute("autenticado", u); //se tiver um cookie de manter logado, é atribuida à sessão esse usuário
                         sessao.setAttribute("times", times); //deixando os times na sessão
                         request.setAttribute("noticias", noticias);
+                        sessao.setAttribute("campeonatos", cas);
                         request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
                         achouCookie = true; // declarando que o cookie foi achado
                         break;
@@ -118,6 +128,7 @@ public class GerenciarCookies extends HttpServlet {
         if (achouCookie != true) { // se o cookie não for achado, ele é direcionado para a home sem o usuário, mas com os times
             sessao.setAttribute("times", times);
             request.setAttribute("noticias", noticias); //deixando as coisas na sessao mesmo se nao tiver logado
+            sessao.setAttribute("campeonatos", cas);
             request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
         }
 

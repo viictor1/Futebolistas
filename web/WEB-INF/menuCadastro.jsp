@@ -41,6 +41,8 @@
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
         <a href="GerenciarCookies?origin=Cadastro" class="am">USUÁRIOS
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
+        <a href="CampeonatoAntigoCadastrar" class="am">CAMPEONATOS ANTIGOS
+        <i class="fa-solid fa-screwdriver-wrench"></i></a>
       </div>
           
     </div>

@@ -39,3 +39,11 @@ CREATE TABLE Noticias(
   idArquivo int,
   FOREIGN KEY (idArquivo) REFERENCES Arquivos(idArquivo)
 );
+
+Create Table CampeonatoAntigo(
+    id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
+                    (START WITH 1, INCREMENT BY 1),
+    ano INT NOT NULL,
+    vencedor INT NOT NULL,
+    FOREIGN KEY (vencedor) REFERENCES Times(idTime)
+);
