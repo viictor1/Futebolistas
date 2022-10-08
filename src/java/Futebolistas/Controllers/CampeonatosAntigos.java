@@ -55,19 +55,7 @@ public class CampeonatosAntigos extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        HttpSession sessao = request.getSession();
-        ArrayList<CampeonatoAntigo> campeonatos = (ArrayList<CampeonatoAntigo>) sessao.getAttribute("campeonatos");
-        TimeModel model = new TimeModel();
-        for (CampeonatoAntigo campeonato : campeonatos) {
-            Time t = null;
-            try {
-                t = model.getTimeByID(campeonato.getVencedor()); // atribuindo o nome do time vencedor ao campeonato, nao está na dao pq o nome pode ser alterado
-            } catch (SQLException ex) {
-                Logger.getLogger(CampeonatosAntigos.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            campeonato.setNome(t.getNome());
-        }
+       
         request.getRequestDispatcher("WEB-INF/campeonato-antigo.jsp").forward(request, response);
     }
 

@@ -32,6 +32,9 @@ import java.util.logging.Logger;
  */
 @WebServlet(name = "GerenciarCookies", urlPatterns = {"/GerenciarCookies"})
 public class GerenciarCookies extends HttpServlet {
+        ArrayList<Time> times = new ArrayList();
+        ArrayList<Noticia> noticias = new ArrayList();
+        ArrayList<CampeonatoAntigo> cas = new ArrayList();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -68,9 +71,7 @@ public class GerenciarCookies extends HttpServlet {
         TimeModel modelt = new TimeModel();
         NoticiaModel modeln = new NoticiaModel();
         CampeonatoAntigoModel modelca = new CampeonatoAntigoModel();
-        ArrayList<Time> times = new ArrayList();
-        ArrayList<Noticia> noticias = new ArrayList();
-        ArrayList<CampeonatoAntigo> cas = new ArrayList();
+        
         try {
             times = modelt.selecionarTodos();
             noticias = modeln.selecionarTodos();
@@ -78,28 +79,13 @@ public class GerenciarCookies extends HttpServlet {
         } catch (SQLException ex) {
            Logger.getLogger(GerenciarCookies.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         if (sessao != null && sessao.getAttribute("autenticado") != null) {
             u = (Usuario) sessao.getAttribute("autenticado"); // se tiver uma sessão aberta, é atribuida à sessão o usuario
             sessao.setAttribute("autenticado", u);
-            sessao.setAttribute("times", times); //deixando os times na sessão
-            sessao.setAttribute("noticias", noticias);
-            sessao.setAttribute("campeonatos", cas);
-            if("".equals(request.getParameter("origin"))){
-                request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
-                return;
-            } else if("Times".equals(request.getParameter("origin"))){
-                    request.getRequestDispatcher("WEB-INF/times.jsp").forward(request, response);
-                    return;
-                }
-            else if("Cadastro".equals(request.getParameter("origin"))){
-                    request.setAttribute("cadastro", true);
-                    request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
-            } else if("Ca".equals(request.getParameter("origin"))){
-                response.sendRedirect("CampeonatosAntigos");
-                return;
-            }
-            
-            
+            loadlAll(sessao);
+            verificacaoOrigin(request.getParameter("origin"), request, response, sessao);
+        
         } else {
             Cookie[] cookies = request.getCookies();
             sessao = request.getSession(true);
@@ -114,10 +100,8 @@ public class GerenciarCookies extends HttpServlet {
                         }
                         
                         sessao.setAttribute("autenticado", u); //se tiver um cookie de manter logado, é atribuida à sessão esse usuário
-                        sessao.setAttribute("times", times); //deixando os times na sessão
-                        request.setAttribute("noticias", noticias);
-                        sessao.setAttribute("campeonatos", cas);
-                        request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
+                        loadlAll(sessao);
+                        verificacaoOrigin(request.getParameter("origin"), request, response, sessao);
                         achouCookie = true; // declarando que o cookie foi achado
                         break;
                     }
@@ -126,27 +110,51 @@ public class GerenciarCookies extends HttpServlet {
             }             
         }
         if (achouCookie != true) { // se o cookie não for achado, ele é direcionado para a home sem o usuário, mas com os times
-            sessao.setAttribute("times", times);
-            request.setAttribute("noticias", noticias); //deixando as coisas na sessao mesmo se nao tiver logado
-            sessao.setAttribute("campeonatos", cas);
-            if("".equals(request.getParameter("origin"))){
+            loadlAll(sessao);
+            verificacaoOrigin(request.getParameter("origin"), request, response, sessao);
+        }
+        
+    }
+    
+    public void loadlAll(HttpSession sessao){
+        sessao.setAttribute("times", times);
+        sessao.setAttribute("noticias", noticias); // atribuindo tudo à sessão
+        sessao.setAttribute("campeonatos", cas);
+    }
+    
+    public void verificacaoOrigin(String origin, HttpServletRequest request, HttpServletResponse response, HttpSession sessao) throws ServletException, IOException{
+        if("".equals(origin)){
                 request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
                 return;
-            } else if("Times".equals(request.getParameter("origin"))){
+            } else if("Times".equals(origin)){
                     request.getRequestDispatcher("WEB-INF/times.jsp").forward(request, response);
                     return;
                 }
-            else if("Cadastro".equals(request.getParameter("origin"))){
+            else if("Cadastro".equals(origin)){
                     request.setAttribute("cadastro", true);
                     request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
-            } else if("Ca".equals(request.getParameter("origin"))){
-                response.sendRedirect("CampeonatosAntigos");
+                    return;
+            } else if("Ca".equals(origin)){
+                 ArrayList<CampeonatoAntigo> campeonatos = (ArrayList<CampeonatoAntigo>) sessao.getAttribute("campeonatos");
+                TimeModel model = new TimeModel();
+                for (CampeonatoAntigo campeonato : campeonatos) {
+                    Time t = null;
+                    try {
+                        t = model.getTimeByID(campeonato.getVencedor()); // atribuindo o nome do time vencedor ao campeonato, nao está na dao pq o nome pode ser alterado
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CampeonatosAntigos.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    campeonato.setNome(t.getNome());
+                }
+                request.getRequestDispatcher("WEB-INF/campeonato-antigo.jsp").forward(request, response);
+                return;
+            } else{
+                request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
                 return;
             }
-            request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
-        }
-
+        
     }
+    
 
     /**
      * Handles the HTTP <code>POST</code> method.
