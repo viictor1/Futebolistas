@@ -5,10 +5,12 @@
 package Futebolistas.Controllers;
 
 import Futebolistas.Enteties.CampeonatoAntigo;
+import Futebolistas.Enteties.Jogadora;
 import Futebolistas.Enteties.Noticia;
 import Futebolistas.Enteties.Time;
 import Futebolistas.Enteties.Usuario;
 import Futebolistas.Model.CampeonatoAntigoModel;
+import Futebolistas.Model.JogadoraModel;
 import Futebolistas.Model.NoticiaModel;
 import Futebolistas.Model.TimeModel;
 import Futebolistas.Model.UsuarioModel;
@@ -35,6 +37,7 @@ public class GerenciarCookies extends HttpServlet {
         ArrayList<Time> times = new ArrayList();
         ArrayList<Noticia> noticias = new ArrayList();
         ArrayList<CampeonatoAntigo> cas = new ArrayList();
+        ArrayList<Jogadora> jogadoras = new ArrayList();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -71,11 +74,13 @@ public class GerenciarCookies extends HttpServlet {
         TimeModel modelt = new TimeModel();
         NoticiaModel modeln = new NoticiaModel();
         CampeonatoAntigoModel modelca = new CampeonatoAntigoModel();
+        JogadoraModel modelj = new JogadoraModel();
         
         try {
             times = modelt.selecionarTodos();
             noticias = modeln.selecionarTodos();
             cas = modelca.selecionarTodos();
+            jogadoras = modelj.selecionarTodos();
         } catch (SQLException ex) {
            Logger.getLogger(GerenciarCookies.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -120,6 +125,7 @@ public class GerenciarCookies extends HttpServlet {
         sessao.setAttribute("times", times);
         sessao.setAttribute("noticias", noticias); // atribuindo tudo à sessão
         sessao.setAttribute("campeonatos", cas);
+        sessao.setAttribute("jogadoras", jogadoras);
     }
     
     public void verificacaoOrigin(String origin, HttpServletRequest request, HttpServletResponse response, HttpSession sessao) throws ServletException, IOException{

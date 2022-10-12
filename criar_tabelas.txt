@@ -1,3 +1,10 @@
+CREATE TABLE Jogadoras(
+  id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
+                            (START WITH 1, INCREMENT BY 1),
+  nome VARCHAR(45),
+  ativa BOOLEAN NOT NULL
+);
+
 CREATE TABLE Arquivos(
  idArquivo INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
                             (START WITH 1, INCREMENT BY 1),
@@ -17,6 +24,19 @@ CREATE TABLE Times(
   num_torcedores INT NOT NULL,
   idArquivo int,
   FOREIGN KEY (idArquivo) REFERENCES Arquivos(idArquivo)
+);
+
+CREATE TABLE Jogadora_Time(
+  id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
+                            (START WITH 1, INCREMENT BY 1),
+  id_time INT NOT NULL,
+  id_jogadora INT NOT NULL,
+  data_inicio DATE NOT NULL,
+  data_fim DATE,
+  numero_atual INT NOT NULL,
+  posicao VARCHAR(45),
+  FOREIGN KEY (id_time) REFERENCES Times(idTime),
+  FOREIGN KEY (id_jogadora) REFERENCES Jogadoras(id)
 );
 
 CREATE TABLE Usuarios(

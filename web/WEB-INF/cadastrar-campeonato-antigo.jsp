@@ -14,7 +14,7 @@
     </head>
     <body>
         <c:import url="header.jsp"></c:import>
-        <div class="pra-centralizar">
+    <div class="pra-centralizar">
             
     <div class="box-cadastro">
         <a href="MenuCadastro"> <i class="fa-solid fa-arrow-left"></i></a>
