@@ -54,4 +54,13 @@ public class JogadoraDAO {
         stmt.close();
         connection.close();
     }
+    
+    public void alterarAtividade(int id, Boolean b, Connection connection) throws SQLException{
+        String sql = "UPDATE JOGADORAS SET ATIVA = ? WHERE ID = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setBoolean(1, b);
+        stmt.setInt(2, id);
+        stmt.execute();
+        stmt.close();
+    }
 }

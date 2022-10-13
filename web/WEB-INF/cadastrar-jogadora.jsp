@@ -26,7 +26,7 @@
       <div class="right-time">
           <form class="" action="JogadoraCadastrar" method="post">         
           <input type="text" name="nome" class="cadastro-time" placeholder="Nome">        
-          >   
+          <input type="submit" name="" value="Cadastrar" class="btn-time">
         </form>
           
           Apagar Jogadora

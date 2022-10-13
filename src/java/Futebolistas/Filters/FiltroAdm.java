@@ -16,7 +16,7 @@ import java.io.IOException;
  *
  * @author maluc
  */
-@WebFilter(filterName = "FiltroAdm", servletNames = {"CadastrarTimes", "MenuCadastro", "NoticiaCadastrar"})
+@WebFilter(filterName = "FiltroAdm", servletNames = {"CadastrarTimes", "MenuCadastro", "NoticiaCadastrar", "CampeonatoAntigoCadastrar", "JogadoraCadastrar"})
 public class FiltroAdm implements Filter{
 
     @Override
@@ -27,7 +27,13 @@ public class FiltroAdm implements Filter{
         HttpServletResponse response = (HttpServletResponse) res;
         HttpSession sessao = request.getSession(false);
         
-        Usuario u = (Usuario) sessao.getAttribute("autenticado");
+        Usuario u = new Usuario();
+        if(sessao.getAttribute("autenticado") == null){
+            return;           
+        }
+        else{
+            u = (Usuario) sessao.getAttribute("autenticado");
+        }
 
         if(u.getIsAdministrador()){
             chain.doFilter(req, res);

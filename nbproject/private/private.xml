@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/web/WEB-INF/cadastrar-jogadora.jsp</file>
-            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/Controllers/RemoverJogadora.java</file>
-            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/Model/JogadoraModel.java</file>
-            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/DAO/CampeonatoAntigoDAO.java</file>
-            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/DAO/JogadoraDAO.java</file>
-            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/Controllers/CadastrarTimes.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/DAO/Jogadora_TimeDAO.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/Controllers/SaibaMaisTime.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/Model/Jogadora_TimeModel.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/web/WEB-INF/saibaMaisTime.jsp</file>
+            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/DAO/TimeDAO.java</file>
         </group>
     </open-files>
 </project-private>
