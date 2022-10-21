@@ -83,7 +83,7 @@ public class CampeonatoAntigoCadastrar extends HttpServlet {
             response.sendRedirect("CampeonatoAntigoCadastrar");
         }
         
-        response.sendRedirect("GerenciarCookies?origin=Ca");
+        response.sendRedirect("Hub?/=Ca");
     }
 
     /**

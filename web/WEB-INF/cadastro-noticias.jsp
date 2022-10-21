@@ -20,22 +20,28 @@
     <body>
         <c:import url="header.jsp"></c:import>
         <div class="pra-centralizar">
-            
-    <div class="box-cadastro">
-        <a href="MenuCadastro"> <i class="fa-solid fa-arrow-left"></i></a>
-      <div class="left-times">
-          
-      </div>
-      <div class="right-time">
+           <div class="estiquetas">
+                <a href="Hub?/=SaibaMaisTime"><i class="fa-solid fa-chevron-left j"></i></a>
+            </div> 
+            <div class="b-cadastro">
+                <div class="l-left">
+                    <span class="r">MENU</span>
+                    <span class="r">PARA</span>
+                    <span class="r">CADASTRO</span>
+                    <span class="r">DE</span>
+                    <span class="r">NOTICÍAS</span>
+                </div>
+                <div class="middle"></div>
+      <div class="r-right">
           <form class="" action="NoticiaCadastrar" method="post" enctype="multipart/form-data">
-          <input type="text" name="titulo" value="" class="cadastro-time" placeholder="Título">
-          <input type="text" name="autor" value="" class="cadastro-time" placeholder="Autor">
-          <textarea class="cadastro-time" name="texto" rows="10" cols="20" style="resize: none" placeholder="Texto"></textarea>
-          <label for="file" class="file cadastro-time">Capa da Notícia
+          <input type="text" name="titulo" value="" class="cadastro-j" placeholder="Título">
+          <input type="text" name="autor" value="" class="cadastro-j" placeholder="Autor">
+          <textarea class="cadastro-j" name="texto" rows="10" cols="20" style="resize: none; height:80px" placeholder="Texto"></textarea>
+          <label for="file" class="file cadastro-j">Capa da Notícia
             <i class="fa-solid fa-image"></i>
           </label>
-          <input type="file" name="imagem" id="file" value="" class="cadastro-time">
-          <input type="submit" name="" value="Concluir" class="btn-time">   
+          <input type="file" name="imagem" id="file" value="" class="cadastro-j">
+          <input type="submit" name="" value="Concluir" class="btn-j">   
         </form>
       </div>
     </div>

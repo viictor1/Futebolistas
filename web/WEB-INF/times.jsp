@@ -42,10 +42,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
               <span class="name">${time.nome}</span>
             </div>
             <div class="button-carrossel">
-                <button class="saibaMais"><a href="SaibaMaisTime?id=${time.id}">Saiba Mais</a></button>
+                <a href="SaibaMaisTime?id=${time.id}"><button class="saibaMais">Saiba Mais</button></a>
               <c:if test="${autenticado != null && autenticado.time != time.id}">
-                  <button class="torcer"> <a href="TorcerTime?idTime=${time.id}">Torcer</a></button> 
-              </c:if>              
+                <a href="TorcerTime?idTime=${time.id}"><button class="torcer">Torcer</button></a>
+              </c:if>  
+            <c:if test="${autenticado != null && autenticado.time == time.id}">
+            <a href="TorcerTime?idTime=0"><button class="torcer">Deixar de Torcer</button></a>
+          </c:if> 
             </div>
           </div>
         </div>

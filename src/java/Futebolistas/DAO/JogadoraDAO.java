@@ -45,6 +45,23 @@ public class JogadoraDAO {
         return retorno;
     }
     
+    public Jogadora getJogadoraByID(int id) throws SQLException{ 
+        String sql = "SELECT ID, NOME, ATIVA FROM JOGADORAS WHERE ID = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+        Jogadora j = new Jogadora();
+        if(rs.next()){
+            j.setId(rs.getInt("ID"));
+            j.setNome(rs.getString("NOME"));
+            j.setAtiva(rs.getBoolean("ATIVA"));
+        }
+        stmt.close();
+        connection.close();
+        return j;
+    }
+    
     public void remover(int id) throws SQLException{
         String sql = "DELETE FROM JOGADORAS WHERE ID = ?";
         Connection connection = new ConnectionFactory().getConnection();

@@ -58,11 +58,7 @@ public class UsuarioModel {
     public void alterarTime(int id, int id_antigo, int id_novo) throws SQLException{
         UsuarioDAO daoU = new UsuarioDAO();
         TimeDAO daoT = new TimeDAO();
-        daoU.alterarTime(id, id_novo);
-        if(id_antigo != 0 && daoT.getNumTorcedores(id_antigo) > 0){
-            daoT.alterarTorcedores(id_antigo, -1);
-        }   
-        daoT.alterarTorcedores(id_novo, 1);
+        daoU.alterarTime(id, id_novo, id_antigo);
     }
     
     public void removerTorcedores(int id) throws SQLException{ //remover todos os torcedores quando apagar time

@@ -20,30 +20,36 @@
     <body>
         <c:import url="header.jsp"></c:import>
         <div class="pra-centralizar">
-            
-    <div class="box-cadastro">
-        <a href="MenuCadastro"> <i class="fa-solid fa-arrow-left"></i></a>
-      <div class="left-times">
-          
-      </div>
-      <div class="right-time">
-          <form class="" action="CadastrarTimes?id=${alterar.id}" method="post" enctype="multipart/form-data">
-              <c:if test="${alterar.id != null}">
-              <input type="hidden" id="id" name="idArquivo" value="${alterar.idArquivo}">
-              </c:if>
-          <input type="text" name="nome" value="${alterar.nome}" class="cadastro-time" placeholder="Nome do time">
-          <input type="text" name="data" value="${alterar.data_fundacao}" class="cadastro-time" placeholder="Ano de Fundação">
-          <input type="text" name="tecnico" value="${alterar.tecnico}" class="cadastro-time" placeholder="Técnico">
-          <input type="text" name="presidente" value="${alterar.presidente}" class="cadastro-time" placeholder="Presidente">
-          <input type="text" name="local" value="${alterar.local_fundacao}" class="cadastro-time" placeholder="Local de Fundação">
-          <label for="file" class="file cadastro-time">Logo do time
-            <i class="fa-solid fa-image"></i>
-          </label>
-          <input type="file" name="imagem" id="file" value="" class="cadastro-time">
-          <input type="submit" name="" value="Concluir" class="btn-time">   
-        </form>
-      </div>
-    </div>
-    </div>
-  </body>
+            <div class="estiquetas">
+                <a href="Hub?/=SaibaMaisTime"><i class="fa-solid fa-chevron-left j"></i></a>
+            </div>  
+            <div class="b-cadastro-big">
+                <div class="l-left">
+                    <span class="r">MENU</span>
+                    <span class="r">PARA</span>
+                    <span class="r">CADASTRO</span>
+                    <span class="r">DE</span>
+                    <span class="r">TIME</span>
+                </div>
+                <div class="middle"></div>
+                <div class="r-right">
+                    <form class="" action="CadastrarTimes?id=${alterar.id}" method="post" enctype="multipart/form-data">
+                        <c:if test="${alterar.id != null}">
+                        <input type="hidden" id="id" name="idArquivo" value="${alterar.idArquivo}">
+                        </c:if>
+                    <input type="text" name="nome" value="${alterar.nome}" class="cadastro-j" placeholder="Nome do time">
+                    <input type="date" name="data" value="${alterar.data_fundacao}" class="cadastro-j" placeholder="Ano de Fundação">
+                    <input type="text" name="tecnico" value="${alterar.tecnico}" class="cadastro-j" placeholder="Técnico">
+                    <input type="text" name="presidente" value="${alterar.presidente}" class="cadastro-j" placeholder="Presidente">
+                    <input type="text" name="local" value="${alterar.local_fundacao}" class="cadastro-j" placeholder="Local de Fundação">
+                    <label for="file" class="file cadastro-j">Logo do time
+                      <i class="fa-solid fa-image"></i>
+                    </label>
+                    <input type="file" name="imagem" id="file" value="" class="cadastro-j">
+                    <input type="submit" name="" value="Concluir" class="btn-j">   
+                  </form>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

@@ -59,12 +59,9 @@ public class TorcerTime extends HttpServlet {
         
         UsuarioModel model = new UsuarioModel();
         int idTime = Integer.parseInt(request.getParameter("idTime"));
+      
         try {
             model.alterarTime(autenticado.getId(), autenticado.getTime(), idTime);
-        } catch (SQLException ex) {
-            Logger.getLogger(TorcerTime.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
             sessao.setAttribute("autenticado", model.selectUsuariobyID(autenticado.getId()));
         } catch (SQLException ex) {
             Logger.getLogger(TorcerTime.class.getName()).log(Level.SEVERE, null, ex);

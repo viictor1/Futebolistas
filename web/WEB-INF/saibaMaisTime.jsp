@@ -11,18 +11,78 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Saiba Mais</title>
+        <script src="https://kit.fontawesome.com/46a2e52881.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        Nome: ${time.nome} <br>
-        Ano: ${time.data_fundacao} <br>
-        Tecnico: ${time.tecnico} <br>
-        Presidente: ${time.presidente} <br>
-        Local de Fundação: ${time.local_fundacao} <br>
-        Títulos: ${time.titulos} <br>
-        Torcedores: ${time.num_torcedores} <br>
         
-        <br>
+        <c:import url="header.jsp"></c:import>
+        <c:import url="menu.jsp"></c:import>
         
+        
+        <div class="pra-centralizar">
+            <div class="estiquetas">
+                <a href="Hub?/=Times"><i class="fa-solid fa-chevron-left"></i></a>
+                <c:if test="${autenticado.isAdministrador == true}">
+                    <a href="Jogadora_TimeServlet?id_time=${time.id}"><i class="fa-solid fa-pencil fa-2"><span class="cje">Cadastrar Jogadoras</span></i></a>
+                </c:if>
+            </div>
+            <div class="bonitinha">
+                <div class="c2">
+                    <div class="tabela">
+                    <table>
+                    <thead>
+                      <tr>
+                        <th>JOGADORAS</th>
+                        <th>Posição</th>
+                        <th>Data de Início</th>
+                        <th>N. Atual</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <c:forEach varStatus="status" var="jogadora" items="${jogadorasT}">
+                        <tr>
+                        <td>${jogadora.nome}</td>
+                        <td>${jogadora.posicao}</td>
+                        <td>${jogadora.data_inicio}</td>
+                        <td>${jogadora.numero_atual}</td>
+                        <c:if test="${autenticado.isAdministrador == true}">
+                            <td><a href="Jogadora_TimeServlet?id=${jogadora.id}&id=${jogadora.id_time}"><i class="fa-solid fa-pencil"></i></a></td>
+                            <td><a href="RemoverJT?id=${jogadora.id}"><i class="fa-solid fa-trash-can"></a></i></td>
+                        </c:if>                     
+                        </tr>
+                        
+                      </c:forEach> 
+                    </tbody>
+                  </table>   
+                    </div>
+                </div>
+                <div class="c1">
+                    <div class="cont-img">
+                    <div class="card-x">
+                    <div class="imgBx">
+                        <img src="MostrarImagem?id=${time.idArquivo}">
+                    </div>
+                    <div class="contentBx">
+                        
+                        
+                        <div class="size">
+                            <h2>${time.nome} </h2>
+                            <span>Fundação: ${time.data_fundacao} </span>
+                            <span>Tecnico: ${time.tecnico} </span>
+                            <span>Presidente: ${time.presidente} </span>
+                            <span>Local Fundação: ${time.local_fundacao}</span>
+                            <span>Títulos: ${time.titulos} </span>
+                            <span>Torcedores: ${time.num_torcedores}</span>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                
+            </div>
+        
+        </div>
+                    <!-- comment 
         Contratar Jogadora
         <form action="Jogadora_TimeServlet" method="post">
             <select name="selectJ">
@@ -38,55 +98,6 @@
         </form>
             
             <br>
-            
-            Jogadoras Atuais:
-            <table border="1">
-            <thead>
-                <tr>
-                    <th>Data de Início</th>
-                    <th>N. Atual</th>
-                    <th>Posição</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <c:forEach varStatus="status" var="jogadora" items="${jogadorasT}">
-                    <tr>
-                        <c:if test="${jogadora.data_fim == null}">
-                        <td>${jogadora.data_inicio}</td>
-                        <td>${jogadora.numero_atual}</td>
-                        <td>${jogadora.posicao}</td>
-                         </c:if>
-                    </tr>
-                    </c:forEach>   
-            </tbody>
-        </table>
-            
-            Jogadoras Antigas:
-            <table border="1">
-            <thead>
-                <tr>
-                    <th>Data de Início</th>
-                    <th>Data Fim</th>
-                    <th>N. Atual</th>
-                    <th>Posição</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <c:forEach varStatus="status" var="jogadora" items="${jogadorasT}">
-                    <tr>
-                        <c:if test="${jogadora.data_fim != null}">
-                        <td>${jogadora.data_inicio}</td>
-                        <td>${jogadora.data_fim}</td>
-                        <td>${jogadora.numero_atual}</td>
-                        <td>${jogadora.posicao}</td>
-                        </c:if>
-                    </tr>
-                    </c:forEach>   
-            </tbody>
-        </table>
-        
-        <a href="GerenciarCookies?origin=Times">voltar</a>
+            --> 
     </body>
 </html>

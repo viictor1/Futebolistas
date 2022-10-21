@@ -4,12 +4,7 @@
  */
 package Futebolistas.Controllers;
 
-import Futebolistas.Enteties.Jogadora;
-import Futebolistas.Enteties.Jogadora_Time;
-import Futebolistas.Enteties.Time;
-import Futebolistas.Model.JogadoraModel;
-import Futebolistas.Model.Jogadora_TimeModel;
-import Futebolistas.Model.TimeModel;
+import Futebolistas.Model.NoticiaModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,17 +12,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
- * @author victo
+ * @author maluc
  */
-@WebServlet(name = "SaibaMaisTime", urlPatterns = {"/SaibaMaisTime"})
-public class SaibaMaisTime extends HttpServlet {
+@WebServlet(name = "Noticia", urlPatterns = {"/Noticia"})
+public class Noticia extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,6 +34,7 @@ public class SaibaMaisTime extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -57,28 +51,14 @@ public class SaibaMaisTime extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-        int id;
-        id = Integer.parseInt(request.getParameter("id")); //id do time
-        TimeModel model = new TimeModel();
-        Jogadora_TimeModel modeljt = new Jogadora_TimeModel();
-        JogadoraModel modelJ = new JogadoraModel();
-        ArrayList<Jogadora_Time> jogadoras = new ArrayList();
+        NoticiaModel model = new NoticiaModel();
         try {
-            Time t = model.getTimeByID(id);
-            request.setAttribute("time", t);
-            ArrayList<Jogadora_Time> jogadorasT = modeljt.selectJogadoras(id);
-            
-            for(Jogadora_Time jogadora: jogadorasT){
-                Jogadora j = modelJ.getJogadoraByID(jogadora.getId_jogadora());   
-                jogadora.setNome(j.getNome());
-            }
-            request.setAttribute("jogadorasT", jogadorasT);
-            request.getRequestDispatcher("WEB-INF/saibaMaisTime.jsp").forward(request, response);
+            Futebolistas.Enteties.Noticia n = model.selectNoticiaByID(Integer.parseInt(request.getParameter("id")));
+            request.setAttribute("noticia", n);
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            response.sendRedirect("Hub?/=Times");
+            Logger.getLogger(Noticia.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        request.getRequestDispatcher("WEB-INF/noticia.jsp").forward(request, response);
     }
 
     /**

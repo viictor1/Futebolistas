@@ -60,7 +60,7 @@ public class RemoverCampeonatoAntigo extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(RemoverCampeonatoAntigo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        response.sendRedirect("GerenciarCookies?origin=Ca");
+        response.sendRedirect("Hub?/=Ca");
     }
 
     /**

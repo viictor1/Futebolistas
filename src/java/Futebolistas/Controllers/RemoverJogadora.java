@@ -76,7 +76,7 @@ public class RemoverJogadora extends HttpServlet {
         JogadoraModel model = new JogadoraModel();
         try {
             model.remover(id);
-            response.sendRedirect("GerenciarCookies");
+            response.sendRedirect("Hub");
         } catch (SQLException ex) {
             response.sendRedirect("JogadoraCdastrar");
         }

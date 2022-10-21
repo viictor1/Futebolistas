@@ -94,9 +94,9 @@
   </div>
         <div id="menu-login" onclick="<c:if test="${autenticado == nul}">showModal()</c:if> <c:if test="${autenticado != nul}">showLogado()</c:if>"> <!-- mudando o modal que aparecerá dependendo se o usuário está ou não logado -->
       <center>
-      <div id="line-login"></div>
-      <div id="line-login"></div> <!-- Menu do lado fechado -->
-      <div id="line-login"></div>
+      <div class="line-login"></div>
+      <div class="line-login"></div> <!-- Menu do lado fechado -->
+      <div class="line-login"></div>
       </center>
     </div>
     <div id="pmenu">
@@ -111,11 +111,11 @@
           <span class="x" onclick="hideModal()">&times;</span>
           <div id=modal-titulo>USUÁRIO</div>
           <div class="modal-line"></div>
-          <div id="option" onclick="showLogin();hideModal()"><center>Login</center></div>
+          <div class="option" onclick="showLogin();hideModal()"><center>Login</center></div>
           <div class="modal-line"></div>
-          <div id="option" onclick="showCadastro();hideModal()"><center>Registrar conta</center></div>
+          <div class="option" onclick="showCadastro();hideModal()"><center>Registrar conta</center></div>
           <div class="modal-line"></div>
-          <div id="option"><center>mais opções</center></div>
+          <div class="option"><center>mais opções</center></div>
           <div class="modal-line"></div>
         </div>
       </div>
@@ -128,17 +128,17 @@
     <div class="content-logado">        
     <span class="x" onclick="hideLogado()">&times;</span>
     <div id=modal-titulo>${autenticado.nome}</div> <!--AQ É A VARIÁVEL DO NOME QUE O USUÁRIO ESCOLHEU -->
-    <div id="option"><center>Meu time</center></div>
+    <div class="option"><a href="SaibaMaisTime?id=${autenticado.time}"><center>Meu time</center></a></div>
     <div class="modal-line"></div>
-    <div id="option" onclick="showAtualizarS();hideLogado()"><center>Alterar senha</center></div>
+    <div class="option" onclick="showAtualizarS();hideLogado()"><center>Alterar senha</center></div>
     <div class="modal-line"></div>
-    <div id="option"><center><a onclick="validarRemover()">Apagar conta</a></center></div>
+    <div class="option"><center><a onclick="validarRemover()">Apagar conta</a></center></div>
     <div class="modal-line"></div>
     <c:if test="${autenticado.isAdministrador == true}"> <!-- se o usuário logado for um adm, ele poderá cadastrar novos times, noticias, usuarios, jogadoras, campeonatos antigos -->
-        <a href="MenuCadastro"><div id="option"><center>Cadastrar</center></div></a>
-            <div class="modal-line"></div>
+        <a href="MenuCadastro"><div class="option"><center>Cadastrar</center></div></a>
+        <div class="modal-line"></div>
         </c:if>
-    <div id="option"><center><a onclick="validarSair()"">Sair</a></center></div> <!--Aq é pra logout-->
+    <div class="option"><center><a onclick="validarSair()"">Sair</a></center></div> <!--Aq é pra logout-->
     </div>
   </div>
   </div>

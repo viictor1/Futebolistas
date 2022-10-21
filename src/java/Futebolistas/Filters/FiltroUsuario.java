@@ -33,7 +33,7 @@ public class FiltroUsuario implements Filter{
             chain.doFilter(request, response);
         }
         else {
-            response.sendRedirect("GerenciarCookies");
+            response.sendRedirect("Hub");
         }
     }
     

@@ -10,7 +10,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>GerenciarCookies</welcome-file>
+        <welcome-file>Hub</welcome-file>
     </welcome-file-list>
 
 </web-app>

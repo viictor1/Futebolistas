@@ -41,7 +41,7 @@ public class UsuarioCadastrar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("GerenciarCookies");
+        response.sendRedirect("Hub");
     }
 
     /**
@@ -82,9 +82,9 @@ public class UsuarioCadastrar extends HttpServlet {
             UsuarioModel model = new UsuarioModel();
             try {
                 model.add(u);     
-                response.sendRedirect("GerenciarCookies");
+                response.sendRedirect("Hub");
             } catch (Exception e) {
-                response.sendRedirect("GerenciarCookies");
+                response.sendRedirect("Hub");
             }
           
     }

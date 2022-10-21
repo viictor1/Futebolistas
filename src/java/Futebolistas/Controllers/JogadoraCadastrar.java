@@ -71,7 +71,7 @@ public class JogadoraCadastrar extends HttpServlet {
         JogadoraModel model = new JogadoraModel();
         try {
             model.add(j);
-            response.sendRedirect("GerenciarCookies");
+            response.sendRedirect("Hub");
         } catch (SQLException ex) {
             response.sendRedirect("JogadoraCadastrar");
         }

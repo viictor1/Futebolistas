@@ -7,7 +7,11 @@ package Futebolistas.DAO;
 import Futebolistas.Connections.ConnectionFactory;
 import Futebolistas.Controllers.Times;
 import Futebolistas.Enteties.Arquivo;
+import Futebolistas.Enteties.Jogadora;
+import Futebolistas.Enteties.Jogadora_Time;
 import Futebolistas.Enteties.Time;
+import Futebolistas.Model.JogadoraModel;
+import Futebolistas.Model.Jogadora_TimeModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,12 +31,11 @@ public class TimeDAO {
             connection.setAutoCommit(false);                      
             
             dao.add(connection, img);
-            
             String sql = "INSERT INTO TIMES (NOME, DATA_FUNDACAO, TECNICO, PRESIDENTE, LOCAL_FUNDACAO, NUM_TORCEDORES, TITULOS, IDARQUIVO) VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement stmt = connection.prepareStatement(sql);
             
             stmt.setString(1, time.getNome());
-            stmt.setString(2, time.getData_fundacao());
+            stmt.setDate(2, time.getData_fundacao());
             stmt.setString(3, time.getTecnico());
             stmt.setString(4, time.getPresidente());
             stmt.setString(5, time.getLocal_fundacao());
@@ -43,7 +46,6 @@ public class TimeDAO {
             stmt.execute();
             stmt.close();
             connection.commit();
-            
         } catch (Exception e) {
             connection.rollback();
         } finally {
@@ -55,8 +57,22 @@ public class TimeDAO {
         ArquivoDAO dao = new ArquivoDAO(); 
         CampeonatoAntigoDAO daoC = new CampeonatoAntigoDAO();
         Connection connection = new ConnectionFactory().getConnection();
+        Jogadora_TimeDAO daoJT = new Jogadora_TimeDAO();
+        Jogadora_TimeModel model = new Jogadora_TimeModel();
+        JogadoraDAO daoJ = new JogadoraDAO();
+        ArrayList<Jogadora_Time> array = new ArrayList();
         try {
             connection.setAutoCommit(false);
+            array = model.selectJogadoras(id);
+            for(Jogadora_Time jogadora: array){
+                daoJ.alterarAtividade(jogadora.getId_jogadora(), false, connection);               
+            }
+            String sql2 = "DELETE FROM JOGADORA_TIME WHERE ID_TIME = ?";
+            PreparedStatement stmt2 = connection.prepareStatement(sql2);
+            stmt2.setInt(1, id);
+            stmt2.execute();
+            stmt2.close();
+            
             daoC.removerTodosDoVencedor(id);
             Time t = selectTimeByID(id);
             String sql = "DELETE FROM TIMES WHERE IDTIME = ?";
@@ -88,7 +104,7 @@ public class TimeDAO {
             Time t = new Time();
             t.setId(rs.getInt("IDTIME"));
             t.setNome(rs.getString("NOME"));
-            t.setData_fundacao(rs.getString("DATA_FUNDACAO"));
+            t.setData_fundacao(rs.getDate("DATA_FUNDACAO"));
             t.setTecnico(rs.getString("TECNICO"));
             t.setPresidente(rs.getString("PRESIDENTE"));
             t.setLocal_fundacao(rs.getString("LOCAL_FUNDACAO"));
@@ -166,7 +182,7 @@ public class TimeDAO {
             PreparedStatement stmt = connection.prepareStatement(sql);
             
             stmt.setString(1, t.getNome());
-            stmt.setString(2, t.getData_fundacao());
+            stmt.setDate(2, t.getData_fundacao());
             stmt.setString(3, t.getTecnico());
             stmt.setString(4, t.getPresidente());
             stmt.setString(5, t.getLocal_fundacao());
@@ -193,7 +209,7 @@ public class TimeDAO {
         if(rs.next()){
             t.setId(rs.getInt("IDTIME"));
             t.setNome(rs.getString("NOME"));
-            t.setData_fundacao(rs.getString("DATA_FUNDACAO"));
+            t.setData_fundacao(rs.getDate("DATA_FUNDACAO"));
             t.setTecnico(rs.getString("TECNICO"));
             t.setPresidente(rs.getString("PRESIDENTE"));
             t.setLocal_fundacao(rs.getString("LOCAL_FUNDACAO"));

@@ -39,7 +39,7 @@ public class FiltroAdm implements Filter{
             chain.doFilter(req, res);
         }
         else{
-            response.sendRedirect("GerenciarCookies");
+            response.sendRedirect("Hub");
         }
     }
     

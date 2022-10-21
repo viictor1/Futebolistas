@@ -16,7 +16,7 @@ CREATE TABLE Times(
   idTime INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
                             (START WITH 1, INCREMENT BY 1),
   nome VARCHAR(45) NOT NULL,
-  data_fundacao VARCHAR(4) NOT NULL,
+  data_fundacao DATE NOT NULL,
   tecnico VARCHAR(45) NOT NULL,
   presidente VARCHAR(45) NOT NULL,
   local_fundacao VARCHAR(45) NOT NULL,

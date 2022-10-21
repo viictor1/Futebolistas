@@ -83,7 +83,7 @@ public class AlterarSenha extends HttpServlet {
                 Logger.getLogger(AlterarSenha.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        response.sendRedirect("GerenciarCookies");
+        response.sendRedirect("Hub");
     }
 
     /**

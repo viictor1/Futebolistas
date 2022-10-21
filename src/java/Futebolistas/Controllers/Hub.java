@@ -32,8 +32,8 @@ import java.util.logging.Logger;
  *
  * @author maluc
  */
-@WebServlet(name = "GerenciarCookies", urlPatterns = {"/GerenciarCookies"})
-public class GerenciarCookies extends HttpServlet {
+@WebServlet(name = "Hub", urlPatterns = {"/Hub"})
+public class Hub extends HttpServlet {
         ArrayList<Time> times = new ArrayList();
         ArrayList<Noticia> noticias = new ArrayList();
         ArrayList<CampeonatoAntigo> cas = new ArrayList();
@@ -82,14 +82,14 @@ public class GerenciarCookies extends HttpServlet {
             cas = modelca.selecionarTodos();
             jogadoras = modelj.selecionarTodos();
         } catch (SQLException ex) {
-           Logger.getLogger(GerenciarCookies.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(Hub.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         if (sessao != null && sessao.getAttribute("autenticado") != null) {
             u = (Usuario) sessao.getAttribute("autenticado"); // se tiver uma sessão aberta, é atribuida à sessão o usuario
             sessao.setAttribute("autenticado", u);
             loadlAll(sessao);
-            verificacaoOrigin(request.getParameter("origin"), request, response, sessao);
+            verificacaoOrigin(request.getParameter("/"), request, response, sessao);
         
         } else {
             Cookie[] cookies = request.getCookies();
@@ -101,12 +101,12 @@ public class GerenciarCookies extends HttpServlet {
                         try {
                             u = model.selectUsuariobyID(Integer.parseInt(cookie.getValue())); // pegando o usuário pelo id dele que está no valor do cookie
                         } catch (SQLException ex) {
-                            Logger.getLogger(GerenciarCookies.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(Hub.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         
                         sessao.setAttribute("autenticado", u); //se tiver um cookie de manter logado, é atribuida à sessão esse usuário
                         loadlAll(sessao);
-                        verificacaoOrigin(request.getParameter("origin"), request, response, sessao);
+                        verificacaoOrigin(request.getParameter("/"), request, response, sessao);
                         achouCookie = true; // declarando que o cookie foi achado
                         break;
                     }
@@ -116,7 +116,8 @@ public class GerenciarCookies extends HttpServlet {
         }
         if (achouCookie != true) { // se o cookie não for achado, ele é direcionado para a home sem o usuário, mas com os times
             loadlAll(sessao);
-            verificacaoOrigin(request.getParameter("origin"), request, response, sessao);
+            verificacaoOrigin(request.getParameter("/"), request, response, sessao);
+            return;
         }
         
     }
@@ -128,19 +129,19 @@ public class GerenciarCookies extends HttpServlet {
         sessao.setAttribute("jogadoras", jogadoras);
     }
     
-    public void verificacaoOrigin(String origin, HttpServletRequest request, HttpServletResponse response, HttpSession sessao) throws ServletException, IOException{
-        if("".equals(origin)){
+    public void verificacaoOrigin(String d, HttpServletRequest request, HttpServletResponse response, HttpSession sessao) throws ServletException, IOException{
+        if("".equals(d)){
                 request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
                 return;
-            } else if("Times".equals(origin)){
+            } else if("Times".equals(d)){
                     request.getRequestDispatcher("WEB-INF/times.jsp").forward(request, response);
                     return;
                 }
-            else if("Cadastro".equals(origin)){
+            else if("Cadastro".equals(d)){
                     request.setAttribute("cadastro", true);
                     request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
                     return;
-            } else if("Ca".equals(origin)){
+            } else if("Ca".equals(d)){
                  ArrayList<CampeonatoAntigo> campeonatos = (ArrayList<CampeonatoAntigo>) sessao.getAttribute("campeonatos");
                 TimeModel model = new TimeModel();
                 for (CampeonatoAntigo campeonato : campeonatos) {
@@ -154,7 +155,11 @@ public class GerenciarCookies extends HttpServlet {
                 }
                 request.getRequestDispatcher("WEB-INF/campeonato-antigo.jsp").forward(request, response);
                 return;
-            } else{
+            } else if("Torcidas".equals(d)){
+                request.getRequestDispatcher("WEB-INF/torcidas.jsp").forward(request, response);
+                return;
+            }
+            else{
                 request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
                 return;
             }

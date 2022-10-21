@@ -59,7 +59,7 @@ public class NoticiaCadastrar extends HttpServlet {
         NoticiaModel model = new NoticiaModel();
         try {
             model.add(n, img);
-            response.sendRedirect("GerenciarCookies");
+            response.sendRedirect("Hub");
         } catch (SQLException ex) {
             Logger.getLogger(NoticiaCadastrar.class.getName()).log(Level.SEVERE, null, ex);
             response.sendRedirect("NoticiaCadastrar");

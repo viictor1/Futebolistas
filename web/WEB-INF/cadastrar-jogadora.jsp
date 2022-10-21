@@ -11,38 +11,48 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Cadastrar Jogadoras</title>
-        
+        <script src="https://kit.fontawesome.com/46a2e52881.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <c:import url="header.jsp"></c:import> 
         
         <div class="pra-centralizar">
-            
-    <div class="box-cadastro">
-        <a href="MenuCadastro"> <i class="fa-solid fa-arrow-left"></i></a>
-      <div class="left-times">
-          
-      </div>
-      <div class="right-time">
-          <form class="" action="JogadoraCadastrar" method="post">         
-          <input type="text" name="nome" class="cadastro-time" placeholder="Nome">        
-          <input type="submit" name="" value="Cadastrar" class="btn-time">
-        </form>
-          
-          Apagar Jogadora
-          <form action="RemoverJogadora" method="post">
-            <select name="selectJ">
-                <c:forEach var="jogadora" items="${jogadoras}">
-                      <option value="${jogadora.id}">${jogadora.nome}</option>
-                </c:forEach>
-            </select> 
-              <br> <!<!-- apagar depois -->
-              <input type="submit" name="" value="Remover" class="btn-time">
-           </form>
-      </div>
-              
-    </div>
-        
-    </div>
+           <div class="estiquetas">
+                <a href="MenuCadastro"><i class="fa-solid fa-chevron-left j"></i></a>
+            </div> 
+            <div class="b-cadastro">
+                <div class="l-left">
+                    <span class="r">CADASTRO</span>
+                    <span class="r">E</span>
+                    <span class="r">REMOÇÃO</span>
+                    <span class="r">DE</span>
+                    <span class="r">JOGADORAS</span>
+                </div>
+                <div class="middle"></div>
+                <div class="r-right">
+                    <div class="form-this">
+                    <form action="JogadoraCadastrar" method="post">         
+                    <input type="text" name="nome" class="cadastro-j" placeholder="Nome">        
+                    <input type="submit" name="" value="Cadastrar" class="btn-j">
+                   </form>
+                    </div>
+                    <div class="form-this2">
+                    <span class="n">Apagar Jogadora</span>
+                    <form action="RemoverJogadora" method="post">
+                        <div class="custom-select">
+                          <select name="selectJ" class="select-jogadora">
+                            <c:forEach var="jogadora" items="${jogadoras}">
+                                  <option value="${jogadora.id}">${jogadora.nome}</option>
+                            </c:forEach>
+                        </select> 
+                        </div>                          
+                        <!-- apagar depois -->
+                        <input type="submit" name="" value="Remover" class="btn-j">  
+                        
+                     </form>
+                    </div>
+                </div>          
+            </div>   
+        </div>
     </body>
 </html>

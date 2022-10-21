@@ -52,7 +52,7 @@ public class UsuarioLogin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.sendRedirect("GerenciarCookies");
+        response.sendRedirect("Hub");
     }
 
     /**
@@ -87,7 +87,7 @@ public class UsuarioLogin extends HttpServlet {
 
                 }    
         }   
-            response.sendRedirect("GerenciarCookies");
+            response.sendRedirect("Hub");
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioLogin.class.getName()).log(Level.SEVERE, null, ex);
         }

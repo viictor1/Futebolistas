@@ -31,38 +31,39 @@
 
         <!-- Feed de notícias -->
     <div class="feed"><center>FEED</center></div>
+    
     <div class="body-feed">
     <section> 
       <div class="swiper mySwiper container">
         <div class="swiper-wrapper content">
             
         <c:forEach var="noticia" items="${noticias}">
-          <div class="swiper-slide cardf">
-            <div class="media-icons">        
-            </div>
-            <div class="decoration2"></div><div class="decoration3"></div>
+          <div class="swiper-slide cardf">         
+            
             <div class="card-content">
+                <div class="media-icons">
                 <c:if test="${autenticado.isAdministrador == true}">
                     <a href="RemoverNoticia?id=${noticia.id}"><i class="fa-solid fa-trash-can"></i></a>
                 </c:if>
+            </div>
+                
               <div class="img-feed">
-                <img src="MostrarImagem?id=${noticia.idArquivo}">
+                  <img src="MostrarImagem?id=${noticia.idArquivo}" height="220px">
               </div>
               <div class="titulo">
                 <span class="name">${noticia.titulo}</span>
-              </div>
-              <div class="legenda">
-                <span class="legenda-noticia">${noticia.texto}</span>
+                <a href="Noticia?id=${noticia.id}"><span class="mais">Ler Mais</span></a>
               </div>
             </div>
           </div>          
         </c:forEach>
       </div>
-      <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-pagination"></div>
       </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
     </section>
+    </div>
       <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
       
       <script>

@@ -19,14 +19,13 @@
     <body>
         <c:import url="header.jsp"></c:import>
         <div class="pra-centralizar">
-            
+        <div class="estiquetas">
+                <a href="Hub"><i class="fa-solid fa-xmark j"></i></a>
+            </div>
          <div class="both">
-             <a href="GerenciarCookies"><i class="fa-solid fa-xmark"></i></a>
       <div class="left">
-        <span class="r">CADASTRO</span>
-        <span class="r">TIME</span>
-        <span class="r">E</span>
-        <span class="r">JOGADORAS</span>
+        <span class="r">MENU</span>
+        <span class="r">ADM</span>
       </div>
       <div class="middle"></div>
       
@@ -35,11 +34,11 @@
         <a href="CadastrarTimes?idAlterar=${idAlterar}" class="am">TIME
           <i class="fa-solid fa-screwdriver-wrench"></i>
         </a>
-        <a href="JogadoraCadastrar" class="am">JOGADORAS
-        <i class="fa-solid fa-screwdriver-wrench"></i></a>
         <a href="NoticiaCadastrar" class="am">NOTÍCIAS
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
-        <a href="GerenciarCookies?origin=Cadastro" class="am">USUÁRIOS
+        <a href="JogadoraCadastrar" class="am">JOGADORAS
+        <i class="fa-solid fa-screwdriver-wrench"></i></a>
+        <a href="Hub?/=Cadastro" class="am">USUÁRIOS
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
         <a href="CampeonatoAntigoCadastrar" class="am">CAMPEONATOS ANTIGOS
         <i class="fa-solid fa-screwdriver-wrench"></i></a>

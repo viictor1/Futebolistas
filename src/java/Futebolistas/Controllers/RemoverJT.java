@@ -4,30 +4,25 @@
  */
 package Futebolistas.Controllers;
 
-import Futebolistas.Enteties.Jogadora;
-import Futebolistas.Enteties.Jogadora_Time;
-import Futebolistas.Enteties.Time;
-import Futebolistas.Model.JogadoraModel;
 import Futebolistas.Model.Jogadora_TimeModel;
-import Futebolistas.Model.TimeModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 /**
  *
- * @author victo
+ * @author maluc
  */
-@WebServlet(name = "SaibaMaisTime", urlPatterns = {"/SaibaMaisTime"})
-public class SaibaMaisTime extends HttpServlet {
+@WebServlet(name = "RemoverJT", urlPatterns = {"/RemoverJT"})
+public class RemoverJT extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -57,28 +52,16 @@ public class SaibaMaisTime extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-        int id;
-        id = Integer.parseInt(request.getParameter("id")); //id do time
-        TimeModel model = new TimeModel();
-        Jogadora_TimeModel modeljt = new Jogadora_TimeModel();
-        JogadoraModel modelJ = new JogadoraModel();
-        ArrayList<Jogadora_Time> jogadoras = new ArrayList();
+        int id = Integer.parseInt(request.getParameter("id"));
+        Jogadora_TimeModel model = new Jogadora_TimeModel();
+        int id_time = 0;
         try {
-            Time t = model.getTimeByID(id);
-            request.setAttribute("time", t);
-            ArrayList<Jogadora_Time> jogadorasT = modeljt.selectJogadoras(id);
-            
-            for(Jogadora_Time jogadora: jogadorasT){
-                Jogadora j = modelJ.getJogadoraByID(jogadora.getId_jogadora());   
-                jogadora.setNome(j.getNome());
-            }
-            request.setAttribute("jogadorasT", jogadorasT);
-            request.getRequestDispatcher("WEB-INF/saibaMaisTime.jsp").forward(request, response);
+            id_time = model.getJTByID(id).getId_time();
+            model.removerPorIDJ(id);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-            response.sendRedirect("Hub?/=Times");
         }
-        
+        response.sendRedirect("SaibaMaisTime?id=" + id_time);
     }
 
     /**

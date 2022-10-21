@@ -12,8 +12,16 @@ import java.sql.Date;
  */
 public class Jogadora_Time {
     int id, id_time, id_jogadora, numero_atual;
-    String posicao;
+    String posicao, nome;
     Date data_inicio, data_fim;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     public Jogadora_Time() {
     }

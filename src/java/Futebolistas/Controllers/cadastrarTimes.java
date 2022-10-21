@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,7 +67,7 @@ public class CadastrarTimes extends HttpServlet {
             try {
                 t = model.getTimeByID(Integer.parseInt(request.getParameter("idAlterar")));
             } catch (SQLException ex) {
-                Logger.getLogger(CadastrarTimes.class.getName()).log(Level.SEVERE, null, ex);
+                response.sendRedirect("Hub?/=Times");
             }
             request.setAttribute("alterar", t);
         }
@@ -88,7 +89,8 @@ public class CadastrarTimes extends HttpServlet {
         processRequest(request, response);
         request.setCharacterEncoding("UTF-8");
         
-        String nome, data_fundacao, tecnico, presidente, local_fundacao;
+        String nome, tecnico, presidente, local_fundacao;
+        Date data_fundacao;
         int id;
         
         if("".equals(request.getParameter("id"))){
@@ -99,7 +101,7 @@ public class CadastrarTimes extends HttpServlet {
         }
      
         nome = request.getParameter("nome");
-        data_fundacao = request.getParameter("data");
+        data_fundacao = Date.valueOf(request.getParameter("data"));
         tecnico = request.getParameter("tecnico");
         presidente = request.getParameter("presidente");
         local_fundacao = request.getParameter("local");
@@ -149,10 +151,10 @@ public class CadastrarTimes extends HttpServlet {
             try {
                 model.atualizarTime(time, id, img);
             } catch (SQLException ex) {
-                response.sendRedirect("GerenciarCookies?origin=Times");
+                response.sendRedirect("Hub?/=Times");
             }
         }   
-        response.sendRedirect("GerenciarCookies?origin=Times");       
+        response.sendRedirect("Hub?/=Times");       
     }
 
     /**

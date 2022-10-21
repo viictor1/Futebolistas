@@ -37,4 +37,9 @@ public class NoticiaModel {
         NoticiaDAO dao = new NoticiaDAO();
         return dao.selecionarTodos();
     }
+    
+    public Noticia selectNoticiaByID(int id) throws SQLException{
+        NoticiaDAO dao = new NoticiaDAO();
+        return dao.getNoticiaByID(id);
+    }
 }

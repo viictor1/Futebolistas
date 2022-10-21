@@ -123,17 +123,40 @@ public class UsuarioDAO {
         connection.close();
     }
     
-    public void alterarTime(int id, int id_time) throws SQLException{
-        String sql = "UPDATE USUARIOS SET IDTIME = ? WHERE ID = ?";
+    public void alterarTime(int id, int id_time, int id_antigo) throws SQLException{
         Connection connection = new ConnectionFactory().getConnection();
-        PreparedStatement stmt = connection.prepareStatement(sql);
+        String sql = "";      
+        try {
+            if(id_time == 0){
+                sql = "UPDATE USUARIOS SET IDTIME = NULL WHERE ID = ?";
+                PreparedStatement stmt = connection.prepareStatement(sql);
+                stmt.setInt(1, id);
+                stmt.execute();
+                stmt.close();
+            }else{
+                sql = "UPDATE USUARIOS SET IDTIME = ? WHERE ID = ?";
+                PreparedStatement stmt = connection.prepareStatement(sql);
+                stmt.setInt(1, id_time);
+                stmt.setInt(2, id);
+                stmt.execute();
+                stmt.close();
+
+            }      
+            TimeDAO dao = new TimeDAO();           
+            if(id_antigo != 0 && dao.getNumTorcedores(id_antigo) > 0){
+            dao.alterarTorcedores(id_antigo, -1);
+            }   
+            dao.alterarTorcedores(id_time, 1);
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            connection.rollback();
+        } finally {
+            connection.close();
+        }
         
-        stmt.setInt(1, id_time);
-        stmt.setInt(2, id);
         
-        stmt.execute();
-        stmt.close();
-        connection.close();
+        
     }
     
     public void removerTorcedores(int id) throws SQLException{ //remover todos os torcedores quando apagar time

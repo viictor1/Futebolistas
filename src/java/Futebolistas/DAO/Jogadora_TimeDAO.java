@@ -40,8 +40,46 @@ public class Jogadora_TimeDAO {
         }       
     }
     
+    public void removerPorIDJ(Jogadora_Time jt) throws SQLException{
+        String sql = "DELETE FROM JOGADORA_TIME WHERE ID_JOGADORA = ?";
+        JogadoraDAO dao = new JogadoraDAO();
+        Connection connection = new ConnectionFactory().getConnection();
+        try {
+            connection.setAutoCommit(false);
+            dao.alterarAtividade(jt.getId_jogadora(), false, connection);
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, jt.getId_jogadora());
+            stmt.execute();
+            stmt.close();         
+            connection.commit();
+        } catch (Exception e) {
+            connection.rollback();
+        } finally {
+            connection.close();
+        }           
+    }
+    
+    public void removerPorIDT(Jogadora_Time jt) throws SQLException{
+        String sql = "DELETE FROM JOGADORA_TIME WHERE ID_TIME = ?";
+        JogadoraDAO dao = new JogadoraDAO();
+        Connection connection = new ConnectionFactory().getConnection();
+        try {
+            connection.setAutoCommit(false);
+            dao.alterarAtividade(jt.getId_jogadora(), false, connection);
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, jt.getId_time());
+            stmt.execute();
+            stmt.close();         
+            connection.commit();
+        } catch (Exception e) {
+            connection.rollback();
+        } finally {
+            connection.close();
+        }           
+    }
+    
     public ArrayList<Jogadora_Time> selectAtuais(int id) throws SQLException{
-        String sql = "SELECT ID, ID_TIME, ID_JOGADORA, DATA_INICIO, DATA_FIM, NUMERO_ATUAL, POSICAO FROM JOGADORA_TIME WHERE ID_TIME = ?";
+        String sql = "SELECT ID, ID_TIME, ID_JOGADORA, DATA_INICIO, DATA_FIM, NUMERO_ATUAL, POSICAO FROM JOGADORA_TIME WHERE ID_TIME = ? AND DATA_FIM IS NULL";
         ArrayList<Jogadora_Time> retorno = new ArrayList();
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
@@ -52,6 +90,7 @@ public class Jogadora_TimeDAO {
             Jogadora_Time jt = new Jogadora_Time();
             jt.setId(rs.getInt("ID"));
             jt.setId_time(rs.getInt("ID_TIME"));
+            jt.setId_jogadora(rs.getInt("ID_JOGADORA"));
             jt.setData_inicio(rs.getDate("DATA_INICIO"));
             jt.setData_fim(rs.getDate("DATA_FIM"));
             jt.setPosicao(rs.getString("POSICAO"));
@@ -61,6 +100,29 @@ public class Jogadora_TimeDAO {
         stmt.close();
         connection.close();
         return retorno;   
+    }
+    
+    public Jogadora_Time getJTByID(int id) throws SQLException{
+        String sql = "SELECT ID, ID_TIME, ID_JOGADORA, DATA_INICIO, DATA_FIM, NUMERO_ATUAL, POSICAO FROM JOGADORA_TIME WHERE ID = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, id);
+        
+        ResultSet rs = stmt.executeQuery();
+        Jogadora_Time jt = new Jogadora_Time();
+        while(rs.next()){
+            jt.setId(rs.getInt("ID"));
+            jt.setId_time(rs.getInt("ID_TIME"));
+            jt.setId_jogadora(rs.getInt("ID_JOGADORA"));
+            jt.setData_inicio(rs.getDate("DATA_INICIO"));
+            jt.setData_fim(rs.getDate("DATA_FIM"));
+            jt.setPosicao(rs.getString("POSICAO"));
+            jt.setNumero_atual(rs.getInt("NUMERO_ATUAL"));
+
+        }
+        stmt.close();
+        connection.close();
+        return jt;   
     }
     
 

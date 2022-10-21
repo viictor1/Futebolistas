@@ -4,15 +4,18 @@
  */
 package Futebolistas.Enteties;
 
+import java.sql.Date;
+
 /**
  *
  * @author maluc
  */
 public class Time {
-    private String nome, data_fundacao, tecnico, presidente, local_fundacao;
+    private String nome, tecnico, presidente, local_fundacao;
     private int id, titulos, num_torcedores, idArquivo;
+    private Date data_fundacao;
 
-    public Time(String nome, String data_fundacao, String tecnico, String presidente, String local_fundacao) {
+    public Time(String nome, Date data_fundacao, String tecnico, String presidente, String local_fundacao) {
         this.nome = nome;
         this.data_fundacao = data_fundacao;
         this.tecnico = tecnico;
@@ -56,11 +59,11 @@ public class Time {
         this.nome = nome;
     }
 
-    public String getData_fundacao() {
+    public Date getData_fundacao() {
         return data_fundacao;
     }
 
-    public void setData_fundacao(String data_fundacao) {
+    public void setData_fundacao(Date data_fundacao) {
         this.data_fundacao = data_fundacao;
     }
 

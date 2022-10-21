@@ -35,7 +35,16 @@ public class Jogadora_TimeServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
+        
+        if(request.getParameter("id") != null){
+            Jogadora_TimeModel model = new Jogadora_TimeModel();
+            Jogadora_Time jt = null;
+            jt = model.getJTByID(Integer.parseInt(request.getParameter("id")));
+            request.setAttribute("jt", jt);
+            request.getRequestDispatcher("WEB-INF/jogadora_time.jsp").forward(request, response);
+        }
+        request.setAttribute("id_time", request.getParameter("id_time"));
         response.setContentType("text/html;charset=UTF-8");
     }
 
@@ -51,7 +60,13 @@ public class Jogadora_TimeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Jogadora_TimeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        request.getRequestDispatcher("WEB-INF/jogadora_time.jsp").forward(request, response);
     }
 
     /**
@@ -65,14 +80,23 @@ public class Jogadora_TimeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Jogadora_TimeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        int id_time, id_jogadora, numero;
+        int id_time = 0, id_jogadora, numero;
         String posicao;
         Date data_inicio;     
         
         id_time = Integer.parseInt(request.getParameter("id_time"));
-        id_jogadora = Integer.parseInt(request.getParameter("selectJ"));
+        if("".equals(request.getParameter("selectJ")) || request.getParameter("selectJ") == null){
+            id_jogadora = 0;
+        }
+        else{
+            id_jogadora = Integer.parseInt(request.getParameter("selectJ"));
+        }
         numero = Integer.parseInt(request.getParameter("numero"));
         data_inicio = Date.valueOf(request.getParameter("data_inicio"));
         posicao = request.getParameter("posicao");
@@ -87,11 +111,10 @@ public class Jogadora_TimeServlet extends HttpServlet {
         Jogadora_TimeModel model = new Jogadora_TimeModel();
         try {
             model.add(jt);
-            response.sendRedirect("GerenciarCookies?origin=Times");
         } catch (SQLException ex) {
-            Logger.getLogger(Jogadora_TimeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
-        
+        response.sendRedirect("SaibaMaisTime?id=" + id_time);
     }
 
     /**

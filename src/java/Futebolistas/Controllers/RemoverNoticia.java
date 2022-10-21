@@ -53,6 +53,7 @@ public class RemoverNoticia extends HttpServlet {
         processRequest(request, response);
         
         int id = Integer.parseInt(request.getParameter("id"));
+        System.out.println("oiioi");
         NoticiaModel model = new NoticiaModel();
         try {
             model.remover(id);
@@ -60,7 +61,7 @@ public class RemoverNoticia extends HttpServlet {
             Logger.getLogger(RemoverNoticia.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        response.sendRedirect("GerenciarCookies");
+        response.sendRedirect("Hub");
     }
 
     /**
