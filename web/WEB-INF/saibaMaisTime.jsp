@@ -23,7 +23,7 @@
             <div class="estiquetas">
                 <a href="Hub?/=Times"><i class="fa-solid fa-chevron-left"></i></a>
                 <c:if test="${autenticado.isAdministrador == true}">
-                    <a href="Jogadora_TimeServlet?id_time=${time.id}"><i class="fa-solid fa-pencil fa-2"><span class="cje">Cadastrar Jogadoras</span></i></a>
+                    <a href="Jogadora_TimeServlet?id=${time.id}"><i class="fa-solid fa-pencil fa-2"><span class="cje">Cadastrar Jogadoras</span></i></a>
                 </c:if>
             </div>
             <div class="bonitinha">
@@ -46,7 +46,7 @@
                         <td>${jogadora.data_inicio}</td>
                         <td>${jogadora.numero_atual}</td>
                         <c:if test="${autenticado.isAdministrador == true}">
-                            <td><a href="Jogadora_TimeServlet?id=${jogadora.id}&id=${jogadora.id_time}"><i class="fa-solid fa-pencil"></i></a></td>
+                            <td><a href="Jogadora_TimeServlet?id_jogadora=${jogadora.id}&id=${jogadora.id_time}"><i class="fa-solid fa-pencil"></i></a></td>
                             <td><a href="RemoverJT?id=${jogadora.id}"><i class="fa-solid fa-trash-can"></a></i></td>
                         </c:if>                     
                         </tr>
@@ -82,22 +82,6 @@
             </div>
         
         </div>
-                    <!-- comment 
-        Contratar Jogadora
-        <form action="Jogadora_TimeServlet" method="post">
-            <select name="selectJ">
-                <c:forEach var="jogadora" items="${jogadoras}">
-                      <option value="${jogadora.id}">${jogadora.nome}</option>
-                </c:forEach>
-           </select> 
-            Data de inicio: <input type="date" name="data_inicio" class="cadastro-time">
-            Número: <input type="number" name="numero" class="cadastro-time">
-            Posição: <input type="text" name="posicao" class="cadastro-time">
-            <input type="hidden" value="${time.id}" name="id_time">
-            <input type="submit" name="" value="Contratar" class="btn-time">
-        </form>
-            
-            <br>
-            --> 
+
     </body>
 </html>

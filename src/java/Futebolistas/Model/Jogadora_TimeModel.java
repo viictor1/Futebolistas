@@ -38,4 +38,9 @@ public class Jogadora_TimeModel {
         return dao.selectAtuais(id);
     }
     
+    public void editar(Jogadora_Time jt) throws SQLException{
+        Jogadora_TimeDAO dao = new Jogadora_TimeDAO();
+        dao.editar(jt);
+    }
+    
 }

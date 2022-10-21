@@ -36,16 +36,8 @@ public class Jogadora_TimeServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        
-        if(request.getParameter("id") != null){
-            Jogadora_TimeModel model = new Jogadora_TimeModel();
-            Jogadora_Time jt = null;
-            jt = model.getJTByID(Integer.parseInt(request.getParameter("id")));
-            request.setAttribute("jt", jt);
-            request.getRequestDispatcher("WEB-INF/jogadora_time.jsp").forward(request, response);
-        }
-        request.setAttribute("id_time", request.getParameter("id_time"));
         response.setContentType("text/html;charset=UTF-8");
+ 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -60,13 +52,22 @@ public class Jogadora_TimeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
+        try {   
+            processRequest(request, response); 
+            if("".equals(request.getParameter("id_jogadora")) || request.getParameter("id_jogadora") == null){ // alterar jogadora      
+            }else{
+                Jogadora_TimeModel model = new Jogadora_TimeModel();
+                Jogadora_Time jt = null;
+                jt = model.getJTByID(Integer.parseInt(request.getParameter("id_jogadora")));
+                request.setAttribute("jt", jt);
+            }
+            request.setAttribute("id", request.getParameter("id"));
+            request.getRequestDispatcher("WEB-INF/jogadora_time.jsp").forward(request, response);
+            
+         } catch (SQLException ex) {
             Logger.getLogger(Jogadora_TimeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        request.getRequestDispatcher("WEB-INF/jogadora_time.jsp").forward(request, response);
     }
 
     /**
@@ -77,44 +78,65 @@ public class Jogadora_TimeServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
+   @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(Jogadora_TimeServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+            processRequest(request, response);     
         int id_time = 0, id_jogadora, numero;
         String posicao;
-        Date data_inicio;     
+        Date data_inicio, data_fim;    
         
-        id_time = Integer.parseInt(request.getParameter("id_time"));
+        id_time = Integer.parseInt(request.getParameter("id"));
         if("".equals(request.getParameter("selectJ")) || request.getParameter("selectJ") == null){
             id_jogadora = 0;
         }
         else{
             id_jogadora = Integer.parseInt(request.getParameter("selectJ"));
         }
-        numero = Integer.parseInt(request.getParameter("numero"));
-        data_inicio = Date.valueOf(request.getParameter("data_inicio"));
+        
+        numero = Integer.parseInt(request.getParameter("numero")); 
         posicao = request.getParameter("posicao");
         
         Jogadora_Time jt = new Jogadora_Time();
+        if("".equals(request.getParameter("alterando")) || request.getParameter("alterando") == null){
+            data_inicio = Date.valueOf(request.getParameter("data_inicio")); //cadastrando nova
+            jt.setData_inicio(data_inicio);
+        }    
+        else{    
+            if("".equals(request.getParameter("data_fim"))){ //alterando
+                data_fim = null;
+            } 
+            else{
+                data_fim = Date.valueOf(request.getParameter("data_fim"));
+            }
+            id_jogadora = Integer.parseInt(request.getParameter("id_jogadora"));
+            jt.setData_fim(data_fim);
+        }
         jt.setId_time(id_time);
         jt.setId_jogadora(id_jogadora);
         jt.setPosicao(posicao);
-        jt.setData_inicio(data_inicio);
+        
         jt.setNumero_atual(numero);
+        
         
         Jogadora_TimeModel model = new Jogadora_TimeModel();
         try {
-            model.add(jt);
+            if("".equals(request.getParameter("alterando")) || request.getParameter("alterando") == null){ 
+                model.add(jt);
+            }
+            else{
+                jt.setId(Integer.parseInt(request.getParameter("alterando")));
+                model.editar(jt);
+            }  
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         response.sendRedirect("SaibaMaisTime?id=" + id_time);
+        
+         } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     /**

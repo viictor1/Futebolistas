@@ -62,7 +62,6 @@ public class SaibaMaisTime extends HttpServlet {
         TimeModel model = new TimeModel();
         Jogadora_TimeModel modeljt = new Jogadora_TimeModel();
         JogadoraModel modelJ = new JogadoraModel();
-        ArrayList<Jogadora_Time> jogadoras = new ArrayList();
         try {
             Time t = model.getTimeByID(id);
             request.setAttribute("time", t);

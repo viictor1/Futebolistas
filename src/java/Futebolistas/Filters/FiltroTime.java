@@ -20,7 +20,7 @@ import java.sql.SQLException;
  *
  * @author maluc
  */
-@WebFilter(filterName = "FiltroTime", servletNames = {"SaibaMaisTime"})
+@WebFilter(filterName = "FiltroTime", servletNames = {"SaibaMaisTime", "Jogadora_TimeServlet"})
 public class FiltroTime implements Filter{
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
@@ -29,7 +29,10 @@ public class FiltroTime implements Filter{
         
         int id = 0;
         TimeModel model = new TimeModel();
-        if(!"".equals(request.getParameter("id_time")) || request.getParameter("id") != null){
+        if("".equals(request.getParameter("id")) || request.getParameter("id") == null){    
+            response.sendRedirect("Hub");
+        }   
+        else{
             id = Integer.parseInt(req.getParameter("id"));
             try {
                 if(!"".equals(model.getTimeByID(id).getNome()) && model.getTimeByID(id).getNome() != null){
@@ -41,9 +44,6 @@ public class FiltroTime implements Filter{
             } catch (SQLException ex) {
                 response.sendRedirect("Hub");
             }
-        }
-        else{
-            response.sendRedirect("Hub");
         }
     
     }

@@ -135,7 +135,7 @@
     <div class="option"><center><a onclick="validarRemover()">Apagar conta</a></center></div>
     <div class="modal-line"></div>
     <c:if test="${autenticado.isAdministrador == true}"> <!-- se o usuário logado for um adm, ele poderá cadastrar novos times, noticias, usuarios, jogadoras, campeonatos antigos -->
-        <a href="MenuCadastro"><div class="option"><center>Cadastrar</center></div></a>
+        <a href="MenuCadastro"><div class="option"><center>Menu ADM</center></div></a>
         <div class="modal-line"></div>
         </c:if>
     <div class="option"><center><a onclick="validarSair()"">Sair</a></center></div> <!--Aq é pra logout-->

@@ -125,5 +125,31 @@ public class Jogadora_TimeDAO {
         return jt;   
     }
     
+    public void editar(Jogadora_Time jt) throws SQLException{
+        String sql = "UPDATE JOGADORA_TIME SET DATA_FIM = ?, NUMERO_ATUAL = ?, POSICAO = ? WHERE ID = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        try {
+            connection.setAutoCommit(false);
+            stmt.setDate(1, jt.getData_fim());
+            stmt.setInt(2, jt.getNumero_atual());
+            stmt.setString(3, jt.getPosicao());
+            stmt.setInt(4, jt.getId());
+            stmt.execute();
+            stmt.close();
+            if(jt.getData_fim() != null){
+                JogadoraDAO dao = new JogadoraDAO();
+                dao.alterarAtividade(jt.getId_jogadora(), false, connection);
+            }
+            connection.commit();
+        } catch (Exception e) {
+            connection.rollback();
+        } finally {
+            connection.close();
+        }
+        
+        
+        
+    }
 
 }

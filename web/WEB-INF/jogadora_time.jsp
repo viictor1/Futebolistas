@@ -19,13 +19,18 @@
         
         <div class="pra-centralizar">
             <div class="estiquetas">
-                <a href="SaibaMaisTime?id=${id_time}"><i class="fa-solid fa-chevron-left j"></i></a>
+                <a href="SaibaMaisTime?id=${id}"><i class="fa-solid fa-chevron-left j"></i></a>
             </div>
             <div class="b-cadastro">
                 <div class="l-left">
                     <span class="r">MENU</span>
                     <span class="r">PARA</span>
-                    <span class="r">CADASTRO</span>
+                    <c:if test="${jt.posicao != null}">
+                        <span class="r">ALTERAÇÃO</span>
+                    </c:if>
+                    <c:if test="${jt.posicao == null}">
+                        <span class="r">CADASTRO</span>
+                    </c:if>
                     <span class="r">DE</span>
                     <span class="r">JOGADORAS</span>
                 </div> 
@@ -34,13 +39,15 @@
                     <form action="Jogadora_TimeServlet" method="post">
                     <c:if test="${jt.posicao != null}">
                         <span class="r-little">Data de Fim:</span> <input type="date" name="data_fim" class="cadastro-j">
+                        <input type="hidden" value="${jt.id}" name="alterando"> <!-- Para verificar se está alterando ou cadastrando -->
+                        <input type="hidden" value="${jt.id_jogadora}" name="id_jogadora">
                     </c:if>
                     <c:if test="${jt.posicao == null}">
                         <span class="r-little">Data de inicio:</span> <input type="date" name="data_inicio" class="cadastro-j">
                     </c:if>
-                    <span class="r-little">Número:</span> <input type="number" name="numero" class="cadastro-j">
+                        <span class="r-little">Número:</span> <input type="number" name="numero" class="cadastro-j" value="${jt.numero_atual}">
                     <span class="r-little">Posição:</span> <input type="text" name="posicao" class="cadastro-j" value="${jt.posicao}">
-                    <input type="hidden" value="${id_time}" name="id_time">
+                    <input type="hidden" value="${id}" name="id">
                     <div class="custom-select"> 
                     <c:if test="${jt.posicao == null}">
                     <select name="selectJ" class="select-jogadora">
@@ -55,19 +62,5 @@
                 </div>
             </div>
         </div>
-        <!-- comment      
-        <form action="Jogadora_TimeServlet" method="post">
-            <select name="selectJ">
-                <c:forEach var="jogadora" items="${jogadoras}">
-                      <option value="${jogadora.id}">${jogadora.nome}</option>
-                </c:forEach>
-           </select> 
-            Data de inicio: <input type="date" name="data_inicio" class="cadastro-time">
-            Número: <input type="number" name="numero" class="cadastro-time">
-            Posição: <input type="text" name="posicao" class="cadastro-time">
-            <input type="hidden" value="${time.id}" name="id_time">
-            <input type="submit" name="" value="Contratar" class="btn-time">
-        </form>
-             -->  
     </body>
 </html>
