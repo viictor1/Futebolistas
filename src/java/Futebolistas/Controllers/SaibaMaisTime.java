@@ -75,7 +75,7 @@ public class SaibaMaisTime extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/saibaMaisTime.jsp").forward(request, response);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-            response.sendRedirect("Hub?/=Times");
+            response.sendRedirect("Times");
         }
         
     }

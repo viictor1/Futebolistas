@@ -47,7 +47,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <a href="TorcerTime?idTime=${time.id}"><button class="torcer">Torcer</button></a>
               </c:if>  
             <c:if test="${autenticado != null && autenticado.time == time.id}">
-            <a href="TorcerTime?idTime=0"><button class="torcer">Deixar de Torcer</button></a>
+            <a href="TorcerTime?idTime=0"><button class="torcer">Torcer X</button></a>
           </c:if> 
             </div>
           </div>

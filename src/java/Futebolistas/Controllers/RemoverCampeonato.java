@@ -4,14 +4,14 @@
  */
 package Futebolistas.Controllers;
 
-import Futebolistas.Enteties.CampeonatoAntigo;
-import Futebolistas.Model.CampeonatoAntigoModel;
+import Futebolistas.Model.CampeonatoModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,8 +21,8 @@ import java.util.logging.Logger;
  *
  * @author victo
  */
-@WebServlet(name = "CampeonatoAntigoCadastrar", urlPatterns = {"/CampeonatoAntigoCadastrar"})
-public class CampeonatoAntigoCadastrar extends HttpServlet {
+@WebServlet(name = "RemoverCampeonato", urlPatterns = {"/RemoverCampeonato"})
+public class RemoverCampeonato extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,6 +36,7 @@ public class CampeonatoAntigoCadastrar extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -52,7 +53,14 @@ public class CampeonatoAntigoCadastrar extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-        request.getRequestDispatcher("WEB-INF/cadastrar-campeonato-antigo.jsp").forward(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        CampeonatoModel model = new CampeonatoModel();
+        try {
+            model.remover(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(RemoverCampeonato.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        response.sendRedirect("Campeonatos");
     }
 
     /**
@@ -67,23 +75,6 @@ public class CampeonatoAntigoCadastrar extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
-        int ano, vencedor;
-        
-        ano = Integer.parseInt(request.getParameter("ano"));
-        vencedor = Integer.parseInt(request.getParameter("selectTime"));
-        CampeonatoAntigo ca = new CampeonatoAntigo();
-        ca.setAno(ano);
-        ca.setVencedor(vencedor);
-        
-        CampeonatoAntigoModel model = new CampeonatoAntigoModel();
-        try {
-            model.add(ca);
-        } catch (SQLException ex) {
-            response.sendRedirect("CampeonatoAntigoCadastrar");
-        }
-        
-        response.sendRedirect("Hub?/=Ca");
     }
 
     /**

@@ -4,6 +4,7 @@
  */
 package Futebolistas.Controllers;
 
+import Futebolistas.Enteties.Campeonato;
 import Futebolistas.Enteties.Time;
 import Futebolistas.Model.TimeModel;
 import jakarta.servlet.ServletException;
@@ -12,18 +13,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
- * @author maluc
+ * @author victo
  */
-@WebServlet(name = "MenuCadastro", urlPatterns = {"/MenuCadastro"})
-public class MenuCadastro extends HttpServlet {
+@WebServlet(name = "Campeonatos", urlPatterns = {"/Campeonatos"})
+public class Campeonatos extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,8 +37,8 @@ public class MenuCadastro extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-
-        request.getRequestDispatcher("WEB-INF/menuCadastro.jsp").forward(request, response);
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -53,11 +53,25 @@ public class MenuCadastro extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
+        Hub hub = new Hub();
         try {
-            processRequest(request, response);
+            hub.loadlAll(request.getSession());
+            ArrayList<Campeonato> campeonatos = (ArrayList<Campeonato>) request.getSession().getAttribute("campeonatos");
+                TimeModel model = new TimeModel();
+                for (Campeonato campeonato : campeonatos) {
+                    Time t = null;
+                    try {
+                        t = model.getTimeByID(campeonato.getVencedor()); // atribuindo o nome do time vencedor ao campeonato, nao está na dao pq o nome pode ser alterado
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Campeonatos.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    campeonato.setNome(t.getNome());
+                }
         } catch (SQLException ex) {
-            Logger.getLogger(MenuCadastro.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
+        request.getRequestDispatcher("WEB-INF/campeonato-antigo.jsp").forward(request, response);
     }
 
     /**
@@ -74,7 +88,7 @@ public class MenuCadastro extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(MenuCadastro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Campeonatos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

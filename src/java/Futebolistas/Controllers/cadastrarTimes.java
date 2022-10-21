@@ -67,7 +67,7 @@ public class CadastrarTimes extends HttpServlet {
             try {
                 t = model.getTimeByID(Integer.parseInt(request.getParameter("idAlterar")));
             } catch (SQLException ex) {
-                response.sendRedirect("Hub?/=Times");
+                response.sendRedirect("Times");
             }
             request.setAttribute("alterar", t);
         }
@@ -151,10 +151,10 @@ public class CadastrarTimes extends HttpServlet {
             try {
                 model.atualizarTime(time, id, img);
             } catch (SQLException ex) {
-                response.sendRedirect("Hub?/=Times");
+                response.sendRedirect("Times");
             }
         }   
-        response.sendRedirect("Hub?/=Times");       
+        response.sendRedirect("Times");       
     }
 
     /**

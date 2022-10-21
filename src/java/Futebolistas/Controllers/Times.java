@@ -53,6 +53,12 @@ public class Times extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
+        Hub hub = new Hub();
+        try {
+            hub.loadlAll(request.getSession());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
         request.getRequestDispatcher("WEB-INF/times.jsp").forward(request, response);
     }
 

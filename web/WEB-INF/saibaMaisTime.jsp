@@ -21,7 +21,7 @@
         
         <div class="pra-centralizar">
             <div class="estiquetas">
-                <a href="Hub?/=Times"><i class="fa-solid fa-chevron-left"></i></a>
+                <a href="Times"><i class="fa-solid fa-chevron-left"></i></a>
                 <c:if test="${autenticado.isAdministrador == true}">
                     <a href="Jogadora_TimeServlet?id=${time.id}"><i class="fa-solid fa-pencil fa-2"><span class="cje">Cadastrar Jogadoras</span></i></a>
                 </c:if>
@@ -58,7 +58,12 @@
                 </div>
                 <div class="c1">
                     <div class="cont-img">
-                    <div class="card-x">
+                        <div class="card-x">
+                            <style>
+                                .cont-img .card-x:after{
+                                    content: '${time.nome}';
+                                }
+                            </style>
                     <div class="imgBx">
                         <img src="MostrarImagem?id=${time.idArquivo}">
                     </div>

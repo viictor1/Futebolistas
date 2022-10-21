@@ -1114,7 +1114,6 @@ cursor: pointer;
 }
 
 .cont-img .card-x:after{
-  content: 'Vasco';
   position: absolute;
   top: 30%;
   left: -20%;

@@ -1,7 +1,7 @@
 package Futebolistas.DAO;
 
 import Futebolistas.Connections.ConnectionFactory;
-import Futebolistas.Enteties.CampeonatoAntigo;
+import Futebolistas.Enteties.Campeonato;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,10 +12,10 @@ import java.util.ArrayList;
  *
  * @author victo
  */
-public class CampeonatoAntigoDAO{
+public class CampeonatoDAO{
     
-    public void add (CampeonatoAntigo ca) throws SQLException {
-        String sql = "INSERT INTO CAMPEONATOANTIGO (ANO, VENCEDOR) VALUES (?,?)";
+    public void add (Campeonato ca) throws SQLException {
+        String sql = "INSERT INTO CAMPEONATO (ANO, VENCEDOR) VALUES (?,?)";
         Connection connection = new ConnectionFactory().getConnection();
         try {
             connection.setAutoCommit(false);
@@ -37,8 +37,8 @@ public class CampeonatoAntigoDAO{
         
     }
     
-    public void remover(CampeonatoAntigo ca) throws SQLException{
-        String sql = "DELETE FROM CAMPEONATOANTIGO WHERE ID = ?";
+    public void remover(Campeonato ca) throws SQLException{
+        String sql = "DELETE FROM CAMPEONATO WHERE ID = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         try {
@@ -60,7 +60,7 @@ public class CampeonatoAntigoDAO{
     }
     
     public void removerTodosDoVencedor(int id) throws SQLException{
-        String sql = "DELETE FROM CAMPEONATOANTIGO WHERE VENCEDOR = ?";
+        String sql = "DELETE FROM CAMPEONATO WHERE VENCEDOR = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, id);
@@ -69,14 +69,14 @@ public class CampeonatoAntigoDAO{
         connection.close();
     }
     
-    public CampeonatoAntigo selectCabyID(int id) throws SQLException{
-        String sql = "SELECT ID, ANO, VENCEDOR FROM CAMPEONATOANTIGO WHERE ID = ?";
+    public Campeonato selectCabyID(int id) throws SQLException{
+        String sql = "SELECT ID, ANO, VENCEDOR FROM CAMPEONATO WHERE ID = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, id);    
         ResultSet rs = stmt.executeQuery();
         
-        CampeonatoAntigo ca = new CampeonatoAntigo();
+        Campeonato ca = new Campeonato();
         if(rs.next()){
             ca.setId(rs.getInt("ID"));
             ca.setAno(rs.getInt("ANO"));
@@ -87,15 +87,15 @@ public class CampeonatoAntigoDAO{
         return ca;
     }
     
-    public ArrayList<CampeonatoAntigo> selecionarTodos() throws SQLException{
-        String sql = "SELECT ID, ANO, VENCEDOR FROM CAMPEONATOANTIGO";
-        ArrayList<CampeonatoAntigo> retorno = new ArrayList();
+    public ArrayList<Campeonato> selecionarTodos() throws SQLException{
+        String sql = "SELECT ID, ANO, VENCEDOR FROM CAMPEONATO WHERE VENCEDOR IS NOT NULL ORDER BY ANO DESC";
+        ArrayList<Campeonato> retorno = new ArrayList();
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
         
         while(rs.next()){
-            CampeonatoAntigo ca = new CampeonatoAntigo();
+            Campeonato ca = new Campeonato();
             ca.setId(rs.getInt("ID"));
             ca.setAno(rs.getInt("ANO"));
             ca.setVencedor(rs.getInt("VENCEDOR"));
@@ -108,7 +108,7 @@ public class CampeonatoAntigoDAO{
     
     public Boolean verificarAno(int ano) throws SQLException{ // pra nao poder cadastrar 2 titulos no mesmo ano
         Boolean encontrado = false;
-        String sql = "SELECT ID FROM CAMPEONATOANTIGO WHERE ANO = ?";
+        String sql = "SELECT ID FROM CAMPEONATO WHERE ANO = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, ano);

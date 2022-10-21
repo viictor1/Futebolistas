@@ -40,7 +40,7 @@
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
         <a href="Hub?/=Cadastro" class="am">USUÁRIOS
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
-        <a href="CampeonatoAntigoCadastrar" class="am">CAMPEONATOS ANTIGOS
+        <a href="CampeonatoCadastrar" class="am">CAMPEONATOS
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
       </div>
           

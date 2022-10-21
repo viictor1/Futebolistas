@@ -55,7 +55,7 @@ public class TimeDAO {
     
     public void remover(int id) throws SQLException{
         ArquivoDAO dao = new ArquivoDAO(); 
-        CampeonatoAntigoDAO daoC = new CampeonatoAntigoDAO();
+        CampeonatoDAO daoC = new CampeonatoDAO();
         Connection connection = new ConnectionFactory().getConnection();
         Jogadora_TimeDAO daoJT = new Jogadora_TimeDAO();
         Jogadora_TimeModel model = new Jogadora_TimeModel();
@@ -94,7 +94,7 @@ public class TimeDAO {
     }
     
     public ArrayList<Time> selecionarTodos() throws SQLException{
-        String sql = "SELECT IDTIME, NOME, DATA_FUNDACAO, TECNICO, PRESIDENTE, LOCAL_FUNDACAO, TITULOS, NUM_TORCEDORES, IDARQUIVO FROM TIMES";
+        String sql = "SELECT IDTIME, NOME, DATA_FUNDACAO, TECNICO, PRESIDENTE, LOCAL_FUNDACAO, TITULOS, NUM_TORCEDORES, IDARQUIVO FROM TIMES ORDER BY NOME";
         ArrayList<Time> retorno = new ArrayList();
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);

@@ -58,7 +58,7 @@ public class RemoverTime extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(RemoverTime.class.getName()).log(Level.SEVERE, null, ex);
         }
-        response.sendRedirect("Hub?/=Times");
+        response.sendRedirect("Times");
     }
 
     /**

@@ -11,10 +11,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 
 /**
@@ -58,6 +56,9 @@ public class RemoverJT extends HttpServlet {
         try {
             id_time = model.getJTByID(id).getId_time();
             model.removerPorIDJ(id);
+            Hub hub = new Hub();
+            hub.loadlAll(request.getSession());
+            
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }

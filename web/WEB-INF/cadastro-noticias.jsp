@@ -21,7 +21,7 @@
         <c:import url="header.jsp"></c:import>
         <div class="pra-centralizar">
            <div class="estiquetas">
-                <a href="Hub?/=SaibaMaisTime"><i class="fa-solid fa-chevron-left j"></i></a>
+                <a href="MenuCadastro"><i class="fa-solid fa-chevron-left j"></i></a>
             </div> 
             <div class="b-cadastro">
                 <div class="l-left">

@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cadastro de Campeonato Antigo</title>
+        <title>Cadastro de Campeonato</title>
     </head>
     <body>
         <c:import url="header.jsp"></c:import>
@@ -22,7 +22,7 @@
           
       </div>
       <div class="right-time">
-          <form class="" action="CampeonatoAntigoCadastrar" method="post">
+          <form class="" action="CampeonatoCadastrar" method="post">
             <select name="selectTime">
                 <c:forEach var="time" items="${times}">
                       <option value="${time.id}">${time.nome}</option>

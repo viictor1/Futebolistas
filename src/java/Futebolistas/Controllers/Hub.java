@@ -4,12 +4,12 @@
  */
 package Futebolistas.Controllers;
 
-import Futebolistas.Enteties.CampeonatoAntigo;
+import Futebolistas.Enteties.Campeonato;
 import Futebolistas.Enteties.Jogadora;
 import Futebolistas.Enteties.Noticia;
 import Futebolistas.Enteties.Time;
 import Futebolistas.Enteties.Usuario;
-import Futebolistas.Model.CampeonatoAntigoModel;
+import Futebolistas.Model.CampeonatoModel;
 import Futebolistas.Model.JogadoraModel;
 import Futebolistas.Model.NoticiaModel;
 import Futebolistas.Model.TimeModel;
@@ -33,11 +33,7 @@ import java.util.logging.Logger;
  * @author maluc
  */
 @WebServlet(name = "Hub", urlPatterns = {"/Hub"})
-public class Hub extends HttpServlet {
-        ArrayList<Time> times = new ArrayList();
-        ArrayList<Noticia> noticias = new ArrayList();
-        ArrayList<CampeonatoAntigo> cas = new ArrayList();
-        ArrayList<Jogadora> jogadoras = new ArrayList();
+public class Hub extends HttpServlet {      
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -71,25 +67,20 @@ public class Hub extends HttpServlet {
         HttpSession sessao = request.getSession(false);
         Boolean achouCookie = false;
         Usuario u = null;
-        TimeModel modelt = new TimeModel();
-        NoticiaModel modeln = new NoticiaModel();
-        CampeonatoAntigoModel modelca = new CampeonatoAntigoModel();
-        JogadoraModel modelj = new JogadoraModel();
         
-        try {
-            times = modelt.selecionarTodos();
-            noticias = modeln.selecionarTodos();
-            cas = modelca.selecionarTodos();
-            jogadoras = modelj.selecionarTodos();
-        } catch (SQLException ex) {
-           Logger.getLogger(Hub.class.getName()).log(Level.SEVERE, null, ex);
+        if("Cadastro".equals(request.getParameter("/"))){
+            request.setAttribute("cadastro", true);
         }
         
         if (sessao != null && sessao.getAttribute("autenticado") != null) {
             u = (Usuario) sessao.getAttribute("autenticado"); // se tiver uma sessão aberta, é atribuida à sessão o usuario
             sessao.setAttribute("autenticado", u);
-            loadlAll(sessao);
-            verificacaoOrigin(request.getParameter("/"), request, response, sessao);
+            try {
+                loadlAll(sessao);
+            } catch (SQLException ex) {
+                Logger.getLogger(Hub.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
         
         } else {
             Cookie[] cookies = request.getCookies();
@@ -105,67 +96,55 @@ public class Hub extends HttpServlet {
                         }
                         
                         sessao.setAttribute("autenticado", u); //se tiver um cookie de manter logado, é atribuida à sessão esse usuário
-                        loadlAll(sessao);
-                        verificacaoOrigin(request.getParameter("/"), request, response, sessao);
+                        try {
+                            loadlAll(sessao);
+                        } catch (SQLException ex) {
+                            System.out.println(ex.getMessage());
+                        }
                         achouCookie = true; // declarando que o cookie foi achado
+                        request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
                         break;
                     }
 
                 }
             }             
         }
-        if (achouCookie != true) { // se o cookie não for achado, ele é direcionado para a home sem o usuário, mas com os times
+        if (achouCookie != true) { 
+            try {
+            // se o cookie não for achado, ele é direcionado para a home sem o usuário, mas com os times
             loadlAll(sessao);
-            verificacaoOrigin(request.getParameter("/"), request, response, sessao);
-            return;
+            } catch (SQLException ex) {
+                Logger.getLogger(Hub.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
         }
         
     }
     
-    public void loadlAll(HttpSession sessao){
+    public void loadlAll(HttpSession sessao) throws SQLException{
+        ArrayList<Time> times = new ArrayList();
+        ArrayList<Noticia> noticias = new ArrayList();
+        ArrayList<Campeonato> cas = new ArrayList();
+        ArrayList<Jogadora> jogadoras = new ArrayList();
+        
+        TimeModel modelt = new TimeModel();
+        NoticiaModel modeln = new NoticiaModel();
+        CampeonatoModel modelca = new CampeonatoModel();
+        JogadoraModel modelj = new JogadoraModel();
+
+        times = modelt.selecionarTodos();
+        noticias = modeln.selecionarTodos();
+        cas = modelca.selecionarTodos();
+        jogadoras = modelj.selecionarTodos();
+
+        
         sessao.setAttribute("times", times);
         sessao.setAttribute("noticias", noticias); // atribuindo tudo à sessão
         sessao.setAttribute("campeonatos", cas);
         sessao.setAttribute("jogadoras", jogadoras);
     }
-    
-    public void verificacaoOrigin(String d, HttpServletRequest request, HttpServletResponse response, HttpSession sessao) throws ServletException, IOException{
-        if("".equals(d)){
-                request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
-                return;
-            } else if("Times".equals(d)){
-                    request.getRequestDispatcher("WEB-INF/times.jsp").forward(request, response);
-                    return;
-                }
-            else if("Cadastro".equals(d)){
-                    request.setAttribute("cadastro", true);
-                    request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
-                    return;
-            } else if("Ca".equals(d)){
-                 ArrayList<CampeonatoAntigo> campeonatos = (ArrayList<CampeonatoAntigo>) sessao.getAttribute("campeonatos");
-                TimeModel model = new TimeModel();
-                for (CampeonatoAntigo campeonato : campeonatos) {
-                    Time t = null;
-                    try {
-                        t = model.getTimeByID(campeonato.getVencedor()); // atribuindo o nome do time vencedor ao campeonato, nao está na dao pq o nome pode ser alterado
-                    } catch (SQLException ex) {
-                        Logger.getLogger(CampeonatosAntigos.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    campeonato.setNome(t.getNome());
-                }
-                request.getRequestDispatcher("WEB-INF/campeonato-antigo.jsp").forward(request, response);
-                return;
-            } else if("Torcidas".equals(d)){
-                request.getRequestDispatcher("WEB-INF/torcidas.jsp").forward(request, response);
-                return;
-            }
-            else{
-                request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
-                return;
-            }
         
-    }
-    
+  
 
     /**
      * Handles the HTTP <code>POST</code> method.

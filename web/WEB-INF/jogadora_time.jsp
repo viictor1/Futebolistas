@@ -57,7 +57,7 @@
                    </select> 
                     </c:if>
                    </div>
-                    <input type="submit" name="" value="Contratar" class="btn-j">
+                    <input type="submit" name="" value="Concluir" class="btn-j">
                 </form>
                 </div>
             </div>

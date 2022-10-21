@@ -37,7 +37,7 @@
             <div class="decoration2"></div><div class="decoration3"></div>
             <div class="card-content">
                 <c:if test="${autenticado.isAdministrador == true}">
-                    <a href="RemoverCampeonatoAntigo?id=${campeonato.id}"><i class="fa-solid fa-trash-can"></i></a>
+                    <a href="RemoverCampeonato?id=${campeonato.id}"><i class="fa-solid fa-trash-can"></i></a>
                 </c:if>
               <div class="img-feed">
                   <img src="">

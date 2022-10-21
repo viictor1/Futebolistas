@@ -4,7 +4,7 @@ package Futebolistas.Enteties;
  *
  * @author victo
  */
-public class CampeonatoAntigo {
+public class Campeonato {
     int id, ano, vencedor;
     String nome;
 
@@ -16,7 +16,7 @@ public class CampeonatoAntigo {
         this.nome = nome;
     }
 
-    public CampeonatoAntigo() {
+    public Campeonato() {
     }
 
     public int getId() {
