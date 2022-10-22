@@ -62,6 +62,12 @@ public class Jogadora_TimeServlet extends HttpServlet {
                 request.setAttribute("jt", jt);
             }
             request.setAttribute("id", request.getParameter("id"));
+            Hub hub = new Hub();
+            try {
+                hub.loadlAll(request.getSession());
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
             request.getRequestDispatcher("WEB-INF/jogadora_time.jsp").forward(request, response);
             
          } catch (SQLException ex) {

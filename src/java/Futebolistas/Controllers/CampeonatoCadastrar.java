@@ -67,21 +67,23 @@ public class CampeonatoCadastrar extends HttpServlet {
         processRequest(request, response);
         
         int ano, vencedor;
+            ano = Integer.parseInt(request.getParameter("ano"));        
+            vencedor = Integer.parseInt(request.getParameter("selectTime"));
+
+            Campeonato ca = new Campeonato();
+            ca.setAno(ano);
+            ca.setVencedor(vencedor);
+
+            CampeonatoModel model = new CampeonatoModel();           
+            try{
+                model.add(ca);
+            } catch (SQLException ex) {
+                response.sendRedirect("CampeonatoCadastrar");
+            }
+
+            response.sendRedirect("Campeonatos");
+
         
-        ano = Integer.parseInt(request.getParameter("ano"));
-        vencedor = Integer.parseInt(request.getParameter("selectTime"));
-        Campeonato ca = new Campeonato();
-        ca.setAno(ano);
-        ca.setVencedor(vencedor);
-        
-        CampeonatoModel model = new CampeonatoModel();
-        try {
-            model.add(ca);
-        } catch (SQLException ex) {
-            response.sendRedirect("CampeonatoCadastrar");
-        }
-        
-        response.sendRedirect("Campeonatos");
     }
 
     /**

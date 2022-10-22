@@ -4,6 +4,8 @@ import Futebolistas.DAO.CampeonatoDAO;
 import Futebolistas.Enteties.Campeonato;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -12,8 +14,14 @@ import java.util.ArrayList;
 public class CampeonatoModel {
     public void add(Campeonato ca) throws SQLException{
         CampeonatoDAO dao = new CampeonatoDAO();
+        Calendar cal = GregorianCalendar.getInstance();
         if(dao.verificarAno(ca.getAno()) == true){
             return;
+        }
+        if(ca.getAno() != cal.get(Calendar.YEAR)){ // se o ano digitado não for o atual
+            if(ca.getVencedor() == 0){
+                return;
+            }
         }
         dao.add(ca);
     }

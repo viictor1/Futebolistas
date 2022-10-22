@@ -136,6 +136,11 @@ public class Hub extends HttpServlet {
         noticias = modeln.selecionarTodos();
         cas = modelca.selecionarTodos();
         jogadoras = modelj.selecionarTodos();
+        
+        for(Time t : times){
+            modelt.atualizarTorcedores(t.getId());
+            modelt.atualizarTitulos(t.getId());
+        }
 
         
         sessao.setAttribute("times", times);

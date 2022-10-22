@@ -41,10 +41,17 @@ public class TimeModel {
         TimeDAO dao = new TimeDAO();
         return dao.selecionarTodos();
     }
-    public void alterarTorcedores(int idTime, int num) throws SQLException{
+    
+    public void atualizarTorcedores(int idTime) throws SQLException{
         TimeDAO dao = new TimeDAO();
-        dao.alterarTorcedores(idTime, num);
+        dao.atualizarTorcedores(idTime);
     }
+    
+    public void atualizarTitulos(int idTime) throws SQLException{
+        TimeDAO dao = new TimeDAO();
+        dao.atualizarTitulos(idTime);
+    }
+    
     public Time getTimeByID(int id) throws SQLException{
         TimeDAO dao = new TimeDAO();
         Time t = dao.selectTimeByID(id);

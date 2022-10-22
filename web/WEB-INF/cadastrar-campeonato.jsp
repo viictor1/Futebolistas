@@ -24,6 +24,7 @@
       <div class="right-time">
           <form class="" action="CampeonatoCadastrar" method="post">
             <select name="selectTime">
+                <option value="0"> </option>
                 <c:forEach var="time" items="${times}">
                       <option value="${time.id}">${time.nome}</option>
                 </c:forEach>

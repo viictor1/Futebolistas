@@ -15,48 +15,32 @@ import java.util.ArrayList;
 public class CampeonatoDAO{
     
     public void add (Campeonato ca) throws SQLException {
-        String sql = "INSERT INTO CAMPEONATO (ANO, VENCEDOR) VALUES (?,?)";
-        Connection connection = new ConnectionFactory().getConnection();
-        try {
-            connection.setAutoCommit(false);
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, ca.getAno());
-            stmt.setInt(2, ca.getVencedor());
-            stmt.execute();
-            stmt.close();
-
-            TimeDAO dao = new TimeDAO();
-            dao.alterarTitulos(ca.getVencedor(), 1);
-            connection.commit();
-        } catch (Exception e) {
-            connection.rollback();
-        } finally {
-            connection.close();
+        String sql = "";
+        if(ca.getVencedor() != 0){
+            sql = "INSERT INTO CAMPEONATO (ANO, VENCEDOR) VALUES (?,?)";
+        }else{
+            sql = "INSERT INTO CAMPEONATO (ANO) VALUES (?)";
         }
-        
-        
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, ca.getAno());
+        if(ca.getVencedor() != 0){
+             stmt.setInt(2, ca.getVencedor());
+        }
+        stmt.execute();
+        stmt.close();
+
+        connection.close();                
     }
     
     public void remover(Campeonato ca) throws SQLException{
         String sql = "DELETE FROM CAMPEONATO WHERE ID = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
-        try {
-            connection.setAutoCommit(false);
-            stmt.setInt(1, ca.getId());
-            stmt.execute();
-            stmt.close();
-            TimeDAO dao = new TimeDAO();
-
-            dao.alterarTitulos(ca.getVencedor(), -1);
-            
-            connection.commit();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            connection.rollback();
-        } finally {
-            connection.close(); 
-        }           
+        stmt.setInt(1, ca.getId());
+        stmt.execute();
+        stmt.close();
+        connection.close();         
     }
     
     public void removerTodosDoVencedor(int id) throws SQLException{

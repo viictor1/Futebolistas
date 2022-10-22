@@ -118,11 +118,11 @@ public class TimeDAO {
         return retorno;      
     }
     
-    public void alterarTorcedores(int id, int num) throws SQLException{
+    public void atualizarTorcedores(int id) throws SQLException{
         String sql = "UPDATE TIMES SET NUM_TORCEDORES = ? WHERE IDTIME = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setInt(1, (getNumTorcedores(id) + num));
+        stmt.setInt(1, getNumTorcedores(id));
         stmt.setInt(2, id);
         
         stmt.execute();
@@ -130,11 +130,11 @@ public class TimeDAO {
         connection.close();
     }
     
-    public void alterarTitulos(int id, int num) throws SQLException{
+    public void atualizarTitulos(int id) throws SQLException{
         String sql = "UPDATE TIMES SET TITULOS = ? WHERE IDTIME = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setInt(1, (getNumTitulos(id) + num));
+        stmt.setInt(1, getNumTitulos(id));
         stmt.setInt(2, id);
         
         stmt.execute();
@@ -143,32 +143,32 @@ public class TimeDAO {
     }
     
     public int getNumTorcedores(int id) throws SQLException{
-        String sql = "SELECT NUM_TORCEDORES FROM TIMES WHERE IDTIME = ?";
+        String sql = "SELECT ID FROM USUARIOS WHERE IDTIME = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
         int num = 0;
         
-        if(rs.next()){
-            num = rs.getInt("NUM_TORCEDORES");
+        while(rs.next()){
+            num++;
         }
-        connection.close();
         return num;
+  
     }
     
     public int getNumTitulos(int id) throws SQLException{
-        String sql = "SELECT TITULOS FROM TIMES WHERE IDTIME = ?";
+        String sql = "SELECT ID FROM CAMPEONATO WHERE VENCEDOR = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
         int num = 0;
         
-        if(rs.next()){
-            num = rs.getInt("TITULOS");
+        while(rs.next()){
+            num++;
         }
-        connection.close();
+        
         return num;
     }
     
