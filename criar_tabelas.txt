@@ -67,3 +67,17 @@ Create Table Campeonato(
     vencedor INT,
     FOREIGN KEY (vencedor) REFERENCES Times(idTime)
 );
+
+CREATE TABLE Jogo(
+  id INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
+                            (START WITH 1, INCREMENT BY 1),
+  campeonato INT NOT NULL,
+  time_visitante INT NOT NULL,
+  time_casa INT NOT NULL,
+  gol_casa INT,
+  gol_visitante INT,
+  data_jogo DATE NOT NULL,
+  FOREIGN KEY (campeonato) REFERENCES Campeonato(id),
+  FOREIGN KEY (time_visitante) REFERENCES Times(idtime),
+  FOREIGN KEY (time_casa) REFERENCES Times(idtime)
+);

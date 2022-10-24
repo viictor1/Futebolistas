@@ -71,6 +71,22 @@ public class CampeonatoDAO{
         return ca;
     }
     
+     public Campeonato selectAtual() throws SQLException{
+        String sql = "SELECT ID, ANO FROM CAMPEONATO WHERE VENCEDOR IS NULL";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql); 
+        ResultSet rs = stmt.executeQuery();
+        
+        Campeonato ca = new Campeonato();
+        if(rs.next()){
+            ca.setId(rs.getInt("ID"));
+            ca.setAno(rs.getInt("ANO"));
+        }
+        stmt.close();
+        connection.close();
+        return ca;
+    }
+    
     public ArrayList<Campeonato> selecionarTodos() throws SQLException{
         String sql = "SELECT ID, ANO, VENCEDOR FROM CAMPEONATO WHERE VENCEDOR IS NOT NULL ORDER BY ANO DESC";
         ArrayList<Campeonato> retorno = new ArrayList();

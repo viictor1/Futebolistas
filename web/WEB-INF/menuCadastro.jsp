@@ -42,6 +42,8 @@
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
         <a href="CampeonatoCadastrar" class="am">CAMPEONATOS
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
+        <a href="JogoCadastrar" class="am">JOGO
+        <i class="fa-solid fa-screwdriver-wrench"></i></a>
       </div>
           
     </div>

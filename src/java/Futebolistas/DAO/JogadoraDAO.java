@@ -27,7 +27,7 @@ public class JogadoraDAO {
     }
     
     public ArrayList<Jogadora> selecionarTodos() throws SQLException{ // selecionar todas as jogadoras que não estão em um time
-        String sql = "SELECT ID, NOME, ATIVA FROM JOGADORAS WHERE ATIVA = FALSE";
+        String sql = "SELECT ID, NOME, ATIVA FROM JOGADORAS WHERE ATIVA = FALSE ORDER BY NOME";
         ArrayList<Jogadora> retorno = new ArrayList();
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);

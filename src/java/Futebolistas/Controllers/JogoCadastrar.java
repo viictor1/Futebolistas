@@ -4,26 +4,21 @@
  */
 package Futebolistas.Controllers;
 
-import Futebolistas.Enteties.Time;
-import Futebolistas.Model.TimeModel;
+import Futebolistas.Model.CampeonatoModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
  *
- * @author maluc
+ * @author victo
  */
-@WebServlet(name = "MenuCadastro", urlPatterns = {"/MenuCadastro"})
-public class MenuCadastro extends HttpServlet {
+@WebServlet(name = "JogoCadastrar", urlPatterns = {"/JogoCadastrar"})
+public class JogoCadastrar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +30,9 @@ public class MenuCadastro extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        request.getRequestDispatcher("WEB-INF/menuCadastro.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -53,11 +47,11 @@ public class MenuCadastro extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(MenuCadastro.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
+        
+        CampeonatoModel model = new CampeonatoModel();
+        request.setAttribute("campeonato", model.selectAtual());
+        request.getRequestDispatcher("WEB-INF/cadastrar-jogo.jsp").forward(request, response);
     }
 
     /**
@@ -71,14 +65,7 @@ public class MenuCadastro extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            
-        try {
-            processRequest(request, response);
-             Hub hub = new Hub();
-            hub.loadlAll(request.getSession());
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+        processRequest(request, response);
     }
 
     /**

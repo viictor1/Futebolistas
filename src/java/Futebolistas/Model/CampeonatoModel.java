@@ -36,4 +36,9 @@ public class CampeonatoModel {
         Campeonato ca = dao.selectCabyID(id);
         dao.remover(ca);
     }
+    
+    public Campeonato selectAtual(){
+        CampeonatoDAO dao = new CampeonatoDAO();
+        return dao.selectAtual();
+    }
 }
