@@ -49,6 +49,7 @@ public class JogoDAO {
             j.setTime_visitante(rs.getInt("TIME_VISITANTE"));
             j.setTime_casa(rs.getInt("TIME_CASA"));
             j.setData_jogo(rs.getDate("DATA_JOGO"));
+            retorno.add(j);
         }
         
         stmt.close();

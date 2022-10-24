@@ -6,11 +6,13 @@ package Futebolistas.Controllers;
 
 import Futebolistas.Enteties.Campeonato;
 import Futebolistas.Enteties.Jogadora;
+import Futebolistas.Enteties.Jogo;
 import Futebolistas.Enteties.Noticia;
 import Futebolistas.Enteties.Time;
 import Futebolistas.Enteties.Usuario;
 import Futebolistas.Model.CampeonatoModel;
 import Futebolistas.Model.JogadoraModel;
+import Futebolistas.Model.JogoModel;
 import Futebolistas.Model.NoticiaModel;
 import Futebolistas.Model.TimeModel;
 import Futebolistas.Model.UsuarioModel;
@@ -126,16 +128,19 @@ public class Hub extends HttpServlet {
         ArrayList<Noticia> noticias = new ArrayList();
         ArrayList<Campeonato> cas = new ArrayList();
         ArrayList<Jogadora> jogadoras = new ArrayList();
+        ArrayList<Jogo> jogos = new ArrayList();
         
         TimeModel modelt = new TimeModel();
         NoticiaModel modeln = new NoticiaModel();
         CampeonatoModel modelca = new CampeonatoModel();
         JogadoraModel modelj = new JogadoraModel();
+        JogoModel modelJogo = new JogoModel();
 
         times = modelt.selecionarTodos();
         noticias = modeln.selecionarTodos();
         cas = modelca.selecionarTodos();
         jogadoras = modelj.selecionarTodos();
+        jogos = modelJogo.proximosJogos();
         
         for(Time t : times){
             modelt.atualizarTorcedores(t.getId());
@@ -147,6 +152,7 @@ public class Hub extends HttpServlet {
         sessao.setAttribute("noticias", noticias); // atribuindo tudo à sessão
         sessao.setAttribute("campeonatos", cas);
         sessao.setAttribute("jogadoras", jogadoras);
+        sessao.setAttribute("jogos", jogos);
     }
         
   

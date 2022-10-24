@@ -4,16 +4,13 @@
  */
 package Futebolistas.Controllers;
 
-import Futebolistas.Enteties.Jogo;
-import Futebolistas.Model.CampeonatoModel;
-import Futebolistas.Model.JogoModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Date;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,8 +20,8 @@ import java.util.logging.Logger;
  *
  * @author victo
  */
-@WebServlet(name = "JogoCadastrar", urlPatterns = {"/JogoCadastrar"})
-public class JogoCadastrar extends HttpServlet {
+@WebServlet(name = "Jogos", urlPatterns = {"/Jogos"})
+public class Jogos extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -55,13 +52,14 @@ public class JogoCadastrar extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-        CampeonatoModel model = new CampeonatoModel();
+        Hub hub = new Hub();
         try {
-            request.setAttribute("campeonato", model.selectAtual());
+            hub.loadlAll(request.getSession());
         } catch (SQLException ex) {
-            Logger.getLogger(JogoCadastrar.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
-        request.getRequestDispatcher("WEB-INF/cadastrar-jogo.jsp").forward(request, response);
+        
+        request.getRequestDispatcher("WEB-INF/jogos.jsp").forward(request, response);
     }
 
     /**
@@ -76,28 +74,6 @@ public class JogoCadastrar extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
-        int campeonato, time_casa, time_visitante;
-        Date data_jogo;
-        
-        campeonato = Integer.parseInt(request.getParameter("campeonato"));
-        time_casa = Integer.parseInt(request.getParameter("time_casa"));
-        time_visitante = Integer.parseInt(request.getParameter("time_visitante"));
-        data_jogo = Date.valueOf(request.getParameter("data_jogo"));
-        
-        Jogo j = new Jogo();
-        j.setCampeonato(campeonato);
-        j.setTime_casa(time_casa);
-        j.setTime_visitante(time_visitante);
-        j.setData_jogo(data_jogo);
-        
-        JogoModel model = new JogoModel();
-        try {
-            model.add(j);
-            response.sendRedirect("Hub");
-        } catch (SQLException ex) {
-            response.sendRedirect("JogoCadastrar");
-        }
     }
 
     /**

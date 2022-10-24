@@ -28,6 +28,20 @@
               ev.dataTransfer.setData("text", ev.target.id);
             }
 
+            function drop_casa(ev) {
+              ev.preventDefault();
+              var data = ev.dataTransfer.getData("text");
+              document.querySelector("[name='time_casa']").value = data;
+              ev.target.appendChild(document.getElementById(data));
+            }
+            
+             function drop_visitante(ev) {
+              ev.preventDefault();
+              var data = ev.dataTransfer.getData("text");
+              document.querySelector("[name='time_visitante']").value = data;
+              ev.target.appendChild(document.getElementById(data));
+            }
+            
             function drop(ev) {
               ev.preventDefault();
               var data = ev.dataTransfer.getData("text");
@@ -37,16 +51,17 @@
     </head>
     <body>
         <c:import url="header.jsp"></c:import>
-        <form action="">
-            Data do jogo <input type="date" name="data">
+        <form action="JogoCadastrar" method="post">
+            Data do jogo <input type="date" name="data_jogo">
             <input type="hidden" name="campeonato" value="${campeonato.id}"> <!<!-- id do campeonato atual -->
-            Time casa: <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-            Time visitante: <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            Time casa: <div id="div1" ondrop="drop_casa(event)" ondragover="allowDrop(event)"><input type="hidden" name="time_casa"></div>
+            Time visitante: <div id="div1" ondrop="drop_visitante(event)" ondragover="allowDrop(event)"><input type="hidden" name="time_visitante"></div>
             
             Times:
             <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"> 
             <c:forEach var="time" items="${times}">          
-                    <img id="drag${time.id}" src="MostrarImagem?id=${time.idArquivo}" draggable="true" ondragstart="drag(event)" width="336" height="69"> <br>             
+                    <img id="${time.id}" src="MostrarImagem?id=${time.idArquivo}" draggable="true" ondragstart="drag(event)" width="336" height="69"> <br> 
+                    
             </c:forEach>
             </div>
            
