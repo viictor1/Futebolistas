@@ -5,9 +5,9 @@ package Futebolistas.Enteties;
  * @author victo
  */
 public class Jogadora {
-    int id;
-    String nome;
-    Boolean ativa;
+    private int id;
+    private String nome;
+    private Boolean ativa;
 
     public Boolean getAtiva() {
         return ativa;

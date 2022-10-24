@@ -5,8 +5,8 @@ package Futebolistas.Enteties;
  * @author victo
  */
 public class Campeonato {
-    int id, ano, vencedor;
-    String nome;
+    private int id, ano, vencedor;
+    private String nome;
 
     public String getNome() {
         return nome;

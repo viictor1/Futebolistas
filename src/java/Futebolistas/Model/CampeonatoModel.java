@@ -37,7 +37,7 @@ public class CampeonatoModel {
         dao.remover(ca);
     }
     
-    public Campeonato selectAtual(){
+    public Campeonato selectAtual() throws SQLException{
         CampeonatoDAO dao = new CampeonatoDAO();
         return dao.selectAtual();
     }

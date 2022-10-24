@@ -11,9 +11,9 @@ import java.sql.Date;
  * @author victo
  */
 public class Jogadora_Time {
-    int id, id_time, id_jogadora, numero_atual;
-    String posicao, nome;
-    Date data_inicio, data_fim;
+    private int id, id_time, id_jogadora, numero_atual;
+    private String posicao, nome;
+    private Date data_inicio, data_fim;
 
     public String getNome() {
         return nome;
