@@ -28,7 +28,7 @@ public class FiltroAdm implements Filter{
         HttpSession sessao = request.getSession(false);
         
         Usuario u = new Usuario();
-        if(sessao.getAttribute("autenticado") == null || "".equals(sessao.getAttribute("autenticado"))){
+        if("".equals(sessao.getAttribute("autenticado"))|| sessao.getAttribute("autenticado") == null ){
             return;           
         }
         else{

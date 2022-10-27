@@ -24,42 +24,52 @@
     <body>
         <c:import url="header.jsp"></c:import> 
         <c:import url="menu.jsp"></c:import>
-    <div class="feed"><center>Campeonatos Antigos</center></div>
-    <div class="body-feed">
-    <section> 
-      <div class="swiper mySwiper container">
-        <div class="swiper-wrapper content">
+    <div class="feed"><center>CAMPEONATOS ANTIGOS</center></div>
+    
+    <div class="body-card">
+            <section>
+             <div class="swiper mySwiper container">
+      <div class="swiper-wrapper content">
+      <c:forEach var="campeonato" items="${campeonatos}">
+        <div class="swiper-slide card">
             
-        <c:forEach var="campeonato" items="${campeonatos}">
-          <div class="swiper-slide cardf">
-            <div class="media-icons">        
+          <div class="card-content">
+              
+              
+            <div class="image">
+              <img src="">
             </div>
-            <div class="decoration2"></div><div class="decoration3"></div>
-            <div class="card-content">
+            <div class="media-icons">   
                 <c:if test="${autenticado.isAdministrador == true}">
+                    
+                    <a href="CadastrarTimes?idAlterar=${time.id}"><i class="fa-solid fa-pencil"></i></a>
                     <a href="RemoverCampeonato?id=${campeonato.id}"><i class="fa-solid fa-trash-can"></i></a>
                 </c:if>
-              <div class="img-feed">
-                  <img src="">
-              </div>
-              <div class="titulo">
-                <span class="name">${campeonato.ano}</span>
-              </div>
-            <div class="legenda">
-                <span class="name">${campeonato.nome}</span>
-              </div>
+
+              
             </div>
-          </div>          
+            <div class="name-time">
+              <span class="name">${campeonato.ano}</span>
+              <span class="name">${campeonato.nome}</span>
+            </div>
+            
+          </div>
+        </div>
         </c:forEach>
-      </div>
-      <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-pagination"></div>
-      </div>
+          </div>
+        </div>
+       <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
     </section>
-      <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-      
-      <script>
+      </div>
+
+    
+    <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
     var swiper = new Swiper(".mySwiper", {
       slidesPerView: 3,
       spaceBetween: 30,
@@ -76,5 +86,6 @@
       },
     });
   </script>
+    
     </body>
 </html>

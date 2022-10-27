@@ -128,7 +128,7 @@
     <div class="content-logado">        
     <span class="x" onclick="hideLogado()">&times;</span>
     <div id=modal-titulo>${autenticado.nome}</div> <!--AQ É A VARIÁVEL DO NOME QUE O USUÁRIO ESCOLHEU -->
-    <div class="option"><a href="SaibaMaisTime?id=${autenticado.time}"><center>Meu time</center></a></div>
+    <a href="SaibaMaisTime?id=${autenticado.time}"><div class="option"><center>Meu time</center></div></a>
     <div class="modal-line"></div>
     <div class="option" onclick="showAtualizarS();hideLogado()"><center>Alterar senha</center></div>
     <div class="modal-line"></div>
@@ -174,7 +174,14 @@
             Nome: <input type="text" name="nome" placeholder="Digite seu nome de usuário" id="form-cadastro" required>
             E-Mail: <input type="email" name="email" placeholder="Digite seu endereço de E-Mail" id="form-cadastro" required>
             Senha: <input type="password" name="senha" placeholder="Digite sua senha" id="form-cadastro" required>
-            <c:if test="${autenticado.isAdministrador == true}"> <!-- ADM pode cadastrar um novo usuároi adm -->
+            Escolha seu time: 
+            <div class="botaozinhos"> 
+                <select name="selectTime" class="select-time">
+            <c:forEach var="time" items="${times}">
+                  <option value="${time.id}">${time.nome}</option>
+             </c:forEach>
+            </select>
+          <c:if test="${autenticado.isAdministrador == true}"> <!-- ADM pode cadastrar um novo usuároi adm -->
                 <div class="kadm">
               <label class="container-label">Administrador:
                   <input type="checkbox" id="adm" value="s" name="adm">
@@ -182,18 +189,10 @@
             </label>
           </div>
             </c:if>
-            Escolha seu time: <br>
-          
-            <select name="selectTime">
-            <c:forEach var="time" items="${times}">
-                  <option value="${time.id}">${time.nome}</option>
-             </c:forEach>
-            </select>
-            <div class="search-box">
-              <input type="text" placeholder="Procurar..." />
-            </div> 
-             <button type="submit" class="cadastro-button">CRIAR CONTA</button>
+            
           </div>
+            <button type="submit" class="cadastro-button">CRIAR CONTA</button>
+            </div>  
           <script src="main.js"></script>
           </form>
         </div>

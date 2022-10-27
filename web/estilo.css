@@ -146,6 +146,7 @@ body{background-color: #F4F3F3;}
   font-family: arial;
   color: rgba(220,220,220);
   border-radius: 5px;
+  text-decoration: none;
 }
 .modal-content{
   background-color: #1C1C1C;
@@ -155,6 +156,7 @@ body{background-color: #F4F3F3;}
   font-family: arial;
   color: rgba(220,220,220);
   border-radius: 5px;
+  text-decoration: none;
 }
 .modal-login{
   position: fixed;
@@ -220,7 +222,7 @@ body{background-color: #F4F3F3;}
   background-color: white;
   padding: 16px 24px;
   width: 384px;
-  height: 400px;
+  height: 65vh;
   border-radius: 0.5rem;
   font-family: arial;
   font-weight: 6px;
@@ -567,7 +569,6 @@ body{background-color: #F4F3F3;}
   padding: 10px;
   padding-bottom: 13px;
   font-family: sans-serif;
-  margin-top: 10px;  
 }
 .container-label {
   display: block;
@@ -906,8 +907,7 @@ section .cardf .image img{
   display: flex;
   background: linear-gradient(135deg, rgba(247, 202, 201, 1) 0%, rgba(146, 168, 209, 1) 100%);
   width: 48vw;
-  height: 66vh;
-  margin-top: 30px;
+  height: 72vh;
   border-radius: 30px;
   font-family: 'Poppins', sans-serif;;
   box-shadow: 3px 3px lightgray;
@@ -959,7 +959,7 @@ section .cardf .image img{
   text-decoration: none;
   border: 2px solid;
   width: 220px;
-  height: 50px;
+  height: 45px;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -970,6 +970,24 @@ section .cardf .image img{
 .am:hover{
   background-color: #fff;
   color: #8D96B6;
+}
+.botaozinhos{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+.select-time{
+  width: 190px;
+  height: 43px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  color: black;
+  background: lightgray;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  margin-right: 20px;
 }
 .fa-solid {
   margin-left: 8px;
@@ -1062,7 +1080,12 @@ cursor: pointer;
   cursor: pointer;
 }
 /*SAIBA MAIS*/
-
+.escolha{
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+   
+}
 .bonitinha{
     height: 60vh;
     width: 60vw;
@@ -1484,4 +1507,13 @@ select[type=option]{border: none}
     align-items: center;
     justify-content: center;
     box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);
+}
+#piechart_3d{
+    margin-top: 20px;
+    height: 60vh;
+    width: 60vw;
+    box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);
+}
+rect {
+    fill: rgba(220,220,220,0.5);
 }
