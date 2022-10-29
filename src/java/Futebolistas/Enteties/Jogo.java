@@ -13,6 +13,41 @@ import java.sql.Date;
 public class Jogo {
     private int id, campeonato, time_visitante, time_casa, gol_casa, gol_visitante;
     private Date data_jogo;
+    
+    String nome_casa, nome_visitante;
+    int img_casa, img_visitante;
+
+    public String getNome_casa() {
+        return nome_casa;
+    }
+
+    public void setNome_casa(String nome_casa) {
+        this.nome_casa = nome_casa;
+    }
+
+    public String getNome_visitante() {
+        return nome_visitante;
+    }
+
+    public void setNome_visitante(String nome_visitante) {
+        this.nome_visitante = nome_visitante;
+    }
+
+    public int getImg_casa() {
+        return img_casa;
+    }
+
+    public void setImg_casa(int img_casa) {
+        this.img_casa = img_casa;
+    }
+
+    public int getImg_visitante() {
+        return img_visitante;
+    }
+
+    public void setImg_visitante(int img_visitante) {
+        this.img_visitante = img_visitante;
+    }
 
     public int getId() {
         return id;

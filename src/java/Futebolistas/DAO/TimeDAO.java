@@ -67,22 +67,31 @@ public class TimeDAO {
             for(Jogadora_Time jogadora: array){
                 daoJ.alterarAtividade(jogadora.getId_jogadora(), false, connection);               
             }
-            String sql2 = "DELETE FROM JOGADORA_TIME WHERE ID_TIME = ?";
+            String sql2 = "DELETE FROM JOGADORA_TIME WHERE ID_TIME = ?"; // apagando as jogadoras_time 
             PreparedStatement stmt2 = connection.prepareStatement(sql2);
             stmt2.setInt(1, id);
             stmt2.execute();
             stmt2.close();
             
             daoC.removerTodosDoVencedor(id);
-            Time t = selectTimeByID(id);
-            String sql = "DELETE FROM TIMES WHERE IDTIME = ?";
+            Time t = selectTimeByID(id); //removendo os campeonatos do time
+            
+            String sql3 = "DELETE FROM JOGO WHERE TIME_CASA = ? OR TIME_VISITANTE = ?";  //removendo os futuros jogos do time
+            PreparedStatement stmt3 = connection.prepareStatement(sql3);
+            stmt3.setInt(1, id);
+            stmt3.setInt(2, id);
+            stmt3.execute();
+            stmt3.close();
+            
+                    
+            String sql = "DELETE FROM TIMES WHERE IDTIME = ?"; //apagando o time
             
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, id);
             stmt.execute();
             stmt.close();
             
-            dao.remover(connection, t.getIdArquivo());        
+            dao.remover(connection, t.getIdArquivo());  // deletando o arquivo de imagem do time
             connection.commit();
         } catch (Exception e) {
             e.printStackTrace();

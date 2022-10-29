@@ -19,4 +19,9 @@ public class JogoModel {
         JogoDAO dao = new JogoDAO();
         return dao.proximosJogos();
     }
+    
+    public void remover(int id) throws SQLException{
+        JogoDAO dao = new JogoDAO();
+        dao.remover(id);
+    }
 }

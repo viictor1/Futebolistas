@@ -4,17 +4,17 @@
  */
 package Futebolistas.Controllers;
 
+import Futebolistas.Enteties.Jogo;
+import Futebolistas.Enteties.Time;
+import Futebolistas.Model.TimeModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import java.util.ArrayList;
 
 /**
  *
@@ -55,6 +55,17 @@ public class Jogos extends HttpServlet {
         Hub hub = new Hub();
         try {
             hub.loadlAll(request.getSession());
+            ArrayList<Jogo> jogos = (ArrayList<Jogo>) request.getSession().getAttribute("jogos");
+            TimeModel model = new TimeModel();
+            for(Jogo j : jogos){
+                Time casa = model.getTimeByID(j.getTime_casa());
+                Time visitante = model.getTimeByID(j.getTime_visitante());
+                
+                j.setNome_casa(casa.getNome());
+                j.setImg_casa(casa.getIdArquivo());
+                j.setNome_visitante(visitante.getNome());
+                j.setImg_visitante(visitante.getIdArquivo());
+            }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }

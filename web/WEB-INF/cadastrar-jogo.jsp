@@ -70,7 +70,7 @@
                 </div>
                 <div class="middle"></div>
                 <div class="r-right">
-                    <form action="" method="post">
+                    <form action="JogoCadastrar" method="post">
                         <input type="hidden" name="campeonato" value="${campeonato.id}">  <!--id do campeonato atual-->
                         <input type="date" name="data_jogo" class="cadastro-j" placeholder="Data do Jogo">
                         Time casa: <div id="div1" ondrop="drop_casa(event)" ondragover="allowDrop(event)">
