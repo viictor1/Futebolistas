@@ -27,6 +27,8 @@
                 <br> <!-- tira depois -->
                 ${jogo.data_jogo}
                 <a href="RemoverJogo?id=${jogo.id}"><i class="fa-solid fa-trash-can"></i></a>
+                <a href="EditarJogo?id=${jogo.id}"><i class="fa-solid fa-pencil"></i></a>
+
             </div>
         </c:forEach>
     </body>

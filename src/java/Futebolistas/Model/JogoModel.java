@@ -24,4 +24,14 @@ public class JogoModel {
         JogoDAO dao = new JogoDAO();
         dao.remover(id);
     }
+    
+    public Jogo selectJogoByID(int id) throws SQLException{
+        JogoDAO dao = new JogoDAO();
+        return dao.selectJogoByID(id);
+    }
+    
+    public void atualizar(Jogo j) throws SQLException{
+        JogoDAO dao = new JogoDAO();
+        dao.atualizar(j);
+    }
 }
