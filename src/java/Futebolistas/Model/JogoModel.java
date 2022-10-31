@@ -34,4 +34,34 @@ public class JogoModel {
         JogoDAO dao = new JogoDAO();
         dao.atualizar(j);
     }
+    
+    public int partidasJogadas(int id) throws SQLException{
+        JogoDAO dao = new JogoDAO();
+        return dao.partidasJogadas(id);
+    }
+    
+    public int vitorias(int id) throws SQLException{
+        JogoDAO dao = new JogoDAO();
+        return dao.vitorias(id);
+    }
+    
+    public int empates(int id) throws SQLException{
+        JogoDAO dao = new JogoDAO();
+        return dao.empates(id);
+    }
+    
+    public int derrotas(int id) throws SQLException{
+        JogoDAO dao = new JogoDAO();
+        return dao.derrotas(id);
+    }
+    
+    public int golsMarcados(int id) throws SQLException{
+        JogoDAO dao = new JogoDAO();
+        return dao.golsMarcados(id);
+    }
+    
+    public int golsSofridos(int id) throws SQLException{
+        JogoDAO dao = new JogoDAO();
+        return dao.golsSofridos(id);
+    }
 }

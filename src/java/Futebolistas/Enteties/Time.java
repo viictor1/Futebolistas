@@ -14,6 +14,72 @@ public class Time {
     private String nome, tecnico, presidente, local_fundacao;
     private int id, titulos, num_torcedores, idArquivo;
     private Date data_fundacao;
+    
+    private int jogos, vitorias, empates, derrotas, pontos, golsMarcados, golsSofridos, saldo;
+
+    public int getDerrotas() {
+        return derrotas;
+    }
+
+    public int getGolsMarcados() {
+        return golsMarcados;
+    }
+
+    public void setGolsMarcados(int golsMarcados) {
+        this.golsMarcados = golsMarcados;
+    }
+
+    public int getGolsSofridos() {
+        return golsSofridos;
+    }
+
+    public void setGolsSofridos(int golsSofridos) {
+        this.golsSofridos = golsSofridos;
+    }
+
+    public int getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(int saldo) {
+        this.saldo = saldo;
+    }
+
+    public int getPontos() {
+        return pontos;
+    }
+
+    public void setPontos(int pontos) {
+        this.pontos = pontos;
+    }
+
+    public void setDerrotas(int derrotas) {
+        this.derrotas = derrotas;
+    }
+
+    public int getEmpates() {
+        return empates;
+    }
+
+    public void setEmpates(int empates) {
+        this.empates = empates;
+    }
+
+    public int getVitorias() {
+        return vitorias;
+    }
+
+    public void setVitorias(int vitorias) {
+        this.vitorias = vitorias;
+    }
+
+    public int getJogos() {
+        return jogos;
+    }
+
+    public void setJogos(int jogos) {
+        this.jogos = jogos;
+    }
 
     public Time(String nome, Date data_fundacao, String tecnico, String presidente, String local_fundacao) {
         this.nome = nome;

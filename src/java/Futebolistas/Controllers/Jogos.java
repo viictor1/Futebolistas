@@ -6,6 +6,7 @@ package Futebolistas.Controllers;
 
 import Futebolistas.Enteties.Jogo;
 import Futebolistas.Enteties.Time;
+import Futebolistas.Model.JogoModel;
 import Futebolistas.Model.TimeModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -65,6 +66,18 @@ public class Jogos extends HttpServlet {
                 j.setImg_casa(casa.getIdArquivo());
                 j.setNome_visitante(visitante.getNome());
                 j.setImg_visitante(visitante.getIdArquivo());
+            }
+            ArrayList<Time> times = (ArrayList<Time>) request.getSession().getAttribute("times");
+            JogoModel modelj = new JogoModel();
+            for(Time t : times){
+                t.setJogos(modelj.partidasJogadas(t.getId()));
+                t.setVitorias(modelj.vitorias(t.getId()));
+                t.setEmpates(modelj.empates(t.getId()));
+                t.setDerrotas(modelj.derrotas(t.getId()));
+                t.setPontos((t.getVitorias() * 3) + t.getEmpates());
+                t.setGolsMarcados(modelj.golsMarcados(t.getId()));
+                t.setGolsSofridos(modelj.golsSofridos(t.getId()));
+                t.setSaldo(t.getGolsMarcados() - t.getGolsSofridos());
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

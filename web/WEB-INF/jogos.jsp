@@ -19,6 +19,7 @@
         <c:import url="header.jsp"></c:import> 
         <c:import url="menu.jsp"></c:import>
         
+        
         <c:forEach var="jogo" items="${jogos}" >
             <div>
                 <img src="MostrarImagem?id=${jogo.img_casa}" height="50px"/>  <img src="MostrarImagem?id=${jogo.img_visitante}" height="50px"/> 
@@ -28,8 +29,41 @@
                 ${jogo.data_jogo}
                 <a href="RemoverJogo?id=${jogo.id}"><i class="fa-solid fa-trash-can"></i></a>
                 <a href="EditarJogo?id=${jogo.id}"><i class="fa-solid fa-pencil"></i></a>
-
             </div>
         </c:forEach>
+        
+        <div class="tabela">
+                    <table>
+                    <thead>
+                      <tr>
+                        <th>TIME</th>
+                        <th>P</th>
+                        <th>J</th>
+                        <th>V</th>
+                        <th>E</th>
+                        <th>D</th>
+                        <th>GP</th>
+                        <th>GC</th>
+                        <th>SG</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <c:forEach varStatus="status" var="time" items="${times}">
+                        <tr>
+                        <td>${time.nome}</td>
+                        <td>${time.pontos}</td>
+                        <td>${time.jogos}</td>        
+                        <td>${time.vitorias}</td>
+                        <td>${time.empates}</td>
+                        <td>${time.derrotas}</td>
+                        <td>${time.golsMarcados}</td>
+                        <td>${time.golsSofridos}</td>
+                        <td>${time.saldo}</td>
+                        </tr>
+                        
+                      </c:forEach> 
+                    </tbody>
+                  </table>   
+                    </div>
     </body>
 </html>
