@@ -151,9 +151,12 @@ public class JogoDAO {
         ResultSet rs = stmt.executeQuery();
         int empates = 0;
         while(rs.next()){
-            if(rs.getInt("GOL_CASA") == rs.getInt("GOL_VISITANTE")){
+            if(rs.getInt("GOL_CASA") != 0 && rs.getInt("GOL_VISITANTE") != 0){
+                if(rs.getInt("GOL_CASA") == rs.getInt("GOL_VISITANTE")){
                 empates++;
+                }
             }
+            
         }
         stmt.close();
         connection.close();

@@ -12,8 +12,16 @@ import java.sql.Date;
  */
 public class Time {
     private String nome, tecnico, presidente, local_fundacao;
-    private int id, titulos, num_torcedores, idArquivo;
+    private int id, titulos, num_torcedores, idArquivo, posicao;
     private Date data_fundacao;
+
+    public int getPosicao() {
+        return posicao;
+    }
+
+    public void setPosicao(int posicao) {
+        this.posicao = posicao;
+    }
     
     private int jogos, vitorias, empates, derrotas, pontos, golsMarcados, golsSofridos, saldo;
 

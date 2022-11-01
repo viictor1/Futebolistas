@@ -22,6 +22,7 @@ CREATE TABLE Times(
   local_fundacao VARCHAR(45) NOT NULL,
   titulos INT NOT NULL,
   num_torcedores INT NOT NULL,
+  posicao int,
   idArquivo int,
   FOREIGN KEY (idArquivo) REFERENCES Arquivos(idArquivo)
 );

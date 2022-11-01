@@ -16,12 +16,18 @@ public class CampeonatoDAO{
     
     public void add (Campeonato ca) throws SQLException {
         String sql = "";
+        Connection connection = new ConnectionFactory().getConnection();
         if(ca.getVencedor() != 0){
             sql = "INSERT INTO CAMPEONATO (ANO, VENCEDOR) VALUES (?,?)";
         }else{
             sql = "INSERT INTO CAMPEONATO (ANO) VALUES (?)";
+            
+            String sql2 = "UPDATE TIMES SET POSICAO = 1";
+            PreparedStatement stmt2 = connection.prepareStatement(sql2);
+            stmt2.execute();
+            stmt2.close();
         }
-        Connection connection = new ConnectionFactory().getConnection();
+        
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, ca.getAno());
         if(ca.getVencedor() != 0){

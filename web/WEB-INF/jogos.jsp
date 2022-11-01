@@ -27,8 +27,11 @@
                 ${jogo.nome_casa} X ${jogo.nome_visitante}
                 <br> <!-- tira depois -->
                 ${jogo.data_jogo}
-                <a href="RemoverJogo?id=${jogo.id}"><i class="fa-solid fa-trash-can"></i></a>
-                <a href="EditarJogo?id=${jogo.id}"><i class="fa-solid fa-pencil"></i></a>
+                <c:if test="${autenticado.isAdministrador == true}">
+                  <a href="RemoverJogo?id=${jogo.id}"><i class="fa-solid fa-trash-can"></i></a>
+                  <a href="EditarJogo?id=${jogo.id}"><i class="fa-solid fa-pencil"></i></a>  
+                </c:if>
+                
             </div>
         </c:forEach>
         
@@ -36,7 +39,7 @@
                     <table>
                     <thead>
                       <tr>
-                        <th>TIME</th>
+                        <th>CLASSIFICAÇÃO</th>
                         <th>P</th>
                         <th>J</th>
                         <th>V</th>
@@ -48,17 +51,21 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <c:forEach varStatus="status" var="time" items="${times}">
+                      <c:forEach varStatus="status" var="participante" items="${participantes}">
                         <tr>
-                        <td>${time.nome}</td>
-                        <td>${time.pontos}</td>
-                        <td>${time.jogos}</td>        
-                        <td>${time.vitorias}</td>
-                        <td>${time.empates}</td>
-                        <td>${time.derrotas}</td>
-                        <td>${time.golsMarcados}</td>
-                        <td>${time.golsSofridos}</td>
-                        <td>${time.saldo}</td>
+                        <td> 
+                        <c:if test="${autenticado.isAdministrador == true}">
+                            <a href="EditarPosicao?id=${participante.id}"><i class="fa-solid fa-pencil"></i></a>  
+                        </c:if>
+                      ${participante.posicao} ${participante.nome}</td>
+                        <td>${participante.pontos}</td>
+                        <td>${participante.jogos}</td>        
+                        <td>${participante.vitorias}</td>
+                        <td>${participante.empates}</td>
+                        <td>${participante.derrotas}</td>
+                        <td>${participante.golsMarcados}</td>
+                        <td>${participante.golsSofridos}</td>
+                        <td>${participante.saldo}</td>
                         </tr>
                         
                       </c:forEach> 

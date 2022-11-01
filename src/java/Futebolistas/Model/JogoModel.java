@@ -12,6 +12,9 @@ import java.util.ArrayList;
 public class JogoModel {
     public void add (Jogo j) throws SQLException{
         JogoDAO dao = new JogoDAO();
+        if(j.getCampeonato() == 0){
+            return;
+        }
         dao.add(j);
     }
     

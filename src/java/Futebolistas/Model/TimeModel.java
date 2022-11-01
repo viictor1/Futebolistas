@@ -83,4 +83,14 @@ public class TimeModel {
         model.removerTorcedores(id);
         dao.remover(id);
     }
+    
+    public ArrayList<Time> selecionarParticipantes() throws SQLException{
+        TimeDAO dao = new TimeDAO();
+        return dao.selecionarParticipantes();
+    }
+    
+    public void alterarPosicao(Time t) throws SQLException{
+        TimeDAO dao = new TimeDAO();
+        dao.alterarPosicao(t);
+    }
 }

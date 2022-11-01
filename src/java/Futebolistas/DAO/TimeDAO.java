@@ -103,7 +103,7 @@ public class TimeDAO {
     }
     
     public ArrayList<Time> selecionarTodos() throws SQLException{
-        String sql = "SELECT IDTIME, NOME, DATA_FUNDACAO, TECNICO, PRESIDENTE, LOCAL_FUNDACAO, TITULOS, NUM_TORCEDORES, IDARQUIVO FROM TIMES ORDER BY NOME";
+        String sql = "SELECT IDTIME, NOME, DATA_FUNDACAO, TECNICO, PRESIDENTE, LOCAL_FUNDACAO, TITULOS, NUM_TORCEDORES, IDARQUIVO, POSICAO FROM TIMES ORDER BY NOME";
         ArrayList<Time> retorno = new ArrayList();
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
@@ -120,6 +120,7 @@ public class TimeDAO {
             t.setTitulos(rs.getInt("TITULOS"));
             t.setNum_torcedores(rs.getInt("NUM_TORCEDORES"));
             t.setIdArquivo(rs.getInt("IDARQUIVO"));
+            t.setPosicao(rs.getInt("POSICAO"));
             retorno.add(t);
         }
         stmt.close();
@@ -208,7 +209,7 @@ public class TimeDAO {
     }
     
     public Time selectTimeByID(int id) throws SQLException{
-        String sql = "SELECT IDTIME, NOME, DATA_FUNDACAO, TECNICO, PRESIDENTE, LOCAL_FUNDACAO, TITULOS, NUM_TORCEDORES, IDARQUIVO FROM TIMES WHERE IDTIME = ?";
+        String sql = "SELECT IDTIME, NOME, DATA_FUNDACAO, TECNICO, PRESIDENTE, LOCAL_FUNDACAO, TITULOS, NUM_TORCEDORES, IDARQUIVO, POSICAO FROM TIMES WHERE IDTIME = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, id);
@@ -225,10 +226,68 @@ public class TimeDAO {
             t.setTitulos(rs.getInt("TITULOS"));
             t.setNum_torcedores(rs.getInt("NUM_TORCEDORES"));
             t.setIdArquivo(rs.getInt("IDARQUIVO"));
+            t.setPosicao(rs.getInt("POSICAO"));
         }
         stmt.close();
         connection.close();
         return t;
     }
     
+    public ArrayList<Time> selecionarParticipantes() throws SQLException{
+        String sql = "SELECT IDTIME, NOME, DATA_FUNDACAO, TECNICO, PRESIDENTE, LOCAL_FUNDACAO, TITULOS, NUM_TORCEDORES, IDARQUIVO, POSICAO FROM TIMES WHERE POSICAO IS NOT NULL ORDER BY POSICAO";
+        ArrayList<Time> retorno = new ArrayList();
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        
+        while(rs.next()){
+            Time t = new Time();
+            t.setId(rs.getInt("IDTIME"));
+            t.setNome(rs.getString("NOME"));
+            t.setData_fundacao(rs.getDate("DATA_FUNDACAO"));
+            t.setTecnico(rs.getString("TECNICO"));
+            t.setPresidente(rs.getString("PRESIDENTE"));
+            t.setLocal_fundacao(rs.getString("LOCAL_FUNDACAO"));
+            t.setTitulos(rs.getInt("TITULOS"));
+            t.setNum_torcedores(rs.getInt("NUM_TORCEDORES"));
+            t.setIdArquivo(rs.getInt("IDARQUIVO"));
+            t.setPosicao(rs.getInt("POSICAO"));
+            retorno.add(t);
+        }
+        stmt.close();
+        connection.close();
+        return retorno; 
+    }
+    
+    public void alterarPosicao(Time t) throws SQLException{
+        Connection connection = new ConnectionFactory().getConnection();
+        
+        String sql = "UPDATE TIMES SET POSICAO = ? WHERE IDTIME = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, t.getPosicao());
+        stmt.setInt(2, t.getId());
+
+        String sql2 = "SELECT IDTIME, POSICAO FROM TIMES WHERE POSICAO >= ?";
+        PreparedStatement stmt2 = connection.prepareStatement(sql2);
+        stmt2.setInt(1, t.getPosicao());
+        ResultSet rs = stmt2.executeQuery();
+        while(rs.next()){
+            Time t2 = new Time();
+            t2.setId(rs.getInt("IDTIME"));
+            t2.setPosicao(rs.getInt("POSICAO") + 1);
+            String sql3 = "UPDATE TIMES SET POSICAO = ? WHERE IDTIME = ?";
+            PreparedStatement stmt3 = connection.prepareStatement(sql3);
+            stmt3.setInt(1, t2.getPosicao());
+            stmt3.setInt(2, t2.getId());
+            stmt3.execute();
+            stmt3.close();
+        }
+        stmt2.close();
+        
+        
+        stmt.execute();
+        stmt.close();
+    
+        connection.close();
+    }
 }

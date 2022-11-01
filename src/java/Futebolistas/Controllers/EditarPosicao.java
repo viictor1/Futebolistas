@@ -4,9 +4,7 @@
  */
 package Futebolistas.Controllers;
 
-import Futebolistas.Enteties.Jogo;
 import Futebolistas.Enteties.Time;
-import Futebolistas.Model.JogoModel;
 import Futebolistas.Model.TimeModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,14 +13,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
  * @author victo
  */
-@WebServlet(name = "Jogos", urlPatterns = {"/Jogos"})
-public class Jogos extends HttpServlet {
+@WebServlet(name = "EditarPosicao", urlPatterns = {"/EditarPosicao"})
+public class EditarPosicao extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -53,38 +53,14 @@ public class Jogos extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-        Hub hub = new Hub();
+        int id = Integer.parseInt(request.getParameter("id"));
+        TimeModel model = new TimeModel();
         try {
-            hub.loadlAll(request.getSession());
-            ArrayList<Jogo> jogos = (ArrayList<Jogo>) request.getSession().getAttribute("jogos");
-            TimeModel model = new TimeModel();
-            for(Jogo j : jogos){
-                Time casa = model.getTimeByID(j.getTime_casa());
-                Time visitante = model.getTimeByID(j.getTime_visitante());
-                
-                j.setNome_casa(casa.getNome());
-                j.setImg_casa(casa.getIdArquivo());
-                j.setNome_visitante(visitante.getNome());
-                j.setImg_visitante(visitante.getIdArquivo());
-            }
-            ArrayList<Time> times = (ArrayList<Time>) model.selecionarParticipantes();
-            JogoModel modelj = new JogoModel();
-            for(Time t : times){
-                t.setJogos(modelj.partidasJogadas(t.getId()));
-                t.setVitorias(modelj.vitorias(t.getId()));
-                t.setEmpates(modelj.empates(t.getId()));
-                t.setDerrotas(modelj.derrotas(t.getId()));
-                t.setPontos((t.getVitorias() * 3) + t.getEmpates());
-                t.setGolsMarcados(modelj.golsMarcados(t.getId()));
-                t.setGolsSofridos(modelj.golsSofridos(t.getId()));
-                t.setSaldo(t.getGolsMarcados() - t.getGolsSofridos());
-            }
-            request.setAttribute("participantes", times);
+            request.setAttribute("time", model.getTimeByID(id));
+            request.getRequestDispatcher("WEB-INF/editarPosicao.jsp").forward(request, response);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        
-        request.getRequestDispatcher("WEB-INF/jogos.jsp").forward(request, response);
     }
 
     /**
@@ -99,6 +75,18 @@ public class Jogos extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        int id = Integer.parseInt(request.getParameter("id"));
+        int posicao = Integer.parseInt(request.getParameter("posicao"));
+        TimeModel model = new TimeModel();
+        try {
+            Time t = model.getTimeByID(id);
+            t.setPosicao(posicao);
+            model.alterarPosicao(t);
+            response.sendRedirect("Jogos");
+        } catch (SQLException ex) {
+            Logger.getLogger(EditarPosicao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
