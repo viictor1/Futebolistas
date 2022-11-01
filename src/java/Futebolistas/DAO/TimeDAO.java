@@ -266,26 +266,21 @@ public class TimeDAO {
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, t.getPosicao());
         stmt.setInt(2, t.getId());
+        stmt.execute();
 
-        String sql2 = "SELECT IDTIME, POSICAO FROM TIMES WHERE POSICAO >= ?";
+        String sql2 = "SELECT IDTIME, POSICAO FROM TIMES WHERE POSICAO > 0 && POSICAO <= ?";
         PreparedStatement stmt2 = connection.prepareStatement(sql2);
         stmt2.setInt(1, t.getPosicao());
         ResultSet rs = stmt2.executeQuery();
         while(rs.next()){
             Time t2 = new Time();
             t2.setId(rs.getInt("IDTIME"));
-            t2.setPosicao(rs.getInt("POSICAO") + 1);
-            String sql3 = "UPDATE TIMES SET POSICAO = ? WHERE IDTIME = ?";
-            PreparedStatement stmt3 = connection.prepareStatement(sql3);
-            stmt3.setInt(1, t2.getPosicao());
-            stmt3.setInt(2, t2.getId());
-            stmt3.execute();
-            stmt3.close();
+            if(rs.getInt("POSICAO") == t.getPosicao()){
+                t2.setPosicao(rs.getInt("POSICAO") + 1);
+                alterarPosicao(t2);
+            }   
         }
-        stmt2.close();
-        
-        
-        stmt.execute();
+        stmt2.close();        
         stmt.close();
     
         connection.close();
