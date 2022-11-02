@@ -17,65 +17,43 @@ import java.util.ArrayList;
 public class Jogadora_TimeDAO {
     public void add(Jogadora_Time jt) throws SQLException{
         String sql = "INSERT INTO JOGADORA_TIME (ID_TIME, ID_JOGADORA, DATA_INICIO, NUMERO_ATUAL, POSICAO) VALUES (?,?,?,?,?)";
-        JogadoraDAO dao = new JogadoraDAO();
         Connection connection = new ConnectionFactory().getConnection();
-        try {
-            connection.setAutoCommit(false);
-            PreparedStatement stmt = connection.prepareStatement(sql);
-        
-            stmt.setInt(1, jt.getId_time());
-            stmt.setInt(2, jt.getId_jogadora());
-            stmt.setDate(3, jt.getData_inicio());;
-            stmt.setInt(4, jt.getNumero_atual());
-            stmt.setString(5, jt.getPosicao());
+        JogadoraDAO dao = new JogadoraDAO();
+        PreparedStatement stmt = connection.prepareStatement(sql);
 
-            stmt.execute();
-            stmt.close();
-            dao.alterarAtividade(jt.getId_jogadora(), true, connection);
-            connection.commit();
-        } catch (Exception e) {
-            connection.rollback();
-        } finally {
-            connection.close();
-        }       
+        stmt.setInt(1, jt.getId_time());
+        stmt.setInt(2, jt.getId_jogadora());
+        stmt.setDate(3, jt.getData_inicio());;
+        stmt.setInt(4, jt.getNumero_atual());
+        stmt.setString(5, jt.getPosicao());
+
+        stmt.execute();
+        stmt.close();
+        connection.close();
+      
     }
     
     public void removerPorIDJ(Jogadora_Time jt) throws SQLException{
         String sql = "DELETE FROM JOGADORA_TIME WHERE ID_JOGADORA = ?";
         JogadoraDAO dao = new JogadoraDAO();
         Connection connection = new ConnectionFactory().getConnection();
-        try {
-            connection.setAutoCommit(false);
-            dao.alterarAtividade(jt.getId_jogadora(), false, connection);
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, jt.getId_jogadora());
-            stmt.execute();
-            stmt.close();         
-            connection.commit();
-        } catch (Exception e) {
-            connection.rollback();
-        } finally {
-            connection.close();
-        }           
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, jt.getId_jogadora());
+        stmt.execute();
+        stmt.close();         
+        connection.close();        
     }
     
     public void removerPorIDT(Jogadora_Time jt) throws SQLException{
         String sql = "DELETE FROM JOGADORA_TIME WHERE ID_TIME = ?";
         JogadoraDAO dao = new JogadoraDAO();
         Connection connection = new ConnectionFactory().getConnection();
-        try {
-            connection.setAutoCommit(false);
-            dao.alterarAtividade(jt.getId_jogadora(), false, connection);
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, jt.getId_time());
-            stmt.execute();
-            stmt.close();         
-            connection.commit();
-        } catch (Exception e) {
-            connection.rollback();
-        } finally {
-            connection.close();
-        }           
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, jt.getId_time());
+        stmt.execute();
+        stmt.close();         
+        connection.close();
+               
     }
     
     public ArrayList<Jogadora_Time> selectAtuais(int id) throws SQLException{
@@ -129,27 +107,15 @@ public class Jogadora_TimeDAO {
         String sql = "UPDATE JOGADORA_TIME SET DATA_FIM = ?, NUMERO_ATUAL = ?, POSICAO = ? WHERE ID = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
-        try {
-            connection.setAutoCommit(false);
-            stmt.setDate(1, jt.getData_fim());
-            stmt.setInt(2, jt.getNumero_atual());
-            stmt.setString(3, jt.getPosicao());
-            stmt.setInt(4, jt.getId());
-            stmt.execute();
-            stmt.close();
-            if(jt.getData_fim() != null){
-                JogadoraDAO dao = new JogadoraDAO();
-                dao.alterarAtividade(jt.getId_jogadora(), false, connection);
-            }
-            connection.commit();
-        } catch (Exception e) {
-            connection.rollback();
-        } finally {
-            connection.close();
-        }
-        
-        
-        
+        stmt.setDate(1, jt.getData_fim());
+        stmt.setInt(2, jt.getNumero_atual());
+        stmt.setString(3, jt.getPosicao());
+        stmt.setInt(4, jt.getId());
+        stmt.execute();
+        stmt.close();
+
+        connection.close();
+              
     }
 
 }

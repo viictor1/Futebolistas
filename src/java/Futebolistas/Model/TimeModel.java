@@ -93,4 +93,9 @@ public class TimeModel {
         TimeDAO dao = new TimeDAO();
         dao.alterarPosicao(t);
     }
+    
+    public void sairDaCompeticao(int id) throws SQLException{
+        TimeDAO dao = new TimeDAO();
+        dao.sairDaCompeticao(id);
+    }
 }

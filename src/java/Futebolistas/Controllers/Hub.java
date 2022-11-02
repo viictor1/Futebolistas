@@ -127,19 +127,24 @@ public class Hub extends HttpServlet {
         ArrayList<Time> times = new ArrayList();
         ArrayList<Noticia> noticias = new ArrayList();
         ArrayList<Campeonato> cas = new ArrayList();
-        ArrayList<Jogadora> jogadoras = new ArrayList();
+        ArrayList<Jogadora> jogadorasL = new ArrayList();
         ArrayList<Jogo> jogos = new ArrayList();
+        ArrayList<Jogadora> jogadoras = new ArrayList();
         
         TimeModel modelt = new TimeModel();
         NoticiaModel modeln = new NoticiaModel();
         CampeonatoModel modelca = new CampeonatoModel();
         JogadoraModel modelj = new JogadoraModel();
         JogoModel modelJogo = new JogoModel();
+        
+        for(Jogadora j : modelj.selecionarTodas()){
+            modelj.atualizarAtividade(j.getId());
+        }
 
         times = modelt.selecionarTodos();
         noticias = modeln.selecionarTodos();
         cas = modelca.selecionarTodos();
-        jogadoras = modelj.selecionarTodos();
+        jogadorasL = modelj.selecionarLivres();
         jogos = modelJogo.proximosJogos();
         
         for(Time t : times){
@@ -151,7 +156,7 @@ public class Hub extends HttpServlet {
         sessao.setAttribute("times", times);
         sessao.setAttribute("noticias", noticias); // atribuindo tudo à sessão
         sessao.setAttribute("campeonatos", cas);
-        sessao.setAttribute("jogadoras", jogadoras);
+        sessao.setAttribute("jogadoras", jogadorasL);
         sessao.setAttribute("jogos", jogos);
     }
         

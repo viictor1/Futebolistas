@@ -4,6 +4,7 @@
  */
 package Futebolistas.Controllers;
 
+import Futebolistas.Model.TimeModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,10 +18,10 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author maluc
+ * @author victo
  */
-@WebServlet(name = "menuTimes", urlPatterns = {"/menuTimes"})
-public class MenuTimes extends HttpServlet {
+@WebServlet(name = "SairDaCompeticao", urlPatterns = {"/SairDaCompeticao"})
+public class SairDaCompeticao extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,12 +33,9 @@ public class MenuTimes extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String id = request.getParameter("idAlterar");
-        request.setAttribute("idAlterar", id);
-        request.getRequestDispatcher("WEB-INF/menuTimes.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -52,11 +50,16 @@ public class MenuTimes extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
+        
+        int id = Integer.parseInt(request.getParameter("id"));
+        TimeModel model = new TimeModel();
         try {
-            processRequest(request, response);
+            model.sairDaCompeticao(id);
         } catch (SQLException ex) {
-            Logger.getLogger(MenuTimes.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
+        response.sendRedirect("Jogos");
     }
 
     /**
@@ -70,11 +73,7 @@ public class MenuTimes extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(MenuTimes.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

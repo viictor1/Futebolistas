@@ -63,10 +63,7 @@ public class TimeDAO {
         ArrayList<Jogadora_Time> array = new ArrayList();
         try {
             connection.setAutoCommit(false);
-            array = model.selectJogadoras(id);
-            for(Jogadora_Time jogadora: array){
-                daoJ.alterarAtividade(jogadora.getId_jogadora(), false, connection);               
-            }
+            
             String sql2 = "DELETE FROM JOGADORA_TIME WHERE ID_TIME = ?"; // apagando as jogadoras_time 
             PreparedStatement stmt2 = connection.prepareStatement(sql2);
             stmt2.setInt(1, id);
@@ -284,6 +281,17 @@ public class TimeDAO {
         stmt2.close();        
         
     
+        connection.close();
+    }
+    
+    public void sairDaCompeticao(int id) throws SQLException{
+        Connection connection = new ConnectionFactory().getConnection();
+        
+        String sql = "UPDATE TIMES SET POSICAO = NULL WHERE IDTIME = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, id);
+        stmt.execute();
+        stmt.close();
         connection.close();
     }
 }
