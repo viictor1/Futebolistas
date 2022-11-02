@@ -267,10 +267,11 @@ public class TimeDAO {
         stmt.setInt(1, t.getPosicao());
         stmt.setInt(2, t.getId());
         stmt.execute();
-
-        String sql2 = "SELECT IDTIME, POSICAO FROM TIMES WHERE POSICAO > 0 && POSICAO <= ?";
+        stmt.close();
+        
+        String sql2 = "SELECT IDTIME, POSICAO FROM TIMES WHERE POSICAO > 0 AND IDTIME != ?";
         PreparedStatement stmt2 = connection.prepareStatement(sql2);
-        stmt2.setInt(1, t.getPosicao());
+        stmt2.setInt(1, t.getId());
         ResultSet rs = stmt2.executeQuery();
         while(rs.next()){
             Time t2 = new Time();
@@ -281,7 +282,7 @@ public class TimeDAO {
             }   
         }
         stmt2.close();        
-        stmt.close();
+        
     
         connection.close();
     }

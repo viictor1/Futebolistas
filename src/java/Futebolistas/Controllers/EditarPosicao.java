@@ -85,7 +85,7 @@ public class EditarPosicao extends HttpServlet {
             model.alterarPosicao(t);
             response.sendRedirect("Jogos");
         } catch (SQLException ex) {
-            Logger.getLogger(EditarPosicao.class.getName()).log(Level.SEVERE, null, ex);
+            response.sendRedirect("Jogos");
         }
     }
 
