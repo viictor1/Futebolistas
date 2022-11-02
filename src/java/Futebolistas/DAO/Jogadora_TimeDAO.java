@@ -57,7 +57,7 @@ public class Jogadora_TimeDAO {
     }
     
     public ArrayList<Jogadora_Time> selectAtuais(int id) throws SQLException{
-        String sql = "SELECT ID, ID_TIME, ID_JOGADORA, DATA_INICIO, DATA_FIM, NUMERO_ATUAL, POSICAO FROM JOGADORA_TIME WHERE ID_TIME = ? AND DATA_FIM IS NULL";
+        String sql = "SELECT ID, ID_TIME, ID_JOGADORA, DATA_INICIO, DATA_FIM, NUMERO_ATUAL, POSICAO FROM JOGADORA_TIME WHERE ID_TIME = ? AND DATA_FIM IS NULL ORDER BY NUMERO_ATUAL ASC";
         ArrayList<Jogadora_Time> retorno = new ArrayList();
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
@@ -116,6 +116,25 @@ public class Jogadora_TimeDAO {
 
         connection.close();
               
+    }
+    
+    public Boolean verificarNum(int num) throws SQLException{
+        String sql = "SELECT ID FROM JOGADORA_TIME WHERE NUMERO_ATUAL = ? AND DATA_FIM IS NULL";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, num);
+        ResultSet rs = stmt.executeQuery();
+        Boolean retorno;
+        
+        if(rs.next()){
+            retorno = true;
+        }
+        else{
+            retorno = false;
+        }
+        stmt.close();
+        connection.close();
+        return retorno;
     }
 
 }

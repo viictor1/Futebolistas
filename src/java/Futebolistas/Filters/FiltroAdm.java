@@ -18,7 +18,7 @@ import java.io.IOException;
  */
 @WebFilter(filterName = "FiltroAdm", servletNames = {"CadastrarTimes", "MenuCadastro", "NoticiaCadastrar", "CampeonatoCadastrar", 
     "JogadoraCadastrar", "JogoCadastrar", "UsuarioCadastrar", "RemoverTime", 
-    "RemoverNoticia", "RemoverJogadora", "RemoverJT", "RemoverCampeonato", "RemoverJogo", "EditarJogo"})
+    "RemoverNoticia", "RemoverJogadora", "RemoverJT", "RemoverCampeonato", "RemoverJogo", "EditarJogo", "EditarPosicao"})
 public class FiltroAdm implements Filter{
 
     @Override
@@ -31,7 +31,8 @@ public class FiltroAdm implements Filter{
         
         Usuario u = new Usuario();
         if("".equals(sessao.getAttribute("autenticado"))|| sessao.getAttribute("autenticado") == null ){
-            return;           
+            response.sendRedirect("Hub");
+            return;
         }
         else{
             u = (Usuario) sessao.getAttribute("autenticado");

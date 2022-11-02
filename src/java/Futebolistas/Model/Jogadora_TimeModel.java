@@ -15,6 +15,18 @@ public class Jogadora_TimeModel {
         if(jt.getId_jogadora() == 0){
             return;
         }
+        if(dao.verificarNum(jt.getNumero_atual())){
+            return;
+        }
+        if("".equals(jt.getData_inicio())){
+            return;
+        }
+        if("".equals(jt.getNumero_atual())){
+            return;
+        }
+        if("".equals(jt.getPosicao())){
+            return;
+        }
         dao.add(jt);
     }
     

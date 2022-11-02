@@ -17,19 +17,19 @@ import java.util.ArrayList;
 public class TimeModel {
     public void add(Time time, Arquivo img) throws SQLException{
         TimeDAO dao = new TimeDAO();
-        if(time.getNome() == null || time.getNome().equals("")){
+        if(time.getNome() == null || ("").equals(time.getNome())){
             return;
         }
-        if(time.getData_fundacao() == null || time.getData_fundacao().equals("")){
+        if(time.getData_fundacao() == null || ("").equals(time.getData_fundacao())){
             return;
         }
-        if(time.getTecnico() == null || time.getTecnico().equals("")){
+        if(time.getTecnico() == null || ("").equals(time.getTecnico())){
             return;
         }
-        if(time.getPresidente() == null || time.getPresidente().equals("")){
+        if(time.getPresidente() == null || ("").equals(time.getPresidente())){
             return;
         }
-        if(time.getLocal_fundacao() == null || time.getLocal_fundacao().equals("")){
+        if(time.getLocal_fundacao() == null || ("").equals( time.getLocal_fundacao())){
             return;
         }
         if(img.getConteudo().length == 0){
@@ -58,19 +58,19 @@ public class TimeModel {
         return t;
     }
     public void atualizarTime(Time time, int id, Arquivo arquivo) throws SQLException{
-        if(time.getNome() == null || time.getNome().equals("")){
+        if(time.getNome() == null || ("").equals(time.getNome())){
             return;
         }
-        if(time.getData_fundacao() == null || time.getData_fundacao().equals("")){
+        if(time.getData_fundacao() == null || ("").equals(time.getData_fundacao())){
             return;
         }
-        if(time.getTecnico() == null || time.getTecnico().equals("")){
+        if(time.getTecnico() == null || ("").equals(time.getTecnico())){
             return;
         }
-        if(time.getPresidente() == null || time.getPresidente().equals("")){
+        if(time.getPresidente() == null || ("").equals(time.getPresidente())){
             return;
         }
-        if(time.getLocal_fundacao() == null || time.getLocal_fundacao().equals("")){
+        if(time.getLocal_fundacao() == null || ("").equals( time.getLocal_fundacao())){
             return;
         }
         TimeDAO dao = new TimeDAO();

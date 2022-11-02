@@ -34,13 +34,13 @@
         <a href="CadastrarTimes?idAlterar=${idAlterar}" class="am">TIME
           <i class="fa-solid fa-screwdriver-wrench"></i>
         </a>
-        <a href="NoticiaCadastrar" class="am">NOTÍCIAS
+        <a href="NoticiaCadastrar" class="am">NOTÍCIA
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
-        <a href="JogadoraCadastrar" class="am">JOGADORAS
+        <a href="JogadoraCadastrar" class="am">JOGADORA
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
-        <a href="Hub?/=Cadastro" class="am">USUÁRIOS
+        <a href="Hub?/=Cadastro" class="am">USUÁRIO
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
-        <a href="CampeonatoCadastrar" class="am">CAMPEONATOS
+        <a href="CampeonatoCadastrar" class="am">CAMPEONATO
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
         <a href="JogoCadastrar" class="am">JOGO
         <i class="fa-solid fa-screwdriver-wrench"></i></a>

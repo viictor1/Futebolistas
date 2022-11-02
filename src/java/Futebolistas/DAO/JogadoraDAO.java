@@ -110,11 +110,9 @@ public class JogadoraDAO {
         Boolean retorno;
         
         if(rs.next()){
-            System.out.println("aaaa" + id);
             retorno = true;
         }
         else{
-            System.out.println("bbb" + id);
             retorno = false;
         }
         stmt.close();

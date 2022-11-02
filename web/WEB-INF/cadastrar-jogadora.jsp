@@ -22,10 +22,7 @@
             </div> 
             <div class="b-cadastro">
                 <div class="l-left">
-                    <span class="r">CADASTRO</span>
-                    <span class="r">E</span>
-                    <span class="r">REMOÇÃO</span>
-                    <span class="r">DE</span>
+                    <span class="r">MENU</span>
                     <span class="r">JOGADORAS</span>
                 </div>
                 <div class="middle"></div>
@@ -36,6 +33,8 @@
                     <input type="submit" name="" value="Cadastrar" class="btn-j">
                    </form>
                     </div>
+                    
+                    
                     <div class="form-this2">
                     <span class="n">Apagar Jogadora</span>
                     <form action="RemoverJogadora" method="post">

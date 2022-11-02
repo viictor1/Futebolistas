@@ -35,7 +35,7 @@
                                 <option value="${time.id}">${time.nome}</option>
                             </c:forEach>
                         </select>
-                        <input type="number" name="ano" value="" class="cadastro-j" placeholder="Ano">        
+                        <input type="number" name="ano" value="" class="cadastro-j" placeholder="Ano" required>        
                         <input type="submit" name="" value="Concluir" class="btn-j">   
                     </form>
                 </div>

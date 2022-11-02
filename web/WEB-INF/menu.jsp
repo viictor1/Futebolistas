@@ -20,7 +20,7 @@
             <ul>
               <li><a href="Hub">HOME</a></li>
               <li><a href="Times">TIMES</a></li> 
-              <li><a href="Jogos">JOGOS</a></li>
+              <li><a href="Jogos">CAMPEONATO</a></li>
               <li><a href="Campeonatos">VENCEDORES ANTIGOS</a></li>
               <li><a href="Torcidas">TORCIDAS</a></li>
               <li><a href="">HISTÓRIA</a></li>

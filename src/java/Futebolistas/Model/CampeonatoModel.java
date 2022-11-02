@@ -23,6 +23,9 @@ public class CampeonatoModel {
                 return;
             }
         }
+        if("".equals(ca.getAno())){
+            return;
+        }
         dao.add(ca);
     }
     

@@ -43,10 +43,10 @@
                         <input type="hidden" value="${jt.id_jogadora}" name="id_jogadora">
                     </c:if>
                     <c:if test="${jt.posicao == null}">
-                        <span class="r-little">Data de inicio:</span> <input type="date" name="data_inicio" class="cadastro-j">
+                        <span class="r-little">Data de inicio:</span> <input type="date" name="data_inicio" class="cadastro-j" required>
                     </c:if>
-                        <span class="r-little">Número:</span> <input type="number" name="numero" class="cadastro-j" value="${jt.numero_atual}">
-                    <span class="r-little">Posição:</span> <input type="text" name="posicao" class="cadastro-j" value="${jt.posicao}">
+                        <span class="r-little">Número:</span> <input type="number" name="numero" class="cadastro-j" value="${jt.numero_atual}" required>
+                    <span class="r-little">Posição:</span> <input type="text" name="posicao" class="cadastro-j" value="${jt.posicao}" required>
                     <input type="hidden" value="${id}" name="id">
                     <div class="custom-select"> 
                     <c:if test="${jt.posicao == null}">

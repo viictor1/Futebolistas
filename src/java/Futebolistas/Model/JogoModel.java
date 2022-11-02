@@ -15,6 +15,12 @@ public class JogoModel {
         if(j.getCampeonato() == 0){
             return;
         }
+        if("".equals(j.getData_jogo())){
+            return;
+        }
+        if("".equals(j.getTime_casa()) || "".equals(j.getTime_visitante())){
+            return;
+        }
         dao.add(j);
     }
     
@@ -35,6 +41,9 @@ public class JogoModel {
     
     public void atualizar(Jogo j) throws SQLException{
         JogoDAO dao = new JogoDAO();
+        if("".equals(j.getGol_casa()) || "".equals(j.getGol_visitante())){
+            return;
+        }
         dao.atualizar(j);
     }
     

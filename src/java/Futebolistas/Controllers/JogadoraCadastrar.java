@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -47,6 +49,12 @@ public class JogadoraCadastrar extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
+        Hub hub = new Hub();
+        try {
+            hub.loadlAll(request.getSession());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
         request.getRequestDispatcher("WEB-INF/cadastrar-jogadora.jsp").forward(request, response);
     }
 

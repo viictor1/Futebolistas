@@ -22,7 +22,7 @@
         ${jogo.nome_casa} X ${jogo.nome_visitante}
         <br> <!-- tira depois -->
         ${jogo.data_jogo}
-        gols casa <input type="number" name="golsCasa"> gols visitante <input type="number" name="golsVisitante">
+        gols casa <input type="number" name="golsCasa" required> gols visitante <input type="number" name="golsVisitante" required>
         <input type="submit" name="" value="Concluir" class="btn-j">   
         <input type="hidden" name="id" value="${jogo.id}">
         </form>

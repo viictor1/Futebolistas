@@ -21,7 +21,7 @@
         <c:import url="header.jsp"></c:import>
         <div class="pra-centralizar">
             <div class="estiquetas">
-                <a href="Times"><i class="fa-solid fa-chevron-left j"></i></a>
+                <a href="MenuCadastro"><i class="fa-solid fa-chevron-left j"></i></a>
             </div>  
             <div class="b-cadastro-big">
                 <div class="l-left">
@@ -37,11 +37,11 @@
                         <c:if test="${alterar.id != null}">
                         <input type="hidden" id="id" name="idArquivo" value="${alterar.idArquivo}">
                         </c:if>
-                    <input type="text" name="nome" value="${alterar.nome}" class="cadastro-j" placeholder="Nome do time">
-                    <input type="date" name="data" value="${alterar.data_fundacao}" class="cadastro-j" placeholder="Ano de Fundação">
-                    <input type="text" name="tecnico" value="${alterar.tecnico}" class="cadastro-j" placeholder="Técnico">
-                    <input type="text" name="presidente" value="${alterar.presidente}" class="cadastro-j" placeholder="Presidente">
-                    <input type="text" name="local" value="${alterar.local_fundacao}" class="cadastro-j" placeholder="Local de Fundação">
+                    <input type="text" name="nome" value="${alterar.nome}" class="cadastro-j" placeholder="Nome do time" required>
+                    <input type="date" name="data" value="${alterar.data_fundacao}" class="cadastro-j" placeholder="Ano de Fundação" required>
+                    <input type="text" name="tecnico" value="${alterar.tecnico}" class="cadastro-j" placeholder="Técnico" required>
+                    <input type="text" name="presidente" value="${alterar.presidente}" class="cadastro-j" placeholder="Presidente" required>
+                    <input type="text" name="local" value="${alterar.local_fundacao}" class="cadastro-j" placeholder="Local de Fundação" required>
                     <label for="file" class="file cadastro-j">Logo do time
                       <i class="fa-solid fa-image"></i>
                     </label>

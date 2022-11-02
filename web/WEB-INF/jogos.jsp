@@ -66,11 +66,12 @@
                         <td>${participante.golsMarcados}</td>
                         <td>${participante.golsSofridos}</td>
                         <td>${participante.saldo}</td>
-                        <td>
-                            <c:if test="${autenticado.isAdministrador == true}">
+                        <c:if test="${autenticado.isAdministrador == true}">
+                            <td>
                                 <a href="SairDaCompeticao?id=${participante.id}"><i class="fa-solid fa-trash-can"></i></a>
-                            </c:if>
-                        </td>      
+                            </td>
+                        </c:if>
+                              
                         </tr>
                         
                       </c:forEach> 
