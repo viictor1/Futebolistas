@@ -73,6 +73,13 @@
                     <form action="JogoCadastrar" method="post">
                         <input type="hidden" name="campeonato" value="${campeonato.id}">  <!--id do campeonato atual-->
                         <input type="date" name="data_jogo" class="cadastro-j" placeholder="Data do Jogo" required>
+                        <select class="select-jogadora" name="select">
+                            <option value="Primeira Fase">Primeira Fase</option>
+                            <option value="Quartas de Final">Quartas de Final</option>
+                            <option value="Semifinal">Semifinal</option>
+                            <option value="Final">Final</option>
+                        </select>
+
                         Time casa: <div id="div1" ondrop="drop_casa(event)" ondragover="allowDrop(event)">
                         <input type="hidden" name="time_casa" class="cadastro-j" placeholder="Time casa" required></div>
                         Time visitante: <div id="div1" ondrop="drop_visitante(event)" ondragover="allowDrop(event)">

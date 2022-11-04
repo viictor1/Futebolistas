@@ -52,9 +52,9 @@ public class EncerrarSessao extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-        HttpSession sessao = request.getSession();
-
-        sessao.invalidate(); // pegando a sessão e invalidando ela
+        HttpSession sessao = request.getSession(true);
+   
+        sessao.removeAttribute("autenticado");// pegando a sessão e removendo o usuario
         
         Cookie[] cookies = request.getCookies();
         
@@ -67,7 +67,9 @@ public class EncerrarSessao extends HttpServlet {
         }
  
         }
-        response.sendRedirect("Hub");  
+        
+        response.sendRedirect("Hub");
+         
     }
 
     /**

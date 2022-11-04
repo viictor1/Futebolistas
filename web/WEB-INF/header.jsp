@@ -94,6 +94,7 @@
   </div>
         <div id="menu-login" onclick="<c:if test="${autenticado == nul}">showModal()</c:if> <c:if test="${autenticado != nul}">showLogado()</c:if>"> <!-- mudando o modal que aparecerá dependendo se o usuário está ou não logado -->
       <center>
+      <c:if test="${autenticado != null}">Seja bem-vindo, ${autenticado.nome}!</c:if>
       <div class="line-login"></div>
       <div class="line-login"></div> <!-- Menu do lado fechado -->
       <div class="line-login"></div>

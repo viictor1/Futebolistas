@@ -65,62 +65,8 @@ public class Hub extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
-        HttpSession sessao = request.getSession(false);
-        Boolean achouCookie = false;
-        Usuario u = null;
         
-        if("Cadastro".equals(request.getParameter("/"))){
-            request.setAttribute("cadastro", true);
-        }
-        
-        if (sessao != null && sessao.getAttribute("autenticado") != null) {
-            u = (Usuario) sessao.getAttribute("autenticado"); // se tiver uma sessão aberta, é atribuida à sessão o usuario
-            sessao.setAttribute("autenticado", u);
-            try {
-                loadlAll(sessao);
-            } catch (SQLException ex) {
-                Logger.getLogger(Hub.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
-        
-        } else {
-            Cookie[] cookies = request.getCookies();
-            sessao = request.getSession(true);
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    if ("ManterLogado".equals(cookie.getName())) {
-                        UsuarioModel model = new UsuarioModel();
-                        try {
-                            u = model.selectUsuariobyID(Integer.parseInt(cookie.getValue())); // pegando o usuário pelo id dele que está no valor do cookie
-                        } catch (SQLException ex) {
-                            Logger.getLogger(Hub.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        
-                        sessao.setAttribute("autenticado", u); //se tiver um cookie de manter logado, é atribuida à sessão esse usuário
-                        try {
-                            loadlAll(sessao);
-                        } catch (SQLException ex) {
-                            System.out.println(ex.getMessage());
-                        }
-                        achouCookie = true; // declarando que o cookie foi achado
-                        request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
-                        break;
-                    }
-
-                }
-            }             
-        }
-        if (achouCookie != true) { 
-            try {
-            // se o cookie não for achado, ele é direcionado para a home sem o usuário, mas com os times
-            loadlAll(sessao);
-            } catch (SQLException ex) {
-                Logger.getLogger(Hub.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
-        }
-        
+        request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
     }
     
     public void loadlAll(HttpSession sessao) throws SQLException{

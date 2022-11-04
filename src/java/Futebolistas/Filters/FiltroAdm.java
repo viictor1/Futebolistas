@@ -17,7 +17,7 @@ import java.io.IOException;
  * @author maluc
  */
 @WebFilter(filterName = "FiltroAdm", servletNames = {"CadastrarTimes", "MenuCadastro", "NoticiaCadastrar", "CampeonatoCadastrar", 
-    "JogadoraCadastrar", "JogoCadastrar", "UsuarioCadastrar", "RemoverTime", 
+    "JogadoraCadastrar", "JogoCadastrar", "RemoverTime", 
     "RemoverNoticia", "RemoverJogadora", "RemoverJT", "RemoverCampeonato", "RemoverJogo", "EditarJogo", "EditarPosicao"})
 public class FiltroAdm implements Filter{
 
