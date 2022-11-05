@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/web/WEB-INF/jogos.jsp</file>
-            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/web/WEB-INF/cadastrar-jogo.jsp</file>
-            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/Controllers/JogoCadastrar.java</file>
-            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/DAO/JogoDAO.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/web/WEB-INF/listar-jogadoras.jsp</file>
+            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/web/WEB-INF/cadastrar-jogadora.jsp</file>
+            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/Controllers/ListarJogadoras.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/Filters/FiltroAdm.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/DAO/JogadoraDAO.java</file>
         </group>
     </open-files>
 </project-private>

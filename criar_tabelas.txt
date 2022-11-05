@@ -79,6 +79,7 @@ CREATE TABLE Jogo(
   gol_visitante INT,
   data_jogo DATE NOT NULL,
   fase VARCHAR(45) NOT NULL,
+  horario TIME NOT NULL,
   FOREIGN KEY (campeonato) REFERENCES Campeonato(id),
   FOREIGN KEY (time_visitante) REFERENCES Times(idtime),
   FOREIGN KEY (time_casa) REFERENCES Times(idtime)

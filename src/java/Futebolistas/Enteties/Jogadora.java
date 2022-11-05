@@ -8,6 +8,17 @@ public class Jogadora {
     private int id;
     private String nome;
     private Boolean ativa;
+    
+    private String nomeTime;
+
+    public String getNomeTime() {
+        return nomeTime;
+    }
+
+    public void setNomeTime(String nomeTime) {
+        this.nomeTime = nomeTime;
+    }
+    
 
     public Boolean getAtiva() {
         return ativa;

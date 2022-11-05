@@ -18,7 +18,7 @@ public class JogoModel {
         if("".equals(j.getData_jogo())){
             return;
         }
-        if("".equals(j.getTime_casa()) || "".equals(j.getTime_visitante())){
+        if(j.getTime_casa() == 0 || j.getTime_visitante() == 0){
             return;
         }
         if("".equals(j.getFase()) || j.getFase() == null){

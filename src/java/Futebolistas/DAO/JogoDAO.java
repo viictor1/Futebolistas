@@ -6,16 +6,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.sql.Time;
-
+import java.time.LocalTime;
+import java.util.ArrayList;
 /**
  *
  * @author victo
  */
 public class JogoDAO {
     public void add(Jogo j) throws SQLException{
-        String sql = "INSERT INTO JOGO (CAMPEONATO, TIME_VISITANTE, TIME_CASA, DATA_JOGO, FASE) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO JOGO (CAMPEONATO, TIME_VISITANTE, TIME_CASA, DATA_JOGO, FASE, HORARIO) VALUES (?,?,?,?,?,?)";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, j.getCampeonato());
@@ -23,6 +23,7 @@ public class JogoDAO {
         stmt.setInt(3, j.getTime_casa());
         stmt.setDate(4, j.getData_jogo());
         stmt.setString(5, j.getFase());
+        stmt.setTime(6, Time.valueOf(j.getHorario()));
         stmt.execute();
         stmt.close();
         connection.close();
@@ -39,7 +40,7 @@ public class JogoDAO {
     }
     
     public ArrayList<Jogo> proximosJogos() throws SQLException{
-        String sql = "SELECT ID, TIME_VISITANTE, TIME_CASA, DATA_JOGO, FASE FROM JOGO WHERE GOL_CASA IS NULL";
+        String sql = "SELECT ID, TIME_VISITANTE, TIME_CASA, DATA_JOGO, FASE, HORARIO FROM JOGO WHERE GOL_CASA IS NULL";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
@@ -52,6 +53,7 @@ public class JogoDAO {
             j.setTime_casa(rs.getInt("TIME_CASA"));
             j.setData_jogo(rs.getDate("DATA_JOGO"));
             j.setFase(rs.getString("FASE"));
+            j.setHorario(LocalTime.parse(String.valueOf(rs.getTime("HORARIO"))));
             retorno.add(j);
         }
         

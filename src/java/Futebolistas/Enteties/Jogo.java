@@ -5,7 +5,8 @@
 package Futebolistas.Enteties;
 
 import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalTime;
+
 
 /**
  *
@@ -15,6 +16,15 @@ public class Jogo {
     private int id, campeonato, time_visitante, time_casa, gol_casa, gol_visitante;
     private Date data_jogo;
     private String fase;
+    private LocalTime horario;
+
+    public LocalTime getHorario() {
+        return horario;
+    }
+
+    public void setHorario(LocalTime horario) {
+        this.horario = horario;
+    }
 
     public String getFase() {
         return fase;

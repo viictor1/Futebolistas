@@ -4,18 +4,18 @@
  */
 package Futebolistas.Controllers;
 
-import Futebolistas.Enteties.Jogo;
-import Futebolistas.Model.CampeonatoModel;
-import Futebolistas.Model.JogoModel;
+import Futebolistas.Enteties.Jogadora;
+import Futebolistas.Model.JogadoraModel;
+import Futebolistas.Model.Jogadora_TimeModel;
+import Futebolistas.Model.TimeModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,8 +24,8 @@ import java.util.logging.Logger;
  *
  * @author victo
  */
-@WebServlet(name = "JogoCadastrar", urlPatterns = {"/JogoCadastrar"})
-public class JogoCadastrar extends HttpServlet {
+@WebServlet(name = "ListarJogadoras", urlPatterns = {"/ListarJogadoras"})
+public class ListarJogadoras extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -56,13 +56,26 @@ public class JogoCadastrar extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-        CampeonatoModel model = new CampeonatoModel();
+        JogadoraModel model = new JogadoraModel();
         try {
-            request.setAttribute("campeonato", model.selectAtual());
+            ArrayList<Jogadora> array = model.selecionarTodas();
+            Jogadora_TimeModel modelJT = new Jogadora_TimeModel();
+            TimeModel modelT = new TimeModel();
+            for(Jogadora j : array){
+                System.out.println(j.getNome());
+                if(modelJT.getTimeByJogadora(j.getId()) == 0){
+                    j.setNomeTime("Sem Time");
+                }
+                else{
+                    j.setNomeTime(modelT.getTimeByID(modelJT.getTimeByJogadora(j.getId())).getNome());
+                }
+                
+            }
+            request.setAttribute("jogadorasAll", array);  
+            request.getRequestDispatcher("WEB-INF/listar-jogadoras.jsp").forward(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(JogoCadastrar.class.getName()).log(Level.SEVERE, null, ex);
+            response.sendRedirect("Hub");
         }
-        request.getRequestDispatcher("WEB-INF/cadastrar-jogo.jsp").forward(request, response);
     }
 
     /**
@@ -77,39 +90,6 @@ public class JogoCadastrar extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        try {
-        int campeonato, time_casa = 0, time_visitante = 0;
-        Date data_jogo;
-        String fase;
-        LocalTime horario;
-        
-        campeonato = Integer.parseInt(request.getParameter("campeonato"));
-        if(!"".equals(request.getParameter("time_casa")) && request.getParameter("time_casa") != null){
-            time_casa = Integer.parseInt(request.getParameter("time_casa"));
-        }
-        if(!"".equals(request.getParameter("time_visitante")) && request.getParameter("time_visitante") != null){
-            time_visitante = Integer.parseInt(request.getParameter("time_visitante"));
-        }
-        data_jogo = Date.valueOf(request.getParameter("data_jogo"));
-        horario = LocalTime.parse(request.getParameter("horario"));
-        fase = request.getParameter("select");       
-        
-        Jogo j = new Jogo();
-        j.setCampeonato(campeonato);
-        j.setTime_casa(time_casa);
-        j.setTime_visitante(time_visitante);
-        j.setData_jogo(data_jogo);
-        j.setHorario(horario);
-        j.setFase(fase);
-        
-        JogoModel model = new JogoModel();
-        
-            model.add(j);
-            response.sendRedirect("JogoCadastrar");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            response.sendRedirect("JogoCadastrar");
-        }
     }
 
     /**

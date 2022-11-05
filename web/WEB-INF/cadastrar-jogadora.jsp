@@ -49,6 +49,8 @@
                         <input type="submit" name="" value="Remover" class="btn-j">  
                         
                      </form>
+                    
+                    <a href="ListarJogadoras">ListarJogadoras</a>
                     </div>
                 </div>          
             </div>   

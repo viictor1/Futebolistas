@@ -136,5 +136,20 @@ public class Jogadora_TimeDAO {
         connection.close();
         return retorno;
     }
-
+    
+    public int getTimeByJogadora(int id) throws SQLException{
+        String sql = "SELECT ID_TIME FROM JOGADORA_TIME WHERE ID_JOGADORA = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, id);
+        int retorno = 0;
+        ResultSet rs = stmt.executeQuery();
+        Jogadora_Time jt = new Jogadora_Time();
+        while(rs.next()){
+            retorno = rs.getInt("ID_TIME");
+        }
+        stmt.close();
+        connection.close();
+        return retorno;   
+    }
 }

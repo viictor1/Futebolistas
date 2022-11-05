@@ -64,7 +64,6 @@ public class Jogos extends HttpServlet {
             for(Jogo j : jogos){             
                 Time casa = model.getTimeByID(j.getTime_casa());
                 Time visitante = model.getTimeByID(j.getTime_visitante());
-                
                 j.setNome_casa(casa.getNome());
                 j.setImg_casa(casa.getIdArquivo());
                 j.setNome_visitante(visitante.getNome());

@@ -73,6 +73,7 @@
                     <form action="JogoCadastrar" method="post">
                         <input type="hidden" name="campeonato" value="${campeonato.id}">  <!--id do campeonato atual-->
                         <input type="date" name="data_jogo" class="cadastro-j" placeholder="Data do Jogo" required>
+                        <input type="time" name="horario" class="cadastro-j" required>
                         <select class="select-jogadora" name="select">
                             <option value="Primeira Fase">Primeira Fase</option>
                             <option value="Quartas de Final">Quartas de Final</option>
