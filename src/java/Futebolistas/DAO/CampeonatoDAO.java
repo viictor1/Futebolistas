@@ -22,7 +22,7 @@ public class CampeonatoDAO{
             
         }else{
             sql = "INSERT INTO CAMPEONATO (ANO) VALUES (?)";
-            String sql3 = "DELETE * FROM JOGO";
+            String sql3 = "DELETE FROM JOGO";
             PreparedStatement stmt3 = connection.prepareStatement(sql3);
             stmt3.execute();
             stmt3.close();

@@ -34,6 +34,7 @@
                 </c:if>
                 <br> <!-- tira depois -->
                 ${jogo.data_jogo}
+                ${jogo.horario}
                 ${jogo.fase}
                 <c:if test="${autenticado.isAdministrador == true}">
                   <a href="RemoverJogo?id=${jogo.id}"><i class="fa-solid fa-trash-can"></i></a>
@@ -42,6 +43,7 @@
                 
             </div>
         </c:forEach>
+        <a href="HistoricoJogos">Ver Histórico de Jogos</a>
         Primeira Fase:
         <div class="tabela">
                     <table>

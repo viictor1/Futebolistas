@@ -5,6 +5,7 @@
 package Futebolistas.Enteties;
 
 import java.sql.Date;
+import java.sql.Time;
 
 /**
  *

@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.Time;
 
 /**
  *
@@ -93,7 +94,7 @@ public class JogoDAO {
     }
     
     public int partidasJogadas(int idTime) throws SQLException{
-        String sql = "SELECT ID FROM JOGO WHERE TIME_CASA = ? AND GOL_CASA IS NOT NULL AND FASE = 'PRIMEIRA FASE' ";
+        String sql = "SELECT ID, FASE FROM JOGO WHERE TIME_CASA = ? AND GOL_CASA IS NOT NULL";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, idTime);      
@@ -101,16 +102,22 @@ public class JogoDAO {
         int num = 0;
         
         while(rs.next()){
-            num++;
+            if("Primeira Fase".equals(rs.getString("FASE"))){
+                num++;
+            }
+            
         }
         stmt.close();
         
-        String sql2 = "SELECT ID FROM JOGO WHERE TIME_VISITANTE = ? AND GOL_VISITANTE IS NOT NULL AND FASE = 'PRIMEIRA FASE'";
+        String sql2 = "SELECT ID, FASE FROM JOGO WHERE TIME_VISITANTE = ? AND GOL_VISITANTE IS NOT NULL";
         PreparedStatement stmt2 = connection.prepareStatement(sql2);
         stmt2.setInt(1, idTime);
         ResultSet rs2 = stmt2.executeQuery();
         while(rs2.next()){
-            num++;
+            if("Primeira Fase".equals(rs2.getString("FASE"))){
+                num++;
+            }
+            
         }
         stmt2.close();
         connection.close();
@@ -118,7 +125,7 @@ public class JogoDAO {
     }
     
     public int vitorias(int idTime) throws SQLException{
-        String sql = "SELECT ID, GOL_CASA, GOL_VISITANTE FROM JOGO WHERE TIME_CASA = ? AND FASE = 'PRIMEIRA FASE'";
+        String sql = "SELECT ID, GOL_CASA, GOL_VISITANTE, FASE FROM JOGO WHERE TIME_CASA = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, idTime);      
@@ -126,18 +133,24 @@ public class JogoDAO {
         int vitorias = 0;
         while(rs.next()){
             if(rs.getInt("GOL_CASA") > rs.getInt("GOL_VISITANTE")){
+                if("Primeira Fase".equals(rs.getString("FASE"))){
                 vitorias++;
+            }
+                
             }
         }
         stmt.close();
         
-        String sql2 = "SELECT ID, GOL_CASA, GOL_VISITANTE FROM JOGO WHERE TIME_VISITANTE = ? AND FASE = 'PRIMEIRA FASE'";
+        String sql2 = "SELECT ID, GOL_CASA, GOL_VISITANTE, FASE FROM JOGO WHERE TIME_VISITANTE = ?";
         PreparedStatement stmt2 = connection.prepareStatement(sql2);
         stmt2.setInt(1, idTime);
         ResultSet rs2 = stmt2.executeQuery();
         while(rs2.next()){
             if(rs2.getInt("GOL_CASA") < rs2.getInt("GOL_VISITANTE")){
-                vitorias++;
+                if("Primeira Fase".equals(rs2.getString("FASE"))){
+                 vitorias++;
+            }
+               
             }
         }
         stmt2.close();
@@ -146,7 +159,7 @@ public class JogoDAO {
     }
     
     public int empates(int idTime) throws SQLException{
-        String sql = "SELECT ID, GOL_CASA, GOL_VISITANTE FROM JOGO WHERE FASE = 'PRIMEIRA FASE' AND TIME_CASA = ? OR TIME_VISITANTE = ? AND FASE = 'PRIMEIRA FASE'";
+        String sql = "SELECT ID, GOL_CASA, GOL_VISITANTE, FASE FROM JOGO WHERE TIME_CASA = ? OR TIME_VISITANTE = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, idTime); 
@@ -156,7 +169,10 @@ public class JogoDAO {
         while(rs.next()){
             if(rs.getInt("GOL_CASA") != 0 && rs.getInt("GOL_VISITANTE") != 0){
                 if(rs.getInt("GOL_CASA") == rs.getInt("GOL_VISITANTE")){
-                empates++;
+                    if("Primeira Fase".equals(rs.getString("FASE"))){
+                        empates++;
+                    }
+                
                 }
             }
             
@@ -167,7 +183,7 @@ public class JogoDAO {
     }
     
     public int derrotas(int idTime) throws SQLException{
-        String sql = "SELECT ID, GOL_CASA, GOL_VISITANTE FROM JOGO WHERE TIME_CASA = ? AND FASE = 'PRIMEIRA FASE'";
+        String sql = "SELECT ID, GOL_CASA, GOL_VISITANTE, FASE FROM JOGO WHERE TIME_CASA = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, idTime);      
@@ -175,18 +191,24 @@ public class JogoDAO {
         int derrotas = 0;
         while(rs.next()){
             if(rs.getInt("GOL_CASA") < rs.getInt("GOL_VISITANTE")){
-                derrotas++;
+                if("Primeira Fase".equals(rs.getString("FASE"))){
+                    derrotas++;
+                }
+                
             }
         }
         stmt.close();
         
-        String sql2 = "SELECT ID, GOL_CASA, GOL_VISITANTE FROM JOGO WHERE TIME_VISITANTE = ? AND FASE = 'PRIMEIRA FASE'";
+        String sql2 = "SELECT ID, GOL_CASA, GOL_VISITANTE, FASE FROM JOGO WHERE TIME_VISITANTE = ?";
         PreparedStatement stmt2 = connection.prepareStatement(sql2);
         stmt2.setInt(1, idTime);
         ResultSet rs2 = stmt2.executeQuery();
         while(rs2.next()){
             if(rs2.getInt("GOL_CASA") > rs2.getInt("GOL_VISITANTE")){
-                derrotas++;
+                if("Primeira Fase".equals(rs2.getString("FASE"))){
+                    derrotas++;
+                }
+                
             }
         }
         stmt2.close();
@@ -195,23 +217,29 @@ public class JogoDAO {
     }
     
     public int golsMarcados(int idTime) throws SQLException{
-        String sql = "SELECT ID, GOL_CASA FROM JOGO WHERE TIME_CASA = ? AND FASE = 'PRIMEIRA FASE'";
+        String sql = "SELECT ID, GOL_CASA, FASE FROM JOGO WHERE TIME_CASA = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, idTime);      
         ResultSet rs = stmt.executeQuery();
         int gols = 0;
         while(rs.next()){
-            gols += rs.getInt("GOL_CASA");
+            if("Primeira Fase".equals(rs.getString("FASE"))){
+                gols += rs.getInt("GOL_CASA");
+            }
+            
         }
         stmt.close();
         
-        String sql2 = "SELECT ID, GOL_VISITANTE FROM JOGO WHERE TIME_VISITANTE = ? AND FASE = 'PRIMEIRA FASE'";
+        String sql2 = "SELECT ID, GOL_VISITANTE, FASE FROM JOGO WHERE TIME_VISITANTE = ?";
         PreparedStatement stmt2 = connection.prepareStatement(sql2);
         stmt2.setInt(1, idTime);
         ResultSet rs2 = stmt2.executeQuery();
         while(rs2.next()){
-            gols += rs2.getInt("GOL_VISITANTE");
+            if("Primeira Fase".equals(rs2.getString("FASE"))){
+                gols += rs2.getInt("GOL_VISITANTE");
+            }
+            
         }
         stmt2.close();
         connection.close();
@@ -220,27 +248,57 @@ public class JogoDAO {
     }
     
     public int golsSofridos(int idTime) throws SQLException{
-        String sql = "SELECT ID, GOL_VISITANTE FROM JOGO WHERE TIME_CASA = ? AND FASE = 'PRIMEIRA FASE'";
+        String sql = "SELECT ID, GOL_VISITANTE, FASE FROM JOGO WHERE TIME_CASA = ?";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, idTime);      
         ResultSet rs = stmt.executeQuery();
         int gols = 0;
         while(rs.next()){
-            gols += rs.getInt("GOL_VISITANTE");
+            if("Primeira Fase".equals(rs.getString("FASE"))){
+                gols += rs.getInt("GOL_VISITANTE");
+            }
+            
         }
         stmt.close();
         
-        String sql2 = "SELECT ID, GOL_CASA FROM JOGO WHERE TIME_VISITANTE = ? AND FASE = 'PRIMEIRA FASE'";
+        String sql2 = "SELECT ID, GOL_CASA, FASE FROM JOGO WHERE TIME_VISITANTE = ?";
         PreparedStatement stmt2 = connection.prepareStatement(sql2);
         stmt2.setInt(1, idTime);
         ResultSet rs2 = stmt2.executeQuery();
         while(rs2.next()){
-            gols += rs2.getInt("GOL_CASA");
+            if("Primeira Fase".equals(rs2.getString("FASE"))){
+                gols += rs2.getInt("GOL_CASA");
+            }
+            
         }
         stmt2.close();
         connection.close();
         
         return gols;
+    }
+    
+    public ArrayList<Jogo> selectHistorico() throws SQLException{
+        String sql = "SELECT ID, TIME_VISITANTE, TIME_CASA, DATA_JOGO, FASE, GOL_CASA, GOL_VISITANTE FROM JOGO WHERE GOL_CASA IS NOT NULL";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        
+        ArrayList<Jogo> retorno = new ArrayList();
+        while(rs.next()){
+            Jogo j = new Jogo();
+            j.setId(rs.getInt("ID"));
+            j.setTime_visitante(rs.getInt("TIME_VISITANTE"));
+            j.setTime_casa(rs.getInt("TIME_CASA"));
+            j.setData_jogo(rs.getDate("DATA_JOGO"));
+            j.setFase(rs.getString("FASE"));
+            j.setGol_casa(rs.getInt("GOL_CASA"));
+            j.setGol_visitante(rs.getInt("GOL_VISITANTE"));
+            retorno.add(j);
+        }
+        
+        stmt.close();
+        connection.close();
+        return retorno;
     }
 }

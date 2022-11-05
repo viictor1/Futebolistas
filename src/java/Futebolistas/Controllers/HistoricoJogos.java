@@ -5,16 +5,17 @@
 package Futebolistas.Controllers;
 
 import Futebolistas.Enteties.Jogo;
-import Futebolistas.Model.CampeonatoModel;
-import Futebolistas.Model.JogoModel;
+import Futebolistas.Enteties.Time;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Date;
+import Futebolistas.Model.JogoModel;
+import Futebolistas.Model.TimeModel;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,8 +24,8 @@ import java.util.logging.Logger;
  *
  * @author victo
  */
-@WebServlet(name = "JogoCadastrar", urlPatterns = {"/JogoCadastrar"})
-public class JogoCadastrar extends HttpServlet {
+@WebServlet(name = "HistoricoJogos", urlPatterns = {"/HistoricoJogos"})
+public class HistoricoJogos extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -55,13 +56,24 @@ public class JogoCadastrar extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-        CampeonatoModel model = new CampeonatoModel();
+        JogoModel modelj = new JogoModel();
+        TimeModel model = new TimeModel();
         try {
-            request.setAttribute("campeonato", model.selectAtual());
+            ArrayList<Jogo> array = modelj.selectHistorico();
+            for(Jogo j : array){             
+                Time casa = model.getTimeByID(j.getTime_casa());
+                Time visitante = model.getTimeByID(j.getTime_visitante());
+                
+                j.setNome_casa(casa.getNome());
+                j.setImg_casa(casa.getIdArquivo());
+                j.setNome_visitante(visitante.getNome());
+                j.setImg_visitante(visitante.getIdArquivo());
+            }
+            request.setAttribute("historico", array);       
+            request.getRequestDispatcher("WEB-INF/historico-jogos.jsp").forward(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(JogoCadastrar.class.getName()).log(Level.SEVERE, null, ex);
+            response.sendRedirect("Jogos");
         }
-        request.getRequestDispatcher("WEB-INF/cadastrar-jogo.jsp").forward(request, response);
     }
 
     /**
@@ -76,33 +88,6 @@ public class JogoCadastrar extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        try {
-        int campeonato, time_casa, time_visitante;
-        Date data_jogo;
-        String fase, horario;
-        
-        campeonato = Integer.parseInt(request.getParameter("campeonato"));
-        time_casa = Integer.parseInt(request.getParameter("time_casa"));
-        time_visitante = Integer.parseInt(request.getParameter("time_visitante"));
-        data_jogo = Date.valueOf(request.getParameter("data_jogo"));
-        horario = request.getParameter("horario");
-        fase = request.getParameter("select");       
-        
-        Jogo j = new Jogo();
-        j.setCampeonato(campeonato);
-        j.setTime_casa(time_casa);
-        j.setTime_visitante(time_visitante);
-        j.setData_jogo(data_jogo);
-        j.setFase(fase);
-        
-        JogoModel model = new JogoModel();
-        
-            model.add(j);
-            response.sendRedirect("JogoCadastrar");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            response.sendRedirect("JogoCadastrar");
-        }
     }
 
     /**

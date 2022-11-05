@@ -32,6 +32,11 @@ public class JogoModel {
         return dao.proximosJogos();
     }
     
+    public ArrayList<Jogo> selectHistorico() throws SQLException{
+        JogoDAO dao = new JogoDAO();
+        return dao.selectHistorico();
+    }
+    
     public void remover(int id) throws SQLException{
         JogoDAO dao = new JogoDAO();
         dao.remover(id);
