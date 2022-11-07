@@ -1,10 +1,8 @@
 package Futebolistas.DAO;
 
 import Futebolistas.Connections.ConnectionFactory;
-import Futebolistas.Enteties.Jogadora;
 import Futebolistas.Enteties.Jogadora_Time;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

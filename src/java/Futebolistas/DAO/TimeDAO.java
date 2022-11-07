@@ -5,18 +5,14 @@
 package Futebolistas.DAO;
 
 import Futebolistas.Connections.ConnectionFactory;
-import Futebolistas.Controllers.Times;
 import Futebolistas.Enteties.Arquivo;
-import Futebolistas.Enteties.Jogadora;
 import Futebolistas.Enteties.Jogadora_Time;
 import Futebolistas.Enteties.Time;
-import Futebolistas.Model.JogadoraModel;
 import Futebolistas.Model.Jogadora_TimeModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 /**

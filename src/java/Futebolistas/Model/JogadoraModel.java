@@ -45,4 +45,9 @@ public class JogadoraModel {
         }
         dao.remover(id);
     }
+    
+    public void editar(Jogadora j) throws SQLException{
+        JogadoraDAO dao = new JogadoraDAO();
+        dao.editar(j);
+    }
 }

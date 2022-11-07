@@ -119,4 +119,14 @@ public class JogadoraDAO {
         return retorno;
     }
    
+    public void editar(Jogadora j) throws SQLException{
+        String sql = "UPDATE JOGADORAS SET NOME = ? WHERE ID = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, j.getNome());
+        stmt.setInt(2, j.getId());
+        stmt.execute();
+        stmt.close();
+        connection.close();
+    }
 }

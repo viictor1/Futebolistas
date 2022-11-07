@@ -29,9 +29,8 @@
                     <tbody>
                       <c:forEach varStatus="status" var="jogadora" items="${jogadorasAll}">
                         <tr>
-                        <td>${jogadora.nome}</td>
-                        <td>${jogadora.nomeTime}</td>
-                        <td><a href=""><i class="fa-solid fa-pencil"></i></a></td>                   
+                        <td>${jogadora.nome}  <a href="JogadoraEditar?id=${jogadora.id}"> <i class="fa-solid fa-pencil"></i></a></td>
+                        <td>${jogadora.nomeTime}</td>               
                         </tr>
                         
                       </c:forEach> 

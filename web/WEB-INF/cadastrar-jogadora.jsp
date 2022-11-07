@@ -29,13 +29,15 @@
                 <div class="r-right">
                     <div class="form-this">
                     <form action="JogadoraCadastrar" method="post">         
-                    <input type="text" name="nome" class="cadastro-j" placeholder="Nome">        
-                    <input type="submit" name="" value="Cadastrar" class="btn-j">
+                        <input type="text" name="nome" class="cadastro-j" placeholder="Nome" value="${editar.nome}">    
+                    <input type="hidden" name="id" value="${editar.id}">
+                    <input type="submit" name="" value="Concluir" class="btn-j">
                    </form>
                     </div>
                     
-                    
+                
                     <div class="form-this2">
+                    <c:if test="${editar.id == null}">
                     <span class="n">Apagar Jogadora</span>
                     <form action="RemoverJogadora" method="post">
                         <div class="custom-select">
@@ -49,8 +51,8 @@
                         <input type="submit" name="" value="Remover" class="btn-j">  
                         
                      </form>
-                    
-                    <a href="ListarJogadoras">ListarJogadoras</a>
+                    </c:if>    
+                    <a href="ListarJogadoras">Listar Jogadoras</a>
                     </div>
                 </div>          
             </div>   
