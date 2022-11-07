@@ -40,7 +40,7 @@ public class JogoDAO {
     }
     
     public ArrayList<Jogo> proximosJogos() throws SQLException{
-        String sql = "SELECT ID, TIME_VISITANTE, TIME_CASA, DATA_JOGO, FASE, HORARIO FROM JOGO WHERE GOL_CASA IS NULL";
+        String sql = "SELECT ID, TIME_VISITANTE, TIME_CASA, DATA_JOGO, FASE, HORARIO FROM JOGO WHERE GOL_CASA IS NULL ORDER BY DATA_JOGO, HORARIO";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
@@ -281,7 +281,7 @@ public class JogoDAO {
     }
     
     public ArrayList<Jogo> selectHistorico() throws SQLException{
-        String sql = "SELECT ID, TIME_VISITANTE, TIME_CASA, DATA_JOGO, FASE, GOL_CASA, GOL_VISITANTE FROM JOGO WHERE GOL_CASA IS NOT NULL";
+        String sql = "SELECT ID, TIME_VISITANTE, TIME_CASA, DATA_JOGO, FASE, GOL_CASA, GOL_VISITANTE FROM JOGO WHERE GOL_CASA IS NOT NULL ORDER BY DATA_JOGO";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
