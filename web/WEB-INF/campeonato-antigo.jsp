@@ -34,15 +34,11 @@
         <div class="swiper-slide card">
             
           <div class="card-content">
-              
-              
-            <div class="image">
-              <img src="">
+         
+              <div class="image"> <img src="MostrarImagem?id=${campeonato.imagem}">
             </div>
             <div class="media-icons">   
                 <c:if test="${autenticado.isAdministrador == true}">
-                    
-                    <a href="CadastrarTimes?idAlterar=${time.id}"><i class="fa-solid fa-pencil"></i></a>
                     <a href="RemoverCampeonato?id=${campeonato.id}"><i class="fa-solid fa-trash-can"></i></a>
                 </c:if>
 

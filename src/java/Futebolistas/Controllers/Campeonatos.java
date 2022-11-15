@@ -67,7 +67,7 @@ public class Campeonatos extends HttpServlet {
                         Logger.getLogger(Campeonatos.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     campeonato.setNome(t.getNome());
-                    System.out.println(campeonato.getNome());
+                    campeonato.setImagem(t.getIdArquivo());
                 }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

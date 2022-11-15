@@ -18,7 +18,7 @@
         <c:import url="menu.jsp"></c:import>
         <div class="pra-centralizar">
             <div class="estiquetas">
-                <a href="Hub"><i class="fa-solid fa-chevron-left"></i></a>
+                <a href="Hub"><i class="fa-solid fa-chevron-left j"></i></a>
             </div>
             <div class="bonitinha">
                 <div class="c2">

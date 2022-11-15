@@ -15,9 +15,17 @@
         <style>
             #div1 {
                 width: 2.5vw;
-                height: 4.5vh;
+                height: 5vh;
+                flex-direction: row;
+                display: flex;
+                gap: 10px;
+                position: relative;
             }
-            
+            .controle{
+                max-width: 220px;
+                overflow-x: scroll;
+                height: 60px;
+            }
         </style>
         <script>
             function allowDrop(ev) {
@@ -59,10 +67,10 @@
         <c:import url="header.jsp"></c:import>
             <div class="pra-centralizar">
                 <div class="estiquetas">
-                    <a href="MenuCadastro"><i class="fa-solid fa-chevron-left j"></i></a>
+                    <a href="MenuCadastro"><i class="fa-solid fa-chevron-left j3"></i></a>
                 </div>  
             
-            <div class="b-cadastro">
+            <div class="b-cadastro2">
                 <div class="l-left">
                     <span class="r">CADASTRO</span>
                     <span class="r">DE</span>
@@ -87,12 +95,13 @@
                             <input type="hidden" name="time_visitante" required></div>
 
                         Times:
+                        <div class="controle">
                         <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"> 
                             <c:forEach var="time" items="${times}">          
                                 <img id="${time.id}" src="MostrarImagem?id=${time.idArquivo}" draggable="true" ondragstart="drag(event)" width="100%" height="100%"> 
                             </c:forEach>
                         </div>
-
+                        </div>
                         <input type="submit" name="" value="Concluir" class="btn-j">
                     </form> 
                 </div>

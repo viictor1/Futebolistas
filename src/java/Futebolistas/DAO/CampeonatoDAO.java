@@ -47,6 +47,12 @@ public class CampeonatoDAO{
     public void remover(Campeonato ca) throws SQLException{
         String sql = "DELETE FROM CAMPEONATO WHERE ID = ?";
         Connection connection = new ConnectionFactory().getConnection();
+        if(selecionarUltimo().getId() == ca.getId()){
+            String sql2 = "DELETE FROM JOGO";
+            PreparedStatement stmt2 = connection.prepareStatement(sql2);
+            stmt2.execute();
+            stmt2.close();
+        }
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, ca.getId());
         stmt.execute();
@@ -149,7 +155,7 @@ public class CampeonatoDAO{
         PreparedStatement stmt = connection.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
         Campeonato ca = new Campeonato();
-        while(rs.next()){
+        if(rs.next()){
             ca.setId(rs.getInt("ID"));
             ca.setAno(rs.getInt("ANO"));
             ca.setVencedor(rs.getInt("VENCEDOR"));

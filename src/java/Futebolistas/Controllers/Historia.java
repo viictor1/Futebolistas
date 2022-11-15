@@ -4,27 +4,22 @@
  */
 package Futebolistas.Controllers;
 
-import Futebolistas.Enteties.Usuario;
-import Futebolistas.Model.UsuarioModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 
 /**
  *
- * @author victo
+ * @author maluc
  */
-@WebServlet(name = "AlterarSenha", urlPatterns = {"/AlterarSenha"})
-public class AlterarSenha extends HttpServlet {
+@WebServlet(name = "Historia", urlPatterns = {"/Historia"})
+public class Historia extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,6 +33,9 @@ public class AlterarSenha extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            request.getRequestDispatcher("WEB-INF/historia.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,23 +65,6 @@ public class AlterarSenha extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
-        HttpSession sessao = request.getSession();
-        Usuario u = (Usuario) sessao.getAttribute("autenticado");
-        sessao.removeAttribute("autenticado");
-        
-        String senhaAntiga = request.getParameter("senhaAntiga");
-        String senhaNova = request.getParameter("senhaNova");
-        if(senhaAntiga.equals(u.getSenha())){ // verificando se a senha digitada pelo usuário é realmente a senha antiga, e alterando a senha
-            UsuarioModel model = new UsuarioModel();
-            try {
-                model.alterarSenha(u.getId(), senhaNova);
-                sessao.setAttribute("autenticado", model.selectUsuariobyID(u.getId()));
-                request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
-            } catch (SQLException ex) {
-                Logger.getLogger(AlterarSenha.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }       
     }
 
     /**

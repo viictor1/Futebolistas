@@ -20,7 +20,7 @@
         <c:import url="header.jsp"></c:import>
         <div class="pra-centralizar">
         <div class="estiquetas">
-                <a href="Hub"><i class="fa-solid fa-xmark j"></i></a>
+                <a href="Hub"><i class="fa-solid fa-xmark j3"></i></a>
             </div>
          <div class="both">
       <div class="left">
@@ -38,8 +38,8 @@
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
         <a href="JogadoraCadastrar" class="am">JOGADORA
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
-        <a href="Hub?/=Cadastro" class="am">USUÁRIO
-        <i class="fa-solid fa-screwdriver-wrench"></i></a>
+        <span onclick="showCadastro()"><a class="am">USUÁRIO
+                <i class="fa-solid fa-screwdriver-wrench"></i></a></span>
         <a href="CampeonatoCadastrar" class="am">CAMPEONATO
         <i class="fa-solid fa-screwdriver-wrench"></i></a>
         <a href="JogoCadastrar" class="am">JOGO

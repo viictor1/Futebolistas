@@ -21,7 +21,7 @@
         
         <div class="pra-centralizar">
             <div class="estiquetas">
-                <a href="Times"><i class="fa-solid fa-chevron-left"></i></a>
+                <a href="Times"><i class="fa-solid fa-chevron-left j"></i></a>
                 <c:if test="${autenticado.isAdministrador == true}">
                     <a href="Jogadora_TimeServlet?id=${time.id}"><i class="fa-solid fa-pencil fa-2"><span class="cje">Cadastrar Jogadoras</span></i></a>
                 </c:if>

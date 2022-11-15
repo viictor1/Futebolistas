@@ -17,7 +17,7 @@
         <c:import url="header.jsp"></c:import>
             <div class="pra-centralizar">
                 <div class="estiquetas">
-                    <a href="MenuCadastro"><i class="fa-solid fa-chevron-left j"></i></a>
+                    <a href="MenuCadastro"><i class="fa-solid fa-chevron-left j3"></i></a>
                 </div>     
                 <div class="b-cadastro">
 
@@ -30,7 +30,7 @@
                     <div class="r-right">
                         <form class="" action="CampeonatoCadastrar" method="post">
                             <select name="selectTime" class="select-jogadora">
-                                <option value="0"> </option>
+                                <option value="0"></option>
                             <c:forEach var="time" items="${times}">
                                 <option value="${time.id}">${time.nome}</option>
                             </c:forEach>

@@ -17,25 +17,37 @@
         <c:import url="header.jsp"></c:import> 
         <c:import url="menu.jsp"></c:import>
         
-        <h1>Jogadoras Cadastradas:</h1>
-        <div class="tabela">
-                    <table>
-                    <thead>
-                      <tr>
-                        <th>JOGADORA</th>
-                        <th>TIME</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <c:forEach varStatus="status" var="jogadora" items="${jogadorasAll}">
-                        <tr>
-                        <td>${jogadora.nome}  <a href="JogadoraEditar?id=${jogadora.id}"> <i class="fa-solid fa-pencil"></i></a></td>
-                        <td>${jogadora.nomeTime}</td>               
-                        </tr>
-                        
-                      </c:forEach> 
-                    </tbody>
-                  </table>   
-                    </div>
+        <div class="pra-centralizar">
+            <div class="estiquetas">
+                <a href="JogadoraCadastrar"><i class="fa-solid fa-chevron-left j"></i></a>
+            </div> 
+            <div class="b-small">
+                <div class="l-small">
+                    <span class="r">Jogadoras</span> 
+                    <span class="r">Cadastradas</span>
+                </div>
+                <div class="r-small">
+                    <div class="tabela">
+                        <table>
+                            <thead>
+                              <tr>
+                                <th>JOGADORA</th>
+                                <th>TIME</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <c:forEach varStatus="status" var="jogadora" items="${jogadorasAll}">
+                                <tr>
+                                <td>${jogadora.nome}  <a href="JogadoraEditar?id=${jogadora.id}"> <i class="fa-solid fa-pencil t"></i></a></td>
+                                <td>${jogadora.nomeTime}</td>               
+                                </tr>                        
+                              </c:forEach> 
+                            </tbody>
+                        </table>   
+                </div>
+                </div>                
+            </div>
+        </div>
+        
     </body>
 </html>

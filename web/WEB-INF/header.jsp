@@ -15,6 +15,7 @@
         <link href="http://fonts.cdnfonts.com/css/lovelo" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="estilo.css">
+        <script src="https://kit.fontawesome.com/46a2e52881.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="style.css" type="text/css">
         <link rel="stylesheet" href="everyone.css" type="text/css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -87,14 +88,16 @@
             </style>
     </head>
     <body>
-        
+        <div class="first">   
     <div id="decoration">
     <div id="barra"></div>
     <div id="textinho">SITE FOCADO NO <br> FUTEBOL FEMININO </div>
   </div>
-        <div id="menu-login" onclick="<c:if test="${autenticado == nul}">showModal()</c:if> <c:if test="${autenticado != nul}">showLogado()</c:if>"> <!-- mudando o modal que aparecerá dependendo se o usuário está ou não logado -->
-      <center>
+        <div class="boasvindas">
       <c:if test="${autenticado != null}">Seja bem-vindo, ${autenticado.nome}!</c:if>
+      </div>
+    <div id="menu-login" onclick="<c:if test="${autenticado == nul}">showModal()</c:if> <c:if test="${autenticado != nul}">showLogado()</c:if>"> <!-- mudando o modal que aparecerá dependendo se o usuário está ou não logado -->
+      <center>
       <div class="line-login"></div>
       <div class="line-login"></div> <!-- Menu do lado fechado -->
       <div class="line-login"></div>
@@ -105,19 +108,20 @@
     </div>
     <div id="smenu">FUTEBOLISTAS</div>
     <hr color="black" size="3px">
+    </div>
         <c:if test="${autenticado == null}"> <!-- Se não tiver usuário logado, aparecerá esse menu -->
     <div class="side-menu">
       <div class="modal" id="modal">
         <div class="modal-content">
           <span class="x" onclick="hideModal()">&times;</span>
           <div id=modal-titulo>USUÁRIO</div>
-          <div class="modal-line"></div>
+          <div class="nada">
+          <div class="modal-line"></div>          
           <div class="option" onclick="showLogin();hideModal()"><center>Login</center></div>
           <div class="modal-line"></div>
           <div class="option" onclick="showCadastro();hideModal()"><center>Registrar Conta</center></div>
-          <div class="modal-line"></div>
-          <div class="option"><center>Mais Opções</center></div>
-          <div class="modal-line"></div>
+          <div class="modal-line"></div>  
+          </div>
         </div>
       </div>
     </div>
@@ -128,7 +132,7 @@
     <div class="modal-logado" id="modal-logado">
     <div class="content-logado">        
     <span class="x" onclick="hideLogado()">&times;</span>
-    <div id=modal-titulo>${autenticado.nome}</div> <!--AQ É A VARIÁVEL DO NOME QUE O USUÁRIO ESCOLHEU -->
+    <div id="modal-titulo">${autenticado.nome}</div> <!--AQ É A VARIÁVEL DO NOME QUE O USUÁRIO ESCOLHEU -->
     <a href="SaibaMaisTime?id=${autenticado.time}"><div class="option"><center>Meu Time</center></div></a>
     <div class="modal-line"></div>
     <div class="option" onclick="showAtualizarS();hideLogado()"><center>Alterar Senha</center></div>
@@ -146,72 +150,103 @@
       </c:if>  
     
         <div class="login"> <!-- Modal para fazer login -->
-      <div class="modal-login" id="modal-login">
-        <div class="content-login">
-          <span class="x" onclick="hideLogin()">&times;</span>
-          LOGIN
-          <form class="form" action="UsuarioLogin" method="post">
-            E-Mail: <input type="email" name="email" placeholder="Digite seu endereço de E-Mail" required>
-            Senha: <input type="password" name="senha" placeholder="Digite sua senha" required>
-            <div id="k">
-              <label class="container-label">Mantenha-me conectado
-                  <input type="checkbox" id="manter" value="s" name="manter">
-              <span class="checkmark"></span>
-            </label>
-          </div>
-            <center><button type="submit" class="form-button">ENTRAR</button></center>
-          </form>
-          <center><div class="esquece">ESQUECEU A SENHA?</div></center>
+        <div class="modal-login" id="modal-login">
+            <div class="pra-centralizar">
+                <div class="estiquetas">
+                    <span onclick="hideLogin()"><i class="fa-solid fa-xmark j"></i></span>
+                </div>
+                <div class="b-cadastro">
+                    <div class="l-left">
+                        <span class="r">FAÇA</span>
+                        <span class="r">SEU</span>
+                        <span class="r">LOGIN</span>
+                    </div>
+                    <div class="middle"></div>
+                    <div class="r-right">
+                        <form class="form" action="UsuarioLogin" method="post">
+                            <input type="email" name="email" class="j2" placeholder=" Seu E-Mail" required>
+                            <input type="password" name="senha" class="j2" placeholder="Sua senha" required>
+                          <div id="k">
+                            <label class="container-label">Mantenha-me conectado
+                                <input type="checkbox" id="manter" value="s" name="manter">
+                            <span class="checkmark"></span>
+                          </label>
+                        </div>
+                          <input type="submit" name="" value="Entrar" class="btn-j2"> 
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+        </div>    
         
         <div class="cadastro"> <!-- Modal para cadastrar um novo usuário -->
-      <div class="modal-cadastro" id="modal-cadastro">
-        <div class="content-login">
-          <span class="x" onclick="hideCadastro()">&times;</span>
-          CADASTRO
-          <form class="form-cadastro" action="UsuarioCadastrar" method="post">
-            Nome: <input type="text" name="nome" placeholder="Digite seu nome de usuário" id="form-cadastro" required>
-            E-Mail: <input type="email" name="email" placeholder="Digite seu endereço de E-Mail" id="form-cadastro" required>
-            Senha: <input type="password" name="senha" placeholder="Digite sua senha" id="form-cadastro" required>
-            Escolha seu time: 
-            <div class="botaozinhos"> 
-                <select name="selectTime" class="select-time">
-            <c:forEach var="time" items="${times}">
-                  <option value="${time.id}">${time.nome}</option>
-             </c:forEach>
-            </select>
-          <c:if test="${autenticado.isAdministrador == true}"> <!-- ADM pode cadastrar um novo usuároi adm -->
-                <div class="kadm">
-              <label class="container-label">Administrador:
-                  <input type="checkbox" id="adm" value="s" name="adm">
-              <span class="checkmark"></span>
-            </label>
-          </div>
-            </c:if>
-            
-          </div>
-            <button type="submit" class="cadastro-button">CRIAR CONTA</button>
-            </div>  
-          <script src="main.js"></script>
-          </form>
+            <div class="modal-cadastro" id="modal-cadastro">
+                <div class="pra-centralizar">
+                    <div class="estiquetas">
+                        <span onclick="hideCadastro()"><i class="fa-solid fa-xmark j3"></i></span>
+                    </div>
+                    <div class="b-cadastro2">
+                        <div class="l-left">
+                            <span class="r">CRIE</span>
+                            <span class="r">SUA</span>
+                            <span class="r">CONTA</span>
+                        </div>
+                        <div class="middle"></div>
+                        <div class="r-right">
+                            <form class="form-cadastro" action="UsuarioCadastrar" method="post">
+                                <input type="text" name="nome" placeholder="Nome de usuário" class="j2" required>
+                                <input type="email" name="email" placeholder="Seu E-Mail" class="j2" required>
+                                <input type="password" name="senha" placeholder="Sua senha" class="j2" required>
+                                Escolha seu time: 
+                                <div class="botaozinhos"> 
+                                    <select name="selectTime" class="select-time">
+                                        <c:forEach var="time" items="${times}">
+                                              <option value="${time.id}">${time.nome}</option>
+                                         </c:forEach>
+                                    </select>
+                                    <c:if test="${autenticado.isAdministrador == true}"> <!-- ADM pode cadastrar um novo usuároi adm -->
+                                        <div class="kadm">
+                                            <label class="container-label">Administrador
+                                                <input type="checkbox" id="adm" value="s" name="adm">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </c:if>
+                                </div>
+                                <input type="submit" name="" value="Criar Conta" class="btn-j2"> 
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        
+        <div class="atualizarS"> 
+            <div class="modal-esquece" id="modal-esquece">
+                <div class="pra-centralizar">
+                    <div class="estiquetas">
+                        <span onclick="hideAtualizarS()"><i class="fa-solid fa-xmark j"></i></span>
+                    </div>
+                    <div class="b-cadastro">
+                        <div class="l-left">
+                            <span class="r">CRIE</span>
+                            <span class="r">SUA</span>
+                        </div>
+                        <div class="middle"></div>
+                        <div class="r-right">
+                            <form action="AlterarSenha" method="post">
+                                <input type="password" name="senhaAntiga" class="j2" placeholder="Senha Atual" required>
+                                <input type="password" name="senhaNova" class="j2" placeholder="Nova Senha" required>
+                                <input type="submit" name="" value="Alterar Senha" class="btn-j2">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
       </div>
-        <div class="atualizarS"> <!<!-- Modal para alterar senha -->
-      <div class="modal-esquece" id="modal-esquece">
-        <div class="content-login">
-          <span class="x" onclick="hideAtualizarS()">&times;</span>
-          ALTERAR SENHA
-          <form action="AlterarSenha" method="post">
-              Senha Antiga: <input type="password" name="senhaAntiga" id="form-cadastro" required>
-              Senha Nova:  <input type="password" name="senhaNova" id="form-cadastro" required>
-              <button type="submit" class="cadastro-button">Alterar Senha</button>
-          </form>
-        </div>
-        </div>
-      </div>
-    </div>
 
     </body>
 </html>

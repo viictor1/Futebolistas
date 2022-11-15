@@ -23,7 +23,7 @@
               <li><a href="Jogos">CAMPEONATO</a></li>
               <li><a href="Campeonatos">VENCEDORES ANTIGOS</a></li>
               <li><a href="Torcidas">TORCIDAS</a></li>
-              <li><a href="">HISTÓRIA</a></li>
+              <li><a href="Historia">HISTÓRIA</a></li>
           </nav>
         </center>
     </div>
