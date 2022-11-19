@@ -36,14 +36,17 @@
                            <div class="swiper-slide card-camp">
                                <div class="card-content">
                                    <div class="image-camp">
-                                       <div class="nome-time"><img src="MostrarImagem?id=${jogo.img_casa}" height="50px"/>${jogo.nome_casa} ${jogo.gol_casa}</div>
-                                       <div class="nome-time"><img src="MostrarImagem?id=${jogo.img_visitante}" height="50px"/>${jogo.nome_visitante} ${jogo.gol_visitante}</div>
-                                       <c:if test="${jogo.fase == 'Final' && campeonato.vencedor == null}"> <%-- Se for a final, pode escolher o vencedor --%>
-                                           <a href="AddVencedor?id=${jogo.time_casa}"><i class="fa-solid fa-trophy"></i></a>
-                                       </c:if>
-                                       <c:if test="${jogo.fase == 'Final' && campeonato.vencedor == null}">
-                                            <a href="AddVencedor?id${jogo.time_visitante}"><i class="fa-solid fa-trophy"></i></a>
-                                       </c:if>
+                                       <div class="nome-time"><img src="MostrarImagem?id=${jogo.img_casa}" height="50px"/>${jogo.nome_casa} ${jogo.gol_casa}
+                                           <c:if test="${jogo.fase == 'Final' && campeonato.vencedor == 0}">
+                                               <a href="AddVencedor?id=${jogo.time_casa}"><i class="fa-solid fa-trophy"></i></a>                                           
+                                           </c:if>
+                                       </div>
+                                       <div class="nome-time"><img src="MostrarImagem?id=${jogo.img_visitante}" height="50px"/>${jogo.nome_visitante} ${jogo.gol_visitante}
+                                           <c:if test="${jogo.fase == 'Final' && campeonato.vencedor == 0}"> <%-- Se for a final, pode escolher o vencedor --%>
+                                             <a href="AddVencedor?id=${jogo.time_visitante}"><i class="fa-solid fa-trophy"></i></a>                                     
+                                            </c:if>
+                                       </div>
+                 
                                    </div>
                                     <div class="linha-small"></div>
                                     <div class="data-hora">

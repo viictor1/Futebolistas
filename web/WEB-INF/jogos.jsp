@@ -43,8 +43,7 @@
                                    <div class="image-camp">
                                        <div class="nome-time"><img src="MostrarImagem?id=${jogo.img_casa}" height="50px"/>${jogo.nome_casa}
                                            <c:if test="${jogo.fase == 'Final' && campeonato.vencedor == 0}">
-                                               <a href="AddVencedor?id=${jogo.time_casa}"><i class="fa-solid fa-trophy"></i></a>
-                                            
+                                               <a href="AddVencedor?id=${jogo.time_casa}"><i class="fa-solid fa-trophy"></i></a>                                           
                                            </c:if>
                                        </div>
                                        

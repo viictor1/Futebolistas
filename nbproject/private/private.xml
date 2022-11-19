@@ -3,9 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/Controllers/Jogadora_TimeServlet.java</file>
-            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/Filters/FiltroUsuario.java</file>
-            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/web/WEB-INF/jogadora_time.jsp</file>
+            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/src/java/Futebolistas/Controllers/HistoricoJogos.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Área%20de%20Trabalho/Futebolistas/web/WEB-INF/historico-jogos.jsp</file>
         </group>
     </open-files>
 </project-private>

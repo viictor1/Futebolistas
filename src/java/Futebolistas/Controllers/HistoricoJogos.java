@@ -6,6 +6,7 @@ package Futebolistas.Controllers;
 
 import Futebolistas.Enteties.Jogo;
 import Futebolistas.Enteties.Time;
+import Futebolistas.Model.CampeonatoModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -58,6 +59,7 @@ public class HistoricoJogos extends HttpServlet {
         
         JogoModel modelj = new JogoModel();
         TimeModel model = new TimeModel();
+        CampeonatoModel modelc = new CampeonatoModel();
         try {
             ArrayList<Jogo> array = modelj.selectHistorico();
             for(Jogo j : array){             
@@ -69,6 +71,7 @@ public class HistoricoJogos extends HttpServlet {
                 j.setNome_visitante(visitante.getNome());
                 j.setImg_visitante(visitante.getIdArquivo());
             }
+            request.setAttribute("campeonato", modelc.selectUltimo());
             request.setAttribute("historico", array);       
             request.getRequestDispatcher("WEB-INF/historico-jogos.jsp").forward(request, response);
         } catch (SQLException ex) {

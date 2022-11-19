@@ -39,7 +39,7 @@ public class JogoModel {
     
     public void remover(int id) throws SQLException{
         JogoDAO dao = new JogoDAO();
-        dao.remover(id);
+        dao.remover(selectJogoByID(id));
     }
     
     public Jogo selectJogoByID(int id) throws SQLException{

@@ -149,6 +149,16 @@ public class CampeonatoDAO{
         connection.close();
     }
     
+    public void removerVencedor(int id) throws SQLException{
+        String sql = "UPDATE CAMPEONATO SET VENCEDOR = NULL WHERE ID = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, id);
+        stmt.execute();
+        stmt.close();
+        connection.close();
+    }
+    
     public Campeonato selecionarUltimo() throws SQLException{
         String sql = "SELECT ID, ANO, VENCEDOR FROM CAMPEONATO ORDER BY ANO DESC";
         Connection connection = new ConnectionFactory().getConnection();

@@ -29,14 +29,29 @@ public class JogoDAO {
         connection.close();
     }
     
-    public void remover(int id) throws SQLException{
+    public void remover(Jogo j) throws SQLException{
         String sql = "DELETE FROM JOGO WHERE ID = ?";
+        CampeonatoDAO dao = new CampeonatoDAO();
         Connection connection = new ConnectionFactory().getConnection();
-        PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setInt(1, id);
-        stmt.execute();
-        stmt.close();
-        connection.close();
+        try {
+            connection.setAutoCommit(false);
+            
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, j.getId());
+            stmt.execute();
+            stmt.close();
+
+            if("Final".equals(j.getFase()) && dao.selectAtual().getId() == 0){
+                dao.removerVencedor(dao.selecionarUltimo().getId());
+            }
+            
+            connection.commit();
+        } catch (Exception e) {
+            connection.rollback();
+        } finally {
+            connection.close();
+        }
+       
     }
     
     public ArrayList<Jogo> proximosJogos() throws SQLException{
@@ -281,7 +296,7 @@ public class JogoDAO {
     }
     
     public ArrayList<Jogo> selectHistorico() throws SQLException{
-        String sql = "SELECT ID, TIME_VISITANTE, TIME_CASA, DATA_JOGO, FASE, GOL_CASA, GOL_VISITANTE FROM JOGO WHERE GOL_CASA IS NOT NULL ORDER BY DATA_JOGO";
+        String sql = "SELECT ID, TIME_VISITANTE, TIME_CASA, DATA_JOGO, FASE, GOL_CASA, GOL_VISITANTE FROM JOGO WHERE GOL_CASA IS NOT NULL ORDER BY DATA_JOGO DESC";
         Connection connection = new ConnectionFactory().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
