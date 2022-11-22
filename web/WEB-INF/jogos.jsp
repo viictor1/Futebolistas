@@ -24,10 +24,11 @@
         <c:import url="header.jsp"></c:import> 
         <c:import url="menu.jsp"></c:import>
         <div class="feed">CAMPEONATO</div>
-        <div class="ano-feed">${campeonato.ano}
+        <c:if test="${campeonato.id != 0}">
+            <div class="ano-feed"> ${campeonato.ano} <c:if test="${autenticado.isAdministrador == true}"><a href="RemoverCampeonato?id=${campeonato.id}"><i class="fa-solid fa-trash-can"></i></a></c:if> 
             <c:if test="${campeonato.vencedor != 0}">  <br> <!-- tirar depois -->
              Vencedor: ${campeonato.nome}
-         </c:if>
+            </c:if>
         </div>
         
         
@@ -99,6 +100,16 @@
   </script>
       <div class="cont-campt">
         <div class="tabela3">
+        <c:if test="${autenticado.isAdministrador == true}">
+            <form action="AddTime">Adcionar Time
+                <select name="selectTime" class="select-time">
+                <c:forEach var="time" items="${fora}">  <!<!-- adcionar time que ta fora -->
+                          <option value="${time.id}">${time.nome}</option>
+                     </c:forEach>
+                </select>
+                <input type="submit" name="" value="Adcionar" class="btn-j2"> 
+            </form>
+        </c:if>
             Primeira Fase:
                 <table>
                     <thead>
@@ -148,5 +159,6 @@
                     </div>
         </div>
         <div class="link-historico"><a href="HistoricoJogos">Ver Histórico de Jogos</a></div>
+        </c:if>
     </body>
 </html>

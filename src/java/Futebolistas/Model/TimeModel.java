@@ -89,6 +89,11 @@ public class TimeModel {
         return dao.selecionarParticipantes();
     }
     
+    public ArrayList<Time> selecionarNaoParticipantes() throws SQLException{
+        TimeDAO dao = new TimeDAO();
+        return dao.selecionarNaoParticipantes();
+    }
+    
     public void alterarPosicao(Time t) throws SQLException{
         TimeDAO dao = new TimeDAO();
         dao.alterarPosicao(t);
@@ -97,5 +102,10 @@ public class TimeModel {
     public void sairDaCompeticao(int id) throws SQLException{
         TimeDAO dao = new TimeDAO();
         dao.sairDaCompeticao(id);
+    }
+    
+    public void entrarNaCompeticao(int id) throws SQLException{
+        TimeDAO dao = new TimeDAO();
+        dao.entrarNaCompeticao(id);
     }
 }

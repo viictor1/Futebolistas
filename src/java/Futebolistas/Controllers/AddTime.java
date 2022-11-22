@@ -4,13 +4,14 @@
  */
 package Futebolistas.Controllers;
 
-import Futebolistas.Model.CampeonatoModel;
+import Futebolistas.Model.TimeModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,8 +21,8 @@ import java.util.logging.Logger;
  *
  * @author victo
  */
-@WebServlet(name = "RemoverCampeonato", urlPatterns = {"/RemoverCampeonato"})
-public class RemoverCampeonato extends HttpServlet {
+@WebServlet(name = "AddTime", urlPatterns = {"/AddTime"})
+public class AddTime extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,7 +36,6 @@ public class RemoverCampeonato extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -52,15 +52,14 @@ public class RemoverCampeonato extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-        int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println(id);
-        CampeonatoModel model = new CampeonatoModel();
+        int id = Integer.parseInt(request.getParameter("selectTime"));
+        TimeModel model = new TimeModel();
         try {
-            model.remover(id);
+            model.entrarNaCompeticao(id);
+            response.sendRedirect("Jogos");
         } catch (SQLException ex) {
-            Logger.getLogger(RemoverCampeonato.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddTime.class.getName()).log(Level.SEVERE, null, ex);
         }
-        response.sendRedirect("Campeonatos");
     }
 
     /**

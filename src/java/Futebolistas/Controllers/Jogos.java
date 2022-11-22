@@ -92,6 +92,7 @@ public class Jogos extends HttpServlet {
             }
             request.setAttribute("campeonato", c);
             request.setAttribute("participantes", times);
+            request.setAttribute("fora", model.selecionarNaoParticipantes());
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }

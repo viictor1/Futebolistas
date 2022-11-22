@@ -442,6 +442,16 @@ body{background-color: #f2f2f2; overflow-x: hidden;}
    align-items: center;
    justify-content: center;
    font-weight: 600;
+   text-align: center;
+}
+.vencedor{
+    font-size: 20px;
+   font-family: 'Poppins', sans-serif;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-weight: 500;
+   text-align: center;
 }
 /*DECORAÇÃO E ESTRUTURA DAS CONTAINERS DO FEED*/
 .containers{
@@ -689,12 +699,19 @@ body{background-color: #f2f2f2; overflow-x: hidden;}
     color: blue;
     font-family: 'Poppins', sans-serif;
     text-decoration: underline;
-    font-size: 14px;
-    margin-top: 10px;
-    margin-bottom: 20px;
+    font-size: 16px;
+    margin-top: 40px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    
+}
+.pra-espaco{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-bottom: 20px;
 }
 .body-card{
   height: 50vh;
@@ -1475,6 +1492,7 @@ cursor: pointer;
   letter-spacing: 1px;
   color: #fff;
   margin-top: 0;
+  padding-top: 8px;
 }
 .cont-img .card-x .contentBx .size, .cont-img .card-x .contentBx .color {
   display: flex;
@@ -1510,16 +1528,17 @@ cursor: pointer;
 }
 
 .cont-img .card-x .contentBx .size span{
-  width: 180px;
+  width: 290px;
   height: 20px;
   line-height: 26px;
-  font-size: 14px;
+  font-size: 13.3px;
   color: #fff;
   margin: 0 5px;
   transition: 0.5s;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-bottom: 2px;
 }
 
 
@@ -1578,7 +1597,6 @@ cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 100vw;
     font-family: 'Poppins', sans-serif;
     margin-top: 27px;
 }
@@ -1592,10 +1610,10 @@ cursor: pointer;
 }
 
 .tabela3{
-    height: 20vh;
-    width: 34vw;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
     margin-top: 2px;
-    margin-left: -35vw;
+
 }
 .cont-campt table th {
 	 padding: 1rem 2.2rem;

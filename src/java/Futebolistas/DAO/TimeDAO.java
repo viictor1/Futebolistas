@@ -290,4 +290,41 @@ public class TimeDAO {
         stmt.close();
         connection.close();
     }
+    
+    public void entrarNaCompeticao(int id) throws SQLException{
+        Connection connection = new ConnectionFactory().getConnection();
+        
+        String sql = "UPDATE TIMES SET POSICAO = 1 WHERE IDTIME = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, id);
+        stmt.execute();
+        stmt.close();
+        connection.close();
+    }
+    
+    public ArrayList<Time> selecionarNaoParticipantes() throws SQLException{
+        String sql = "SELECT IDTIME, NOME, DATA_FUNDACAO, TECNICO, PRESIDENTE, LOCAL_FUNDACAO, TITULOS, NUM_TORCEDORES, IDARQUIVO, POSICAO FROM TIMES WHERE POSICAO IS NULL ORDER BY POSICAO";
+        ArrayList<Time> retorno = new ArrayList();
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        
+        while(rs.next()){
+            Time t = new Time();
+            t.setId(rs.getInt("IDTIME"));
+            t.setNome(rs.getString("NOME"));
+            t.setData_fundacao(rs.getDate("DATA_FUNDACAO"));
+            t.setTecnico(rs.getString("TECNICO"));
+            t.setPresidente(rs.getString("PRESIDENTE"));
+            t.setLocal_fundacao(rs.getString("LOCAL_FUNDACAO"));
+            t.setTitulos(rs.getInt("TITULOS"));
+            t.setNum_torcedores(rs.getInt("NUM_TORCEDORES"));
+            t.setIdArquivo(rs.getInt("IDARQUIVO"));
+            t.setPosicao(rs.getInt("POSICAO"));
+            retorno.add(t);
+        }
+        stmt.close();
+        connection.close();
+        return retorno; 
+    }
 }
