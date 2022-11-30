@@ -14,6 +14,11 @@ Website sobre futebol feminino brasileiro
   </li> 
 </ul>
 
+<h2> Resumo </h2>
+  As informações disponibilizadas por meio da tecnologia, jornais, televisão e rádio têm uma grande importância para o nosso entendimento acerca de assuntos pertinentes em todo o mundo. O futebol feminino brasileiro nem sempre teve essa possibilidade de ser expresso. Recebeu diversas repressões na mídia sendo ridicularizado e atacado constantemente, além de terem parte de sua história menosprezada, apagada e até mesmo proibida durante 42 anos. Dessa forma, para melhor integrarmos o futebol feminino nesse meio, usamos tecnologias Web Java, e HTML com utilização de JSPs e Servlets para criação de um ambiente comunicativo de forma online.
+
+</ul>
+
 <h2> Links </h2>
 <ul>
   <li> Artigo <br>
