@@ -12,7 +12,7 @@ Website sobre futebol feminino brasileiro
    <li>Ana Julia Ferreira (Artigo) <br>
        ssanchesfe@gmail.com <br>
   </li> 
-<ul>
+</ul>
 
 <h2> Links </h2>
 <ul>
@@ -22,7 +22,7 @@ Website sobre futebol feminino brasileiro
   <li> Documento de Requisitos <br>
        https://docs.google.com/document/d/1q6hIKt8glfiA_iLqlgVFLR8zdFPInvtb/edit?usp=sharing&ouid=109587983926213108776&rtpof=true&sd=true <br>
   </li>
-<ul>
+</ul>
 
 <h2> Tecnologias Utilizadas </h2>
 <ul> HTML, CSS, JavaScript, Java (Servlet e JSP)
