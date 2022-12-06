@@ -25,7 +25,7 @@
         <div class="feed">HISTÓRICO DE JOGOS</div>
         <div class="ano-feed">${campeonato.ano}</div>
         
-        <div class="preencher"></div>
+
         
             <div class="body-camp">
                 

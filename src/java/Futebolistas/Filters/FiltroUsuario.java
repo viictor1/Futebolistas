@@ -26,7 +26,7 @@ import java.util.logging.Logger;
  *
  * @author maluc
  */
-@WebFilter(filterName = "FiltroUsuario", servletNames = {"Hub", "AlterarSenha", "TorcerTime"})
+@WebFilter(filterName = "FiltroUsuario", servletNames = {"Hub", "AlterarSenha"})
 public class FiltroUsuario implements Filter{
 
     @Override

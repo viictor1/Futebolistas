@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,20 +52,20 @@ public class TorcerTime extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        HttpSession sessao = request.getSession(true);     
-        Usuario autenticado = (Usuario) sessao.getAttribute("autenticado");
-        sessao.removeAttribute("autenticado");
-        
-        UsuarioModel model = new UsuarioModel();
-        int idTime = Integer.parseInt(request.getParameter("idTime"));
-      
         try {
-            model.alterarTime(autenticado.getId(), autenticado.getTime(), idTime);
+            System.out.println("1");
+            HttpSession sessao = request.getSession(true);     
+            Usuario autenticado = (Usuario) sessao.getAttribute("autenticado");
+            sessao.removeAttribute("autenticado");
+
+            UsuarioModel model = new UsuarioModel();
+            int idTime = Integer.parseInt(request.getParameter("idTime"));
+             model.alterarTime(autenticado.getId(), autenticado.getTime(), idTime);
             sessao.setAttribute("autenticado", model.selectUsuariobyID(autenticado.getId()));
+            response.sendRedirect("Times");
         } catch (SQLException ex) {
-            Logger.getLogger(TorcerTime.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        response.sendRedirect("Times?origin=Times");
+            System.out.println(ex.getMessage());
+        }      
     }
 
     /**

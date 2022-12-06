@@ -6,6 +6,7 @@ package Futebolistas.Controllers;
 
 import Futebolistas.Enteties.Usuario;
 import Futebolistas.Model.UsuarioModel;
+import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -16,9 +17,10 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import Futebolistas.Errors.Error;
+import Futebolistas.CustomExceptions.ParameterException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 /**
  *
  * @author maluc
@@ -66,34 +68,51 @@ public class UsuarioLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-        String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
-
-        UsuarioModel model = new UsuarioModel();
-        Usuario u;
+        
+            response.setContentType("application/json;charset=UTF-8");
+            
+            String email = request.getParameter("email");
+            String senha = request.getParameter("senha");
+            
+            UsuarioModel model = new UsuarioModel();
+            
+            Usuario u;
         try {
             u = model.autenticar(email, senha);
             if (u != null) {
                 HttpSession sessao = request.getSession(true);
                 sessao.setAttribute("autenticado", u);
-
+                
+                Gson gsonParser = new Gson();
+                try(PrintWriter out = response.getWriter()){
+                    out.print(gsonParser.toJson(u));
+                }
+                
                 if ("s".equals(request.getParameter("manter"))) { // criando cookie se o usuário escolheu a opção de manter-se logado
                     Cookie cookie = new Cookie("ManterLogado", String.valueOf(u.getId()));
                     int mes = 60 * 60 * 24 * 30;
                     cookie.setMaxAge(mes);
                     response.addCookie(cookie);
-
-                }    
-        }   
-            response.sendRedirect("Hub");
+                    
+                }
+            }
+            else{
+                Gson gsonParser = new Gson();
+                try(PrintWriter out  = response.getWriter()){
+                    out.print(gsonParser.toJson(new Error(403, "Usuario/Senha Inválidos")));
+                }
+            }          
+        } catch (ParameterException pe) { 
+            Gson gsonParser = new Gson();
+            try ( PrintWriter out = response.getWriter()) {
+                out.print(gsonParser.toJson(new Error(400, pe.getMessage())));
+            }
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+            response.sendRedirect("Hub");
+        
     }
-
     /**
      * Returns a short description of the servlet.
      *

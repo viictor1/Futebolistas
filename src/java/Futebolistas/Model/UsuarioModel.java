@@ -4,28 +4,29 @@
  */
 package Futebolistas.Model;
 
+import Futebolistas.CustomExceptions.ParameterException;
 import Futebolistas.DAO.TimeDAO;
 import Futebolistas.DAO.UsuarioDAO;
 import Futebolistas.Enteties.Usuario;
 import java.sql.SQLException;
 
 public class UsuarioModel {
-    public void add(Usuario u) throws SQLException{
+    public void add(Usuario u) throws SQLException, ParameterException{
         UsuarioDAO dao = new UsuarioDAO();        
         if(u.getNome() == null || u.getNome().equals("")){
-            return;
+            throw new ParameterException("Nome Obrigatório");
         }
         if(u.getEmail() == null || u.getEmail().equals("")){
-            return;
+            throw new ParameterException("Email Obrigatório");
         }
         if(u.getSenha() == null || u.getSenha().equals("")){
-            return;
+            throw new ParameterException("Senha Obrigatório");
         }   
         if(dao.verificarEmail(u.getEmail()) == true){
-            return;
+            throw new ParameterException("Email já cadastrado");
         }
         if(u.getTime() == 0){
-            return;
+            throw new ParameterException("Time Obrigatório");
         }
         dao.add(u);   
     }
@@ -38,8 +39,14 @@ public class UsuarioModel {
         dao.alterarSenha(id, senha);
     }
     
-    public Usuario autenticar(String email, String senha) throws SQLException{
+    public Usuario autenticar(String email, String senha) throws SQLException, ParameterException{
         UsuarioDAO dao = new UsuarioDAO();
+        if(email == null || email.equals("")){
+            throw new ParameterException("Email Obrigatório");
+        }
+        if(senha == null || senha.equals("")){
+            throw new ParameterException("Senha Obrigatório");
+        } 
         Usuario u = dao.autenticar(email, senha);
         return u;
     }

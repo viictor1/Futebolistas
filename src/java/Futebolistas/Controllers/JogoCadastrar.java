@@ -7,6 +7,7 @@ package Futebolistas.Controllers;
 import Futebolistas.Enteties.Jogo;
 import Futebolistas.Model.CampeonatoModel;
 import Futebolistas.Model.JogoModel;
+import Futebolistas.Model.TimeModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -57,11 +58,14 @@ public class JogoCadastrar extends HttpServlet {
         processRequest(request, response);
         
         CampeonatoModel model = new CampeonatoModel();
+        TimeModel modelT = new TimeModel();
         try {
             request.setAttribute("campeonato", model.selectAtual());
+            request.setAttribute("participantes", modelT.selecionarParticipantes());
         } catch (SQLException ex) {
             Logger.getLogger(JogoCadastrar.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         request.getRequestDispatcher("WEB-INF/cadastrar-jogo.jsp").forward(request, response);
     }
 

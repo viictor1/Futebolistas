@@ -106,6 +106,9 @@ public class TimeModel {
     
     public void entrarNaCompeticao(int id) throws SQLException{
         TimeDAO dao = new TimeDAO();
+        if(id == 0){
+            return;
+        }
         dao.entrarNaCompeticao(id);
     }
 }

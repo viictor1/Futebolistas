@@ -97,7 +97,7 @@
                         Times:
                         <div class="controle">
                         <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"> 
-                            <c:forEach var="time" items="${times}">          
+                            <c:forEach var="time" items="${participantes}">          
                                 <img id="${time.id}" src="MostrarImagem?id=${time.idArquivo}" draggable="true" ondragstart="drag(event)" width="100%" height="100%"> 
                             </c:forEach>
                         </div>

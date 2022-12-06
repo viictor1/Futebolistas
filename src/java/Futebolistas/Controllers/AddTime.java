@@ -52,7 +52,10 @@ public class AddTime extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-        int id = Integer.parseInt(request.getParameter("selectTime"));
+        int id = 0;
+        if(!"".equals(request.getParameter("selectTime")) && request.getParameter("selectTime") != null){
+            id = Integer.parseInt(request.getParameter("selectTime"));
+        }
         TimeModel model = new TimeModel();
         try {
             model.entrarNaCompeticao(id);
@@ -60,6 +63,7 @@ public class AddTime extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(AddTime.class.getName()).log(Level.SEVERE, null, ex);
         }
+      
     }
 
     /**
@@ -74,6 +78,7 @@ public class AddTime extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
     }
 
     /**

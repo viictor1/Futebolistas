@@ -186,6 +186,24 @@ body{background-color: #f2f2f2; overflow-x: hidden;}
   ease-in-out, opacity 0.25s ease-in-out;
   z-index: 1100;
 }
+.modal-add{
+   position: fixed;
+  padding: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  transform: scale(1.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.25s ease-in-out, transform 0.25s
+  ease-in-out, opacity 0.25s ease-in-out;
+  z-index: 1100; 
+}
 .modal-cadastro{
   position: fixed;
   padding: 0;
@@ -306,6 +324,11 @@ body{background-color: #f2f2f2; overflow-x: hidden;}
   opacity: 1;
   visibility: visible;
   transform: scale(1.0);
+}
+.show-add{
+   opacity: 1;
+  visibility: visible;
+  transform: scale(1.0); 
 }
 .show-cadastro{
   opacity: 1;
@@ -700,7 +723,6 @@ body{background-color: #f2f2f2; overflow-x: hidden;}
     font-family: 'Poppins', sans-serif;
     text-decoration: underline;
     font-size: 16px;
-    margin-top: 40px;
     margin-bottom: 10px;
     display: flex;
     justify-content: center;
@@ -945,7 +967,22 @@ section .cardf .cardg .image img{
   flex-direction: column;
   align-items: center;
 }
-
+.u{
+    font-size: 20px;
+    padding-left: 5px;
+    cursor: pointer;
+}
+.back{
+    background: linear-gradient(135deg, rgba(247, 202, 201, 1) 0%, rgba(146, 168, 209, 1) 100%);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    width: 25vw;
+    padding-top: 15px;
+    margin-top: 30px;
+    height: 25vh;
+    border-radius: 10px;
+}
 .card .media-icons i{
   color: #fff;
   opacity: 0.6;
@@ -1602,7 +1639,7 @@ cursor: pointer;
 }
 .tabela{
     height: 59.5vh;
-    width: 37vw;
+
     margin-top: 2px;
     margin-left: -12px;
     overflow-y: scroll;
@@ -1969,6 +2006,26 @@ select[type=option]{border: none}
     height: 24px;
     width: 30px; 
     box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);
+}
+.j4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    position: absolute;
+    font-size: 1.4em;
+    padding-top: 4px;
+    padding-bottom: 2px;
+    margin-left: -35px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: -50vh;
+    background-color: lightgray;
+    border-radius: 15px;
+    height: 24px;
+    width: 30px; 
+    box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);  
 }
 #piechart_3d{
     margin-top: 20px;

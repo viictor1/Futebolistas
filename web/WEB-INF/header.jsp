@@ -164,8 +164,8 @@
                     <div class="middle"></div>
                     <div class="r-right">
                         <form class="form" action="UsuarioLogin" method="post">
-                            <input type="email" name="email" class="j2" placeholder=" Seu E-Mail" required>
-                            <input type="password" name="senha" class="j2" placeholder="Sua senha" required>
+                            <input type="email" name="email" class="j2" placeholder=" Seu E-Mail">
+                            <input type="password" name="senha" class="j2" placeholder="Sua senha">
                           <div id="k">
                             <label class="container-label">Mantenha-me conectado
                                 <input type="checkbox" id="manter" value="s" name="manter">
