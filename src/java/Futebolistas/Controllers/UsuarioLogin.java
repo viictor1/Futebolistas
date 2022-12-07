@@ -19,6 +19,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import Futebolistas.Errors.Error;
 import Futebolistas.CustomExceptions.ParameterException;
+import jakarta.servlet.annotation.MultipartConfig;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -26,6 +27,7 @@ import java.util.logging.Logger;
  * @author maluc
  */
 @WebServlet(name = "UsuarioLogin", urlPatterns = {"/UsuarioLogin"})
+@MultipartConfig
 public class UsuarioLogin extends HttpServlet {
 
     /**
@@ -83,17 +85,17 @@ public class UsuarioLogin extends HttpServlet {
                 HttpSession sessao = request.getSession(true);
                 sessao.setAttribute("autenticado", u);
                 
-                Gson gsonParser = new Gson();
-                try(PrintWriter out = response.getWriter()){
-                    out.print(gsonParser.toJson(u));
-                }
-                
                 if ("s".equals(request.getParameter("manter"))) { // criando cookie se o usuário escolheu a opção de manter-se logado
                     Cookie cookie = new Cookie("ManterLogado", String.valueOf(u.getId()));
                     int mes = 60 * 60 * 24 * 30;
                     cookie.setMaxAge(mes);
                     response.addCookie(cookie);
                     
+                }             
+                
+                Gson gsonParser = new Gson();
+                try ( PrintWriter out = response.getWriter()) {
+                    out.print(gsonParser.toJson(u));
                 }
             }
             else{
@@ -101,7 +103,8 @@ public class UsuarioLogin extends HttpServlet {
                 try(PrintWriter out  = response.getWriter()){
                     out.print(gsonParser.toJson(new Error(403, "Usuario/Senha Inválidos")));
                 }
-            }          
+            }   
+            request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
         } catch (ParameterException pe) { 
             Gson gsonParser = new Gson();
             try ( PrintWriter out = response.getWriter()) {
@@ -109,8 +112,7 @@ public class UsuarioLogin extends HttpServlet {
             }
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            response.sendRedirect("Hub");
+        }     
         
     }
     /**

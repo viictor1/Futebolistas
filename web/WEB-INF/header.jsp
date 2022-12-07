@@ -20,6 +20,26 @@
         <link rel="stylesheet" href="everyone.css" type="text/css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script type="text/javascript">
+        async function logar(event){
+            event.preventDefault();
+            let data = new FormData(event.target);
+
+            let resultado = await fetch('UsuarioLogin', {
+                method: 'post',
+                body: data
+            });
+
+            let resultadoData = await resultado.json();
+
+            if(resultadoData.status){
+                alert(resultadoData.Message);
+            }
+            else{
+                window.location.href = "Hub";
+            }
+                
+            
+    }
         function validarRemover(){
         if(window.confirm("Deseja realmente apagar a conta?") == true){
             window.location.href = "UsuarioRemover";
@@ -163,7 +183,7 @@
                     </div>
                     <div class="middle"></div>
                     <div class="r-right">
-                        <form class="form" action="UsuarioLogin" method="post">
+                        <form class="form" action="UsuarioLogin" method="post" onsubmit="logar(event)">
                             <input type="email" name="email" class="j2" placeholder=" Seu E-Mail">
                             <input type="password" name="senha" class="j2" placeholder="Sua senha">
                           <div id="k">
