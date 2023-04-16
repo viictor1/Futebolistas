@@ -27,7 +27,7 @@ Links
 
 # Links
   - Artigo <br>
-https://docs.google.com/document/d/1KdIDZaARUPioGsCoYMYZCaOpP6EPB8ht9w_WU4Rq0o8/edit?usp=sharing
+https://drive.google.com/file/d/1KAuuDz5_WcUEYFNiZCzspnblQSVntxuZ/view?usp=share_link
 
 # Documento de Requisitos <br> 
   - https://docs.google.com/document/d/1q6hIKt8glfiA_iLqlgVFLR8zdFPInvtb/edit?usp=sharing&ouid=109587983926213108776&rtpof=true&sd=true
