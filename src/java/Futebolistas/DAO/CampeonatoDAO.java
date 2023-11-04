@@ -19,8 +19,13 @@ public class CampeonatoDAO{
         Connection connection = new ConnectionFactory().getConnection();
         if(ca.getVencedor() != 0){
             sql = "INSERT INTO CAMPEONATO (ANO, VENCEDOR) VALUES (?,?)";
+            
         }else{
             sql = "INSERT INTO CAMPEONATO (ANO) VALUES (?)";
+            String sql3 = "DELETE * FROM JOGO";
+            PreparedStatement stmt3 = connection.prepareStatement(sql3);
+            stmt3.execute();
+            stmt3.close();
             
             String sql2 = "UPDATE TIMES SET POSICAO = 1";
             PreparedStatement stmt2 = connection.prepareStatement(sql2);
@@ -125,5 +130,32 @@ public class CampeonatoDAO{
         stmt.close();
         connection.close();
         return encontrado;
+    }
+    
+    public void addVencedor(int id, int idTime) throws SQLException{
+        String sql = "UPDATE CAMPEONATO SET VENCEDOR = ? WHERE ID = ?";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, idTime);
+        stmt.setInt(2, id);
+        stmt.execute();
+        stmt.close();
+        connection.close();
+    }
+    
+    public Campeonato selecionarUltimo() throws SQLException{
+        String sql = "SELECT ID, ANO, VENCEDOR FROM CAMPEONATO ORDER BY ANO DESC";
+        Connection connection = new ConnectionFactory().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        Campeonato ca = new Campeonato();
+        while(rs.next()){
+            ca.setId(rs.getInt("ID"));
+            ca.setAno(rs.getInt("ANO"));
+            ca.setVencedor(rs.getInt("VENCEDOR"));
+        }
+        stmt.close();
+        connection.close();
+        return ca;
     }
 }

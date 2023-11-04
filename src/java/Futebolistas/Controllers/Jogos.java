@@ -4,8 +4,10 @@
  */
 package Futebolistas.Controllers;
 
+import Futebolistas.Enteties.Campeonato;
 import Futebolistas.Enteties.Jogo;
 import Futebolistas.Enteties.Time;
+import Futebolistas.Model.CampeonatoModel;
 import Futebolistas.Model.JogoModel;
 import Futebolistas.Model.TimeModel;
 import jakarta.servlet.ServletException;
@@ -58,7 +60,8 @@ public class Jogos extends HttpServlet {
             hub.loadlAll(request.getSession());
             ArrayList<Jogo> jogos = (ArrayList<Jogo>) request.getSession().getAttribute("jogos");
             TimeModel model = new TimeModel();
-            for(Jogo j : jogos){
+            CampeonatoModel modelc = new CampeonatoModel();
+            for(Jogo j : jogos){             
                 Time casa = model.getTimeByID(j.getTime_casa());
                 Time visitante = model.getTimeByID(j.getTime_visitante());
                 
@@ -79,6 +82,16 @@ public class Jogos extends HttpServlet {
                 t.setGolsSofridos(modelj.golsSofridos(t.getId()));
                 t.setSaldo(t.getGolsMarcados() - t.getGolsSofridos());
             }
+            
+            Campeonato c = new Campeonato();
+            if(modelc.selectAtual().getAno() == 0){
+                c = modelc.selectUltimo();
+                c.setNome(model.getTimeByID(c.getVencedor()).getNome());
+            }
+            else{
+                c = modelc.selectAtual();
+            }
+            request.setAttribute("campeonato", c);
             request.setAttribute("participantes", times);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

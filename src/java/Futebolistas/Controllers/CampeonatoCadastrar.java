@@ -67,6 +67,7 @@ public class CampeonatoCadastrar extends HttpServlet {
         processRequest(request, response);
         
         int ano, vencedor;
+        try {
             ano = Integer.parseInt(request.getParameter("ano"));        
             vencedor = Integer.parseInt(request.getParameter("selectTime"));
 
@@ -80,10 +81,18 @@ public class CampeonatoCadastrar extends HttpServlet {
             } catch (SQLException ex) {
                 response.sendRedirect("CampeonatoCadastrar");
             }
-
-            response.sendRedirect("Campeonatos");
-
-        
+            
+            if(vencedor == 0){
+                response.sendRedirect("Jogos");
+            }
+            else{
+                response.sendRedirect("Campeonatos");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+            
+      
     }
 
     /**

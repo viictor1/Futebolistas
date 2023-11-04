@@ -19,14 +19,22 @@
         <c:import url="header.jsp"></c:import> 
         <c:import url="menu.jsp"></c:import>
         
-        
+        <h1>${campeonato.ano}</h1>
+        <c:if test="${campeonato.vencedor != 0}"> <h2>Vencedor: ${campeonato.nome}</h2></c:if>
         <c:forEach var="jogo" items="${jogos}" >
             <div>
+                <c:if test="${jogo.fase == 'Final' && campeonato.vencedor == null}"> <%-- Se for a final, pode escolher o vencedor --%>
+                    <a href="AddVencedor?id=${jogo.time_casa}"><i class="fa-solid fa-trophy"></i></a>
+                </c:if>
                 <img src="MostrarImagem?id=${jogo.img_casa}" height="50px"/>  <img src="MostrarImagem?id=${jogo.img_visitante}" height="50px"/> 
                 <br> <!-- tira depois -->
-                ${jogo.nome_casa} X ${jogo.nome_visitante}
+                ${jogo.nome_casa} X ${jogo.nome_visitante} 
+                <c:if test="${jogo.fase == 'Final' && campeonato.vencedor == null}">
+                    <a href="AddVencedor?id${jogo.time_visitante}"><i class="fa-solid fa-trophy"></i></a>
+                </c:if>
                 <br> <!-- tira depois -->
                 ${jogo.data_jogo}
+                ${jogo.fase}
                 <c:if test="${autenticado.isAdministrador == true}">
                   <a href="RemoverJogo?id=${jogo.id}"><i class="fa-solid fa-trash-can"></i></a>
                   <a href="EditarJogo?id=${jogo.id}"><i class="fa-solid fa-pencil"></i></a>  
@@ -34,7 +42,7 @@
                 
             </div>
         </c:forEach>
-        
+        Primeira Fase:
         <div class="tabela">
                     <table>
                     <thead>

@@ -44,4 +44,14 @@ public class CampeonatoModel {
         CampeonatoDAO dao = new CampeonatoDAO();
         return dao.selectAtual();
     }
+    
+    public void addVencedor(int idTime) throws SQLException{
+        CampeonatoDAO dao = new CampeonatoDAO();
+        dao.addVencedor(selectAtual().getId(), idTime);
+    }
+    
+    public Campeonato selectUltimo() throws SQLException{
+        CampeonatoDAO dao = new CampeonatoDAO();
+        return dao.selecionarUltimo();
+    }
 }

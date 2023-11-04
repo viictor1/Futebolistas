@@ -13,9 +13,18 @@ import java.sql.Date;
 public class Jogo {
     private int id, campeonato, time_visitante, time_casa, gol_casa, gol_visitante;
     private Date data_jogo;
+    private String fase;
+
+    public String getFase() {
+        return fase;
+    }
+
+    public void setFase(String fase) {
+        this.fase = fase;
+    }
     
-    String nome_casa, nome_visitante;
-    int img_casa, img_visitante;
+    private String nome_casa, nome_visitante;
+    private int img_casa, img_visitante;
 
     public String getNome_casa() {
         return nome_casa;

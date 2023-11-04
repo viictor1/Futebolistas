@@ -21,6 +21,9 @@ public class JogoModel {
         if("".equals(j.getTime_casa()) || "".equals(j.getTime_visitante())){
             return;
         }
+        if("".equals(j.getFase()) || j.getFase() == null){
+            return;
+        }
         dao.add(j);
     }
     
